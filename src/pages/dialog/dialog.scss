@@ -1,0 +1,66 @@
+page-dialog {
+
+  .text-input-md {
+    margin: 2px 0 0 10px;
+  }
+
+  .usr_msg ion-card-content {
+    padding: 0;
+  }
+  .date {
+    text-align: center;
+    font-size: 10px;
+    color: #666;
+  }
+
+  .msg-item {
+    width: 90%;
+  }
+
+  .other-msg {
+    float: left;
+  }
+
+  ion-textarea {
+    width: 74%;
+    height: 55px;
+    float:left;
+  }
+  .send-msg {
+    float: right;
+  }
+
+  .item-md, .item-ios {
+    background-color: #fff;
+  }
+
+  ion-footer .toolbar-background-md,
+  ion-footer .toolbar-background-ios {
+    background-color: #ecedf3
+  }
+
+  ion-avatar div {
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+    border-radius: 50%;
+
+  }
+
+  .dialog-avatar {
+    margin: 5px;
+    line-height: 40px;
+    background: left center no-repeat;
+    background-size: 40px auto;
+    text-align: center;
+  }
+
+  .messages ion-card:not(.other-msg) {
+    background-color: #a29878;
+  }
+
+  .item-md ion-avatar[item-left], .item-md ion-thumbnail[item-left],
+  .item-ios ion-avatar[item-left], .item-ios ion-thumbnail[item-left] {
+    margin: 8px 13px;
+  }
+}
