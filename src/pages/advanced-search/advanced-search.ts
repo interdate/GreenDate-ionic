@@ -105,6 +105,32 @@ export class AdvancedSearchPage {
     let params = JSON.stringify({
       action: 'search',
       advanced_search: {
+
+      ageFrom: this.form.form.ageFrom.value,
+      ageTo: this.form.form.ageTo.value,
+      body: this.form.form.body.value,
+      children: this.form.form.children.value,
+      drinking: this.form.form.drinking.value,
+      education: this.form.form.education.value,
+      filter: this.form.form.filter.value,
+      heightFrom: this.form.form.heightFrom.value,
+      heightTo: this.form.form.heightTo.value,
+      occupation: this.form.form.occupation.value,
+      purposes: this.form.form.purposes.value,
+      region: this.form.form.region.value,
+      relationshipStatus: this.form.form.relationshipStatus.value,
+      religion: this.form.form.religion.value,
+      sexOrientation: this.form.form.sexOrientation.value,
+      smoking: this.form.form.smoking.value,
+      withPhoto: this.form.form.withPhoto.value
+
+      }
+    });
+    this.navCtrl.push(HelloIonicPage, { params: params });
+  }
+
+
+  /*
         region: this.form.form.region.value,
         area: this.form.form.area.value,
         ageFrom: this.form.form.ageFrom.value,
@@ -130,10 +156,8 @@ export class AdvancedSearchPage {
         education: this.form.form.education.value,
         withPhoto: this.form.form.withPhoto.value,
         distance: this.form.form.distance.value
-      }
-    });
-    this.navCtrl.push(HelloIonicPage, { params: params });
-  }
+
+  */
 
   selectedRegion()
   {

@@ -26,7 +26,6 @@ export class SearchPage {
   type_search: any = "";
   form: { form: any } = {
     form: {
-      distance: { },
       username: {},
       region: { choices: [[]], },
       ageFrom: {choices: [[]], label: ''},
@@ -96,12 +95,11 @@ export class SearchPage {
           region: this.form.form.region.value,
           ageFrom: this.form.form.ageFrom.value,
           ageTo: this.form.form.ageTo.value,
-          distance: this.form.form.distance.value
         }
       });
       /*let params = "action=search&quick_search[region]=" + this.form.form.region.value +
       "&quick_search[ageFrom]="+ this.age.lower +
-      "&quick_search[ageTo]=" + this.age.upper;*/
+      "&quick_search[ageTo]=" + this.age.upper; distance: this.form.form.distance.value*/
 
       this.navCtrl.push(HelloIonicPage, { params: params });
     }else{

@@ -85,7 +85,8 @@ export class EditProfilePage {
             region: {choices: [[]]},
             relationshipStatus: {choices: [[]]},
             religion: {choices: [[]]},
-            sexOrientation: {choices: [[]]}
+            sexOrientation: {choices: [[]]},
+            _token: {}
         }
     };
 
@@ -662,16 +663,13 @@ export class EditProfilePage {
                     username: this.form.form.username.value,
                     email: {first: this.form.form.email.first.value, second: this.form.form.email.second.value},
                     birthday: this.form.form.birthday.value,
-                    region: this.form.form.region.value,
-                    area: this.form.form.area.value,
-                    zipCode: this.form.form.zipCode.value,
                     phone: this.form.form.phone.value,
                     _token: this.form.form._token.value
                 }
             });
         } else if (this.step == 2) {
 
-            var netWorth;
+            /*var netWorth;
             var status;
             var income;
 
@@ -685,44 +683,88 @@ export class EditProfilePage {
                 netWorth = this.form_step_two.form_step_two.netWorth.value;
                 status = this.form_step_two.form_step_two.status.value;
                 income = this.form_step_two.form_step_two.income.value;
-            }
+            }*/
 
             var params = JSON.stringify({
                 profile_two: {
                     relationshipStatus: this.form_step_two.form_step_two.relationshipStatus.value,
-                    ethnicity: this.form_step_two.form_step_two.ethnicity.value,
+                    city: this.form_step_two.form_step_two.city.value,
+                    region: this.form_step_two.form_step_two.region.value,
+                    sexOrientation: this.form_step_two.form_step_two.sexOrientation.value,
                     religion: this.form_step_two.form_step_two.religion.value,
-                    languages: this.form_step_two.form_step_two.languages.value,
-                    children: this.form_step_two.form_step_two.children.value,
                     occupation: this.form_step_two.form_step_two.occupation.value,
                     education: this.form_step_two.form_step_two.education.value,
-                    smoking: this.form_step_two.form_step_two.smoking.value,
-                    drinking: this.form_step_two.form_step_two.drinking.value,
                     purposes: this.form_step_two.form_step_two.purposes.value,
-                    height: this.form_step_two.form_step_two.height.value,
-                    body: this.form_step_two.form_step_two.body.value,
-                    eyes: this.form_step_two.form_step_two.eyes.value,
-                    hair: this.form_step_two.form_step_two.hair.value,
-                    features: this.form_step_two.form_step_two.features.value,
-                    status: status,
-                    netWorth: netWorth,
-                    income: income,
                     _token: this.form_step_two.form_step_two._token.value
                 }
             });
         } else if (this.step == 3) {
             var params = JSON.stringify({
                 profile_three: {
+
                     about: this.form_step_three.form_step_three.about.value,
-                    hobbies: this.form_step_three.form_step_three.hobbies.value,
+                    animals: this.form_step_three.form_step_three.animals.value,
+                    body: this.form_step_three.form_step_three.body.value,
+                    children: this.form_step_three.form_step_three.children.value,
+                    dinnerWith: this.form_step_three.form_step_three.dinnerWith.value,
+                    drinking: this.form_step_three.form_step_three.drinking.value,
+                    eyes: this.form_step_three.form_step_three.eyes.value,
+                    favoriteBooks: this.form_step_three.form_step_three.favoriteBooks.value,
+                    favoriteDish: this.form_step_three.form_step_three.favoriteDish.value,
+                    favoriteRestaurant: this.form_step_three.form_step_three.favoriteRestaurant.value,
+                    green: this.form_step_three.form_step_three.green.value,
+                    hair: this.form_step_three.form_step_three.hair.value,
+                    height: this.form_step_three.form_step_three.height.value,
+                    interests: this.form_step_three.form_step_three.interests.value,
                     looking: this.form_step_three.form_step_three.looking.value,
+                    music: this.form_step_three.form_step_three.music.value,
+                    nutrition: this.form_step_three.form_step_three.nutrition.value,
+                    perfectDate: this.form_step_three.form_step_three.perfectDate.value,
+                    politicalAffiliation: this.form_step_three.form_step_three.politicalAffiliation.value,
+                    smoking: this.form_step_three.form_step_three.smoking.value,
+                    sport: this.form_step_three.form_step_three.sport.value,
                     _token: this.form_step_three.form_step_three._token.value
+
                 }
             });
         }
 
-        this.http.post(this.api.url + '/api/v1/edits/profiles', params, this.api.setHeaders(true)).subscribe(data => this.validate(data.json()));
+        this.http.post(this.api.url + '/app_dev.php/api/v1/edits/profiles', params, this.api.setHeaders(true)).subscribe(data => this.validate(data.json()));
     }
+
+    /*
+        form-1
+        region: this.form.form.region.value,
+        area: this.form.form.area.value,
+        zipCode: this.form.form.zipCode.value,
+
+        form-3
+        about: this.form_step_three.form_step_three.about.value,
+        hobbies: this.form_step_three.form_step_three.hobbies.value,
+        looking: this.form_step_three.form_step_three.looking.value,
+        _token: this.form_step_three.form_step_three._token.value
+
+        form-2
+        languages: this.form_step_two.form_step_two.languages.value,
+        children: this.form_step_two.form_step_two.children.value,
+        height: this.form_step_two.form_step_two.height.value,
+        body: this.form_step_two.form_step_two.body.value,
+        eyes: this.form_step_two.form_step_two.eyes.value,
+        hair: this.form_step_two.form_step_two.hair.value,
+        features: this.form_step_two.form_step_two.features.value,
+        status: status,
+        netWorth: netWorth,
+        income: income,
+        smoking: this.form_step_two.form_step_two.smoking.value,
+        drinking: this.form_step_two.form_step_two.drinking.value,
+        ethnicity: this.form_step_two.form_step_two.ethnicity.value,
+
+
+    */
+    
+
+
+          
 
     show_hint(msg) {
         let toast = this.toastCtrl.create({
