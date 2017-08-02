@@ -29,13 +29,11 @@ export class RegistrationOnePage {
             password: {first: {}, second: {}},
             gender: {choices: [[]]},
             birthday: {value: {day: {}, month: {}, year: {}}},
-            //region: {choices: [[]]},
-            //area: {choices: [[]]},
-            //zipCode: {choices: [[]]},
             phone: {},
             agree: {},
             _token: {},
             flow_signUp_step: 1
+
         }
     };
     err: {
@@ -44,9 +42,6 @@ export class RegistrationOnePage {
         password: { children: { first: { errors: any }, second: { errors: any } } },
         gender: { errors: any },
         birthday: { errors: any },
-        //region: { errors: any },
-        //area: { errors: any },
-        //zipCode: { errors: any },
         phone: { errors: any },
         agree: { errors: any },
         _token: { errors: any },
@@ -57,9 +52,6 @@ export class RegistrationOnePage {
         password: {children: {first: {errors: []}, second: {errors: []}}},
         gender: {errors: []},
         birthday: {errors: []},
-        //region: {errors: []},
-        //area: {errors: []},
-        //zipCode: {errors: []},
         phone: {errors: []},
         agree: {errors: []},
         _token: {errors: []},
@@ -68,6 +60,7 @@ export class RegistrationOnePage {
     errKeys: any;
     field_value: any;
     user: { region: any, username: any, email: any, email_retype: any, area: any, neighborhood: any, zip_code: any, phone: any, occupation: any, about_me: any, looking_for: any };
+    //user: { username: any, email: any, phone: any, password: any, gender:any, birthday:any, agree:any};
     name: any;
     birth: any;
     username_err: any;
@@ -80,6 +73,21 @@ export class RegistrationOnePage {
     agree_err: any;
     //region_err: any;
     phone_err: any;
+
+    /*
+
+        //region: {choices: [[]]},
+        //area: {choices: [[]]},
+        //zipCode: {choices: [[]]},
+
+        //region: { errors: any },
+        //area: { errors: any },
+        //zipCode: { errors: any },
+
+        //region: {errors: []},
+        //area: {errors: []},
+        //zipCode: {errors: []},
+    */
 
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
@@ -127,9 +135,7 @@ export class RegistrationOnePage {
     }
 
     selectedGender() {
-        if (this.form.form.gender.value == 1) {
-            this.form.form.phone.value = "";
-        }
+      
     }
 
     presentPrompt(title) {
@@ -200,12 +206,12 @@ export class RegistrationOnePage {
 
         this.api.showLoad();
 
-        this.storage.set('user_data', {
+        /*this.storage.set('user_data', {
             username: this.form.form.username.value,
             password: this.form.form.password.first.value
-        });
+        });*/
 
-        this.api.setUserData({username: this.form.form.username.value, password: this.form.form.password.first.value});
+        //this.api.setUserData({username: this.form.form.username.value, password: this.form.form.password.first.value});
 
         var date_arr = ['', '', ''];
 
@@ -215,7 +221,7 @@ export class RegistrationOnePage {
 
         var data = JSON.stringify({
 
-            sign_up_one: {
+            signUpOne: {
                 username: this.form.form.username.value,
                 email: {
                     first: this.form.form.email.first.value,
@@ -236,12 +242,15 @@ export class RegistrationOnePage {
                 agree: this.form.form.agree.value,
                 _token: this.form.form._token.value
             }
+
         });
 
         this.http.post(this.api.url + '/open_api/signs/ups', data, this.api.header).subscribe(data => this.validate(data.json()));
 
     }
 
+                //flow_signUp_step: 1,
+                //flow_singUp_instance: this.form.form.flow_singUp_instance.value,
                 //region: this.form.form.region.value,
                 //area: this.form.form.area.value,
                 //zipCode: this.form.form.zipCode.value,

@@ -22,41 +22,65 @@ export class RegistrationTwoPage {
   form: { form: any } = {
     form: {
      relationshipStatus: { choices: [[]] },
-     region: {choices: [[]]},
-     city: {choices: [[]]},
-     //ethnicity: { choices: [[]] },
+     region: { choices: [[]]},
+     city: { choices: [[]]},
      religion: { choices: [[]] },
-     //languages: { choices: [[]] },
-     //children: { choices: [[]] },
      education: { choices: [[]] },
-     occupation: {},
-     //smoking: { choices: [[]] },
-     //drinking: { choices: [[]] },
+     occupation: { choices: [[]] },
      purposes: { choices: [[]] },
+     sexOrientation: { choices: [[]]},
+     flow_signUp_step: {},
+     flow_signUp_instance: {},
+
+    }
+  };
+
+  err: {
+    relationshipStatus: { errors: any },
+    region: { errors: any },
+    city: { errors: any },
+    religion: { errors: any },
+    education: { errors: any },
+    occupation: { errors: any },
+    purposes: { errors: any },
+    sexOrientation: {errors: any},
+    flow_signUp_step: { errors: any },
+    flow_signUp_instance:{ errors: any }
+  } = {
+    relationshipStatus: { errors:[] },
+    region: { errors:[] },
+    city: { errors:[] },
+    religion: { errors:[] },
+    education: { errors:[] },
+    occupation: { errors:[] },
+    purposes: { errors:[] },
+    sexOrientation: { errors:[] },
+    flow_signUp_step: { errors:[] },
+    flow_signUp_instance:{ errors:[] }
+  };
+
+  errKeys:any;
+  field_value: any;
+  user : { occupation: {} };
+  name : any;
+
+  /*
+     //ethnicity: { choices: [[]] },
      //height: { choices: [[]] },
      //body: { choices: [[]] },
      //eyes: { choices: [[]] },
      //hair: { choices: [[]] },
      //features: { choices: [[]] },
      //status: { choices: [[]] },
-     sexOrientation: {choices: [[]]},
+     //smoking: { choices: [[]] },
+     //drinking: { choices: [[]] },
      //netWorth: { choices: [[]] },
      //income: { choices: [[]] },
-    }
-  };
+     //languages: { choices: [[]] },
+     //children: { choices: [[]] },
 
-  err: {
-    relationshipStatus: { errors: any },
-    //children: { errors: any },
-    //ethnicity: { errors: any },
-    religion: { errors: any },
-    //languages: { errors: any },
-    education: { errors: any },
-    occupation: { errors: any },
-    //smoking: { errors: any },
-    //drinking: { errors: any },
-    purposes: { errors: any },
-    sexOrientation: {errors: any},
+
+     err:
     //height: { errors: any },
     //body: { errors: any },
     //eyes: { errors: any },
@@ -65,18 +89,13 @@ export class RegistrationTwoPage {
     //status: { errors: any },
     //netWorth: { errors: any },
     //income: { errors: any },
-  } = {
-    relationshipStatus: { errors:[] },
-    //children: { errors:[] } ,
-    //ethnicity: { errors:[] },
-    religion: { errors:[] },
-    //languages: { errors:[] },
-    education: { errors:[] },
-    occupation: { errors:[] },
-    //smoking: { errors:[] },
-    //drinking: { errors:[] },
-    purposes: { errors:[] },
-    sexOrientation: {errors:[]},
+    occupation: { errors: any },
+    //smoking: { errors: any },
+    //drinking: { errors: any },
+    //languages: { errors: any },
+    //children: { errors: any },
+    //ethnicity: { errors: any },
+
     //height: { errors:[] },
     //body: { errors:[] },
     //eyes: { errors:[] },
@@ -85,12 +104,12 @@ export class RegistrationTwoPage {
     //status: { errors: [] },
     //netWorth: { errors: [] },
     //income: { errors: [] },
-  };
-
-  errKeys:any;
-  field_value: any;
-  user : { occupation: {} };
-  name : any;
+    //smoking: { errors:[] },
+    //drinking: { errors:[] },
+    //children: { errors:[] } ,
+    //ethnicity: { errors:[] },
+    //languages: { errors:[] },
+  */
 
   constructor(
       public navCtrl: NavController,
@@ -110,7 +129,7 @@ export class RegistrationTwoPage {
 
     this.api.showLoad();
 
-    if( typeof this.form.form.status != 'undefined' ) {
+    /*if( typeof this.form.form.status != 'undefined' ) {
         var data = JSON.stringify({
               flow_signUp_instance: this.form.form.flow_signUp_instance.value,
               flow_signUp_step: this.form.form.flow_signUp_step.value,
@@ -159,9 +178,28 @@ export class RegistrationTwoPage {
                   _token: this.form.form._token.value
               }
             });
-    }
+    }*/
 
-       this.http.post(this.api.url+'/open_api/signs/ups',data, this.api.header).subscribe(data => this.validate( data.json() ) );
+       var data = JSON.stringify({
+              flow_signUp_instance: this.form.form.flow_signUp_instance.value,
+              flow_signUp_step: this.form.form.flow_signUp_step.value,
+              signUpTwo: {
+                  relationshipStatus: this.form.form.relationshipStatus.value,
+                  region: this.form.form.region.value,
+                  city: this.form.form.city.value,
+                  religion: this.form.form.religion.value,
+                  education: this.form.form.education.value,
+                  occupation: this.form.form.occupation.value,
+                  purposes: this.form.form.purposes.value,
+                  sexOrientation: this.form.form.sexOrientation.value
+
+                }
+
+              });
+
+
+
+       this.http.post(this.api.url+'/app_dev.php/open_api/signs/ups',data, this.api.header).subscribe(data => this.validate( data.json() ) );
 
     }
 

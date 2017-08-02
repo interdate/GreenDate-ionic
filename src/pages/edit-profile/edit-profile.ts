@@ -22,6 +22,7 @@ declare var $: any;
 export class EditProfilePage {
     private select: Select;
     public test: any = "First";
+    public mydate: string = "";
 
     @ViewChild('select')
     public set ex(select: any | undefined) {
@@ -43,6 +44,8 @@ export class EditProfilePage {
             })
         }
     }
+
+
 
     /*form: { form: any } = {
         form: {
@@ -161,29 +164,32 @@ export class EditProfilePage {
     err: {
         username: { errors: any },
         email: { first: { errors: any }, second: { errors: any } },
-        //password: { children: { first: { errors: any }, second: { errors: any } } },
-        //gender: { errors: any },
         birthday: { errors: any },
-        //region: { errors: any },
-        //area: { errors: any },
-        //zipCode: { errors: any },
         phone: { errors: any },
-        //agree: { errors: any },
-        //body: { errors: any },
-        _token: { errors: any }
+        _token: { errors: any },
+
+        /*region: { errors: any },
+        area: { errors: any },
+        zipCode: { errors: any },
+        agree: { errors: any },
+        body: { errors: any },
+        password: { children: { first: { errors: any }, second: { errors: any } } },
+        gender: { errors: any },*/
+        
     } = {
         username: {errors: []},
         email: {first: {errors: []}, second: {errors: []}},
-        //password: {children: {first: {errors: [[]]}, second: {errors: [[]]}}},
-        //gender: {errors: []},
         birthday: {errors: []},
-        //region: {errors: []},
-        //area: {errors: []},
-        //zipCode: {errors: []},
         phone: {errors: []},
-        //agree: {errors: []},
         _token: {errors: []},
-        //body: {errors: []}
+
+        /*agree: {errors: []},
+        region: {errors: []},
+        area: {errors: []},
+        zipCode: {errors: []},
+        body: {errors: []}
+        password: {children: {first: {errors: [[]]}, second: {errors: [[]]}}},
+        gender: {errors: []},*/
     };
 
     err_step_two: {
@@ -320,9 +326,18 @@ export class EditProfilePage {
         this.http.get(api.url + '/api/v1/edit/profile?step=' + this.step, api.setHeaders(true)).subscribe(data => {
 
             this.form = data.json();
+            this.mydate = this.form.form.birthday.value.year+'-'+this.check2Numbers(this.form.form.birthday.value.month)+'-'+this.check2Numbers(this.form.form.birthday.value.day);
             console.log('Edit data', this.form);
+            console.log('date', this.mydate);
 
         });
+    }
+
+    check2Numbers(number:string){
+        if(number.length < 2){
+          number = '0'+number;
+        }
+        return number;
     }
 
     open() {
@@ -658,11 +673,21 @@ export class EditProfilePage {
     formSubmit() {
 
         if (this.step == 1) {
+
+            var date_arr = ['', '', ''];
+
+            if (typeof this.mydate != 'undefined') {
+                date_arr = this.mydate.split('-');
+            }
             var params = JSON.stringify({
                 profile_one: {
                     username: this.form.form.username.value,
                     email: {first: this.form.form.email.first.value, second: this.form.form.email.second.value},
-                    birthday: this.form.form.birthday.value,
+                    birthday: {
+                        day: parseInt(date_arr[2]),
+                        month: parseInt(date_arr[1]),
+                        year: parseInt(date_arr[0])
+                    },
                     phone: this.form.form.phone.value,
                     _token: this.form.form._token.value
                 }
@@ -781,15 +806,15 @@ export class EditProfilePage {
         }
 
         if (this.step == 1) {
-            this.err = response.errors.form.children;
+            /*this.err = response.errors.form.children;*/
             console.log('ERRORS',this.err);
-            this.errKeys = Object.keys(this.err_step_two);
+            /*this.errKeys = Object.keys(this.err_step_two);*/
         } else if (this.step == 2) {
-            this.err_step_two = response.errors.form.children;
-            this.errKeys = Object.keys(this.err_step_two);
+            /*this.err_step_two = response.errors.form.children;
+            this.errKeys = Object.keys(this.err_step_two);*/
         } else {
-            this.err_step_three = response.errors.form.children;
-            this.errKeys = Object.keys(this.err_step_three);
+            /*this.err_step_three = response.errors.form.children;
+            this.errKeys = Object.keys(this.err_step_three);*/
         }
 
         this.api.setStorageData({label: 'username', value: this.form.form.username.value});

@@ -146,15 +146,17 @@
             <div class="err">{{err.zipCode.errors}}</div>
         </div> -->
 
-        <div *ngIf="form.form.gender.value == 2" class="input" (click)="presentPrompt('Phone')">
-            <div [ngClass]="{'yellow-bg':  err.phone.errors  && err.phone.errors != 0 }" class="placeholder">{{
-                form.form.phone.label }}
+        <div class="input text">
+            <div [ngClass]="{'yellow-bg':  err.phone.errors && err.phone.errors?.length != 0 }"
+                 class="placeholder">{{ form.form.phone.label }}
             </div>
             <ion-item>
-                <ion-input type="text" [(ngModel)]="form.form.phone.value"></ion-input>
+                <ion-input type="text" [(ngModel)]="form.form.phone.value">
+                </ion-input>
             </ion-item>
             <div class="err">{{ err.phone.errors }}</div>
         </div>
+
 
         <div [ngClass]="{'yellow-border':  err.agree.errors  && err.agree.errors != 0 }">
             <div [innerHTML]="" class="value agree">{{ form.form.agree.text1 }} <a
