@@ -86,7 +86,7 @@
                  class="placeholder">{{ form.form.sexOrientation.label }}
             </div>
             <ion-item>
-                <select-alertless item-content [(ngModel)]="form.form.sexOrientation.value" multiple="true">
+                <select-alertless item-content [(ngModel)]="form.form.sexOrientation.value">
                     <ion-option value="{{ sex.value }}" *ngFor="let sex of form.form.sexOrientation.choices">
                         {{sex.label}}
                     </ion-option>
@@ -109,7 +109,21 @@
             <div class="err">{{ err.education.errors }}</div>
         </div>
 
-        <div class="input text">
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  err.occupation.errors && err.occupation.errors?.length != 0 }"
+                 class="placeholder">{{ form.form.occupation.label }}
+            </div>
+            <ion-item>
+                <select-alertless item-content [(ngModel)]="form.form.occupation.value">
+                    <ion-option value="{{ educ.value }}" *ngFor="let educ of form.form.occupation.choices">
+                        {{educ.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div class="err">{{ err.occupation.errors }}</div>
+        </div>
+
+<!--         <div class="input text">
             <div [ngClass]="{'yellow-bg':  err.occupation.errors && err.occupation.errors?.length != 0 }"
                  class="placeholder">{{ form.form.occupation.label }}
             </div>
@@ -118,7 +132,7 @@
                 <ion-input type="text" [(ngModel)]="form.form.occupation.value"></ion-input>
             </ion-item>
             <div class="err">{{ err.occupation.errors }}</div>
-        </div>
+        </div> -->
 
 <!--         <div class="input">
             <div [ngClass]="{'yellow-bg':  err.smoking.errors && err.smoking.errors?.length != 0 }" class="placeholder">
@@ -272,12 +286,13 @@
             <div class="err">{{ err.features.errors }}</div>
         </div> -->
 
-        
+
         <div *ngFor="let key of errKeys">
             <div *ngIf="err[key].errors" class="err">{{ form.form[key]?.label }}: {{ err[key].errors
                 }}
             </div>
         </div>
+        <div *ngIf="allfields  && allfields?.length != 0" class="err">{{ allfields }}</div>
             <button right color="danger" (click)="formSubmit(form)" full ion-button>{{form.form.submit}}
             </button>
 

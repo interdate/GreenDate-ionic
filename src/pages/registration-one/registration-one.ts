@@ -6,6 +6,7 @@ import {Http} from '@angular/http';
 import {RegistrationTwoPage} from '../registration-two/registration-two'
 import {Storage} from '@ionic/storage';
 import {PagePage} from '../page/page';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 /*
  Generated class for the One page.
@@ -45,7 +46,7 @@ export class RegistrationOnePage {
         phone: { errors: any },
         agree: { errors: any },
         _token: { errors: any },
-        flow_signUp_step: { errors: any }
+        flow_signUp_step: { errors: any },
     } = {
         username: {errors: []},
         email: {children: {first: {errors: []}, second: {errors: []}}},
@@ -73,6 +74,7 @@ export class RegistrationOnePage {
     agree_err: any;
     //region_err: any;
     phone_err: any;
+    allfields = '';
 
     /*
 
@@ -106,6 +108,8 @@ export class RegistrationOnePage {
         }, err => {
             console.log("Oops!");
         });
+
+        //this.usernameControl = new FormControl('',Validators.required);
     }
 
     festSelected(str) {
@@ -267,18 +271,30 @@ export class RegistrationOnePage {
          phone: { errors:any },
          agree: { errors:any },*/
 
-        if (typeof response.user.form.flow_signUp_step != 'undefined' && response.user.form.flow_signUp_step.value == 2) {
+        if(this.form.form.username.value == '' || this.form.form.email.first.value == '' || this.form.form.email.second.value == '' || this.form.form.password.first.value == '' || this.form.form.password.second.value == '' || this.form.form.gender.value == '' || this.form.form.birthday.value == undefined ){
+           this.allfields = 'יש למלאות את כל השדות המסומנות ב*';
+
+           console.log("name: "+this.form.form.username.value +" email-1: "+ this.form.form.email.first.value +" email-2:  " +this.form.form.email.second.value + " pass-1: "+ this.form.form.password.first.value +" pass-2: "+ this.form.form.password.second.value + " gender: " +this.form.form.gender.value + " birtthday: "+this.form.form.birthday.value);
+
+        }else if(this.form.form.agree.value == false){this.allfields = 'יש לאשר את תנאי השימוש';}
+        else{
+            this.allfields = '';
+            if (typeof response.user.form.flow_signUp_step != 'undefined' && response.user.form.flow_signUp_step.value == 2) {
 
             this.navCtrl.push(RegistrationTwoPage, {
                 form: response.user.form
             });
 
-        } else {
+           } else {
 
             this.err = response.user.errors.form.children;
             this.errKeys = Object.keys(this.err);
             this.err.username.errors;
+          }
+
         }
+
+
 
         this.api.hideLoad();
     }

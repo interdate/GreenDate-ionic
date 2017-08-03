@@ -183,6 +183,8 @@
             form.form.email.first.label }}: {{ err.email.children.first.errors }}
         </div>
 
+        <div *ngIf="allfields  && allfields?.length != 0" class="err">{{ allfields }}</div>
+
             <button right color="danger" (click)="formSubmit(form)" full ion-button>{{form.form.submit}}
             </button>
 

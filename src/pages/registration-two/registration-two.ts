@@ -63,6 +63,7 @@ export class RegistrationTwoPage {
   field_value: any;
   user : { occupation: {} };
   name : any;
+  allfields = '';
 
   /*
      //ethnicity: { choices: [[]] },
@@ -127,7 +128,7 @@ export class RegistrationTwoPage {
 
   formSubmit() {
 
-    this.api.showLoad();
+   /* this.api.showLoad(); */
 
     /*if( typeof this.form.form.status != 'undefined' ) {
         var data = JSON.stringify({
@@ -191,32 +192,43 @@ export class RegistrationTwoPage {
                   education: this.form.form.education.value,
                   occupation: this.form.form.occupation.value,
                   purposes: this.form.form.purposes.value,
-                  sexOrientation: this.form.form.sexOrientation.value
-
+                  sexOrientation: this.form.form.sexOrientation.value,
+                  _token: this.form.form._token.value
                 }
 
               });
 
 
 
-       this.http.post(this.api.url+'/app_dev.php/open_api/signs/ups',data, this.api.header).subscribe(data => this.validate( data.json() ) );
+       this.http.post(this.api.url+'/open_api/signs/ups',data, this.api.header).subscribe(data => this.validate( data.json() ) );
 
     }
 
     validate(response) {
 
+       if(this.form.form.relationshipStatus.value == '' || this.form.form.region.value == '' || this.form.form.city.value == '' || this.form.form.religion.value == '' || this.form.form.education.value == '' || this.form.form.occupation.value == '' || this.form.form.purposes.value == '' || this.form.form.sexOrientation.value == ''){
+           this.allfields = 'יש למלאות את כל השדות המסומנות ב*';
+           }
+           else{
+              this.allfields = '';
 
-      if( typeof response.user.form.flow_signUp_step != 'undefined' && response.user.form.flow_signUp_step.value == 3 ) {
+              if( typeof response.user.form.flow_signUp_step != 'undefined' && response.user.form.flow_signUp_step.value == 3 ) {
 
-          this.navCtrl.push(RegistrationThreePage, {
-              form: response.user.form
-        });
+                this.navCtrl.push(RegistrationThreePage, {
+                    form: response.user.form
+              });
 
-      }else{
+            }else{
 
-          this.err = response.user.errors.form.children;
-          this.errKeys = Object.keys(this.err);
-      }
+                this.err = response.user.errors.form.children;
+                this.errKeys = Object.keys(this.err);
+              }
+  
+
+           }
+
+
+
         this.api.hideLoad();
 
     }

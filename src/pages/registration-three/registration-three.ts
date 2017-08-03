@@ -23,24 +23,91 @@ declare var $:any;
 export class RegistrationThreePage {
 
     user:any = {id: ''}
+    allfields = '';
 
     form:{ form: any } = {
         form: {
             about: {},
-            hobbies: {choices: [[]]},
             looking: {},
+            smoking: { choices: [[]] },
+            drinking: { choices: [[]] },
+            children: { choices: [[]] },
+            animals: { choices: [[]] },
+            interests: { choices: [[]] },
+            politicalAffiliation: { choices: [[]] },
+            height: { choices: [[]] },
+            body: { choices: [[]] },
+            eyes: { choices: [[]] },
+            hair: { choices: [[]] },
+            perfectDate: {},
+            favoriteDish: {},
+            favoriteRestaurant: {},
+            dinnerWith: {},
+            favoriteBooks: {},
+            music: {},
+            type: { choices: [[]] },
+            nutrition: { choices: [[]] },
+            veggieReasons: { choices: [[]] },
+            sport: { choices: [[]] },
+            green: { choices: [[]] },
+            flow_signUp_step: {},
+            flow_signUp_instance: {},
             _token: {}
         }
     };
 
     err:{
-        about: { errors: any },
-        hobbies: { errors: any },
-        looking: { errors: any },
+            about: {errors: any},
+            looking: { errors: any },
+            green: { errors: any },
+            smoking: { errors: any },
+            drinking: { errors: any },
+            children: { errors: any },
+            animals: { errors: any },
+            interests: { errors: any },
+            politicalAffiliation: { errors: any },
+            height: { errors: any },
+            body: { errors: any },
+            eyes: { errors: any },
+            hair: { errors: any },
+            perfectDate: { errors: any },
+            favoriteDish: { errors: any },
+            favoriteRestaurant: { errors: any },
+            dinnerWith: { errors: any },
+            favoriteBooks: { errors: any },
+            music: { errors: any },
+            type: { errors: any },
+            nutrition: { errors: any },
+            veggieReasons: { errors: any },
+            sport: { errors: any },
+            flow_signUp_step: { errors: any },
+            flow_signUp_instance: { errors: any },
     } = {
-        about: {errors: []},
-        hobbies: {errors: []},
-        looking: {errors: []},
+            about: { errors: [] },
+            looking: { errors: [] },
+            green: { errors: [] },
+            smoking: { errors: [] },
+            drinking: { errors: [] },
+            children: { errors: [] },
+            animals: { errors: [] },
+            interests: { errors: [] },
+            politicalAffiliation: { errors: [] },
+            height: { errors: [] },
+            body: { errors: [] },
+            eyes: { errors: [] },
+            hair: { errors: [] },
+            perfectDate: { errors: [] },
+            favoriteDish: { errors: [] },
+            favoriteRestaurant: { errors: [] },
+            dinnerWith: { errors: [] },
+            favoriteBooks: { errors: [] },
+            music: { errors: [] },
+            type: { errors: [] },
+            nutrition: { errors: [] },
+            veggieReasons: { errors: [] },
+            sport: { errors: [] },
+            flow_signUp_step: { errors: [] },
+            flow_signUp_instance: { errors: [] },
     };
 
     errKeys:any;
@@ -85,16 +152,36 @@ export class RegistrationThreePage {
 
     formSubmit() {
 
-        this.api.showLoad();
+        //this.api.showLoad();
 
         var data = JSON.stringify({
             flow_signUp_instance: this.form.form.flow_signUp_instance.value,
             flow_signUp_step: this.form.form.flow_signUp_step.value,
-            sign_up_three: {
-                about: this.form.form.about.value,
-                hobbies: this.form.form.hobbies.value,
-                looking: this.form.form.looking.value,
-                _token: this.form.form._token.value
+            signUpTwo: {
+            about: this.form.form.about.value,
+            looking: this.form.form.looking.value,
+            green: this.form.form.green.value,
+            smoking: this.form.form.smoking.value,
+            drinking: this.form.form.drinking.value,
+            children: this.form.form.children.value,
+            animals: this.form.form.animals.value,
+            interests: this.form.form.interests.value,
+            politicalAffiliation: this.form.form.politicalAffiliation.value,
+            height: this.form.form.height.value,
+            body: this.form.form.body.value,
+            eyes: this.form.form.eyes.value,
+            hair: this.form.form.hair.value,
+            perfectDate: this.form.form.perfectDate.value,
+            favoriteDish: this.form.form.favoriteDish.value,
+            favoriteRestaurant: this.form.form.favoriteRestaurant.value,
+            dinnerWith: this.form.form.dinnerWith.value,
+            favoriteBooks: this.form.form.favoriteBooks.value,
+            music: this.form.form.music.value,
+            type: this.form.form.type.value,
+            nutrition: this.form.form.nutrition.value,
+            veggieReasons: this.form.form.veggieReasons.value,
+            sport: this.form.form.sport.value,
+            _token: this.form.form._token.value
             }
         });
 
