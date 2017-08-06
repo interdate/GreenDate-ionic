@@ -210,12 +210,12 @@ export class RegistrationOnePage {
 
         this.api.showLoad();
 
-        /*this.storage.set('user_data', {
+        this.storage.set('user_data', {
             username: this.form.form.username.value,
             password: this.form.form.password.first.value
-        });*/
+        });
 
-        //this.api.setUserData({username: this.form.form.username.value, password: this.form.form.password.first.value});
+        this.api.setUserData({username: this.form.form.username.value, password: this.form.form.password.first.value});
 
         var date_arr = ['', '', ''];
 

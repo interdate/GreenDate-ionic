@@ -195,7 +195,12 @@ export class RegistrationThreePage {
 
     validate(response) {
 
-        if (typeof response.user != 'undefined' && typeof response.user.form.flow_signUp_step != 'undefined' && response.user.form.flow_signUp_step.value == 3) {
+     if(this.form.form.about.value == '' || this.form.form.looking.value == '' || this.form.form.green.value == '' || this.form.form.smoking.value == '' || this.form.form.drinking.value == '' || this.form.form.children.value == '' || this.form.form.animals.value == '' || this.form.form.interests.value == '' || this.form.form.politicalAffiliation.value == '' || this.form.form.height.value == '' || this.form.form.body.value == '' || this.form.form.eyes.value == '' || this.form.form.hair.value == '' || this.form.form.type.value == '' || this.form.form.nutrition.value == '' || this.form.form.veggieReasons.value == '' || this.form.form.sport.value == ''){
+           this.allfields = 'יש למלאות את כל השדות המסומנות ב*';
+           }else{
+           this.allfields = '';
+
+            if (typeof response.user != 'undefined' && typeof response.user.form.flow_signUp_step != 'undefined' && response.user.form.flow_signUp_step.value == 3) {
             console.log('Response1: ', response);
 
             this.err = response.user.errors.form.children;
@@ -205,6 +210,7 @@ export class RegistrationThreePage {
              });
              */
         } else {
+
 
             //let user = this.api.getUserData();
 
@@ -244,7 +250,16 @@ export class RegistrationThreePage {
                 });
 
             }
+
+
         }
+
+
+
+
+           }
+
+
         this.api.hideLoad();
     }
 

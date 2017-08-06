@@ -69,7 +69,6 @@ export class EditProfilePage {
 
     form: { form: any } = {
         form: {
-            submit: '',
             username: {},
             email: {first: {}, second: {}},
             birthday: {value: {day: {}, month: {}, year: {}}},
@@ -81,14 +80,15 @@ export class EditProfilePage {
 
     form_step_two: { form_step_two: any } = {
         form_step_two: {
-            city: {choices: [[]]},
-            education: {choices: [[]]},
-            occupation: {choices: [[]]},
-            purposes: {choices: [[]]},
-            region: {choices: [[]]},
-            relationshipStatus: {choices: [[]]},
-            religion: {choices: [[]]},
-            sexOrientation: {choices: [[]]},
+            city: { choices: [[]] },
+            education: { choices: [[]] },
+            occupation: { choices: [[]] },
+            purposes: { choices: [[]] },
+            region: { choices: [[]] },
+            relationshipStatus: { choices: [[]] },
+            religion: { choices: [[]] },
+            sexOrientation: { choices: [[]] },
+            submit: '',
             _token: {}
         }
     };
@@ -96,26 +96,28 @@ export class EditProfilePage {
     form_step_three: { form_step_three: any } = {
         form_step_three: {
             about: {},
-            animals: {choices: [[]]},
-            body: {choices: [[]]},
-            children: {choices: [[]]},
+            animals: { choices: [[]] },
+            body: { choices: [[]] },
+            children: { choices: [[]] },
             dinnerWith: {},
-            drinking: {choices: [[]]},
-            eyes: {choices: [[]]},
+            drinking: { choices: [[]] },
+            eyes: { choices: [[]] },
             favoriteBooks: {},
             favoriteDish: {},
             favoriteRestaurant: {},
             green:{ choices: [[]] },
-            hair: {choices: [[]]},
-            height: {choices: [[]]},
-            interests: {choices: [[]]},
+            hair: { choices: [[]] },
+            height: { choices: [[]] },
+            interests: { choices: [[]] },
             looking:{},
             music:{},
-            nutrition: {choices: [[]]},
+            nutrition: { choices: [[]] },
             perfectDate:{},
-            politicalAffiliation:{choices: [[]]},
-            smoking: {choices: [[]]},
-            sport: {choices: [[]]},
+            politicalAffiliation:{ choices: [[]] },
+            smoking: { choices: [[]] },
+            sport: { choices: [[]] },
+            type: { choices: [[]] },
+            veggieReasons: { choices: [[]] },
             _token: {}
             
         }
@@ -167,29 +169,12 @@ export class EditProfilePage {
         birthday: { errors: any },
         phone: { errors: any },
         _token: { errors: any },
-
-        /*region: { errors: any },
-        area: { errors: any },
-        zipCode: { errors: any },
-        agree: { errors: any },
-        body: { errors: any },
-        password: { children: { first: { errors: any }, second: { errors: any } } },
-        gender: { errors: any },*/
-        
     } = {
         username: {errors: []},
         email: {first: {errors: []}, second: {errors: []}},
         birthday: {errors: []},
         phone: {errors: []},
-        _token: {errors: []},
-
-        /*agree: {errors: []},
-        region: {errors: []},
-        area: {errors: []},
-        zipCode: {errors: []},
-        body: {errors: []}
-        password: {children: {first: {errors: [[]]}, second: {errors: [[]]}}},
-        gender: {errors: []},*/
+        _token: {errors: []}
     };
 
     err_step_two: {
@@ -201,28 +186,8 @@ export class EditProfilePage {
         relationshipStatus: { errors: any },
         religion: { errors: any },
         sexOrientation: { errors: any },
-
-
-        /*relationshipStatus: { errors: any },
-        children: { errors: any },
-        ethnicity: { errors: any },
-        religion: { errors: any },
-        languages: { errors: any },
-        education: { errors: any },
-        occupation: { errors: any },
-        smoking: { errors: any },
-        drinking: { errors: any },
-        purposes: { errors: any },
-        height: { errors: any },
-        body: { errors: any },
-        eyes: { errors: any },
-        hair: { errors: any },
-        features: { errors: any },
-        status: { errors: any },
-        netWorth: { errors: any },
-        income: { errors: any },*/
+        _token: { errors: any }
     } = {
-
         city: { errors: '' },
         education: { errors: '' },
         occupation: { errors: '' },
@@ -231,26 +196,7 @@ export class EditProfilePage {
         relationshipStatus: { errors: '' },
         religion: { errors: '' },
         sexOrientation: { errors: '' },
-
-
-        /*relationshipStatus: {errors: ''},
-        children: {errors: ''},
-        ethnicity: {errors: ''},
-        religion: {errors: ''},
-        languages: {errors: ''},
-        education: {errors: ''},
-        occupation: {errors: ''},
-        smoking: {errors: ''},
-        drinking: {errors: ''},
-        purposes: {errors: ''},
-        height: {errors: ''},
-        body: {errors: ''},
-        eyes: {errors: ''},
-        hair: {errors: ''},
-        features: {errors: ''},
-        status: {errors: ''},
-        netWorth: {errors: ''},
-        income: {errors: ''},*/
+        _token: {errors: []}
     };
 
     err_step_three: {
@@ -275,12 +221,10 @@ export class EditProfilePage {
             politicalAffiliation:{ errors: any },
             smoking: { errors: any },
             sport: { errors: any },
-
-        /*about: { errors: any },
-        hobbies: { errors: any },
-        looking: { errors: any },*/
+            type: { errors: any },
+            veggieReasons: { errors: any },
+            _token: { errors: any }
     } = {
-
             about: { errors: [] },
             animals: { errors: [] },
             body: { errors: [] },
@@ -302,10 +246,9 @@ export class EditProfilePage {
             politicalAffiliation:{ errors: [] },
             smoking: { errors: [] },
             sport: { errors: [] },
-
-        /*about: {errors: []},
-        hobbies: {errors: []},
-        looking: {errors: []},*/
+            type: { errors: [] },
+            veggieReasons: { errors: [] },
+            _token: {errors: []}
     };
 
     errKeys: any;
@@ -314,6 +257,78 @@ export class EditProfilePage {
         zip_code: any, phone: any, occupation: any, about_me: any, looking_for: any; body };
     name: any;
     step: any = 1;
+
+
+
+    /*
+
+    relationshipStatus: {errors: ''},
+        children: {errors: ''},
+        ethnicity: {errors: ''},
+        religion: {errors: ''},
+        languages: {errors: ''},
+        education: {errors: ''},
+        occupation: {errors: ''},
+        smoking: {errors: ''},
+        drinking: {errors: ''},
+        purposes: {errors: ''},
+        height: {errors: ''},
+        body: {errors: ''},
+        eyes: {errors: ''},
+        hair: {errors: ''},
+        features: {errors: ''},
+        status: {errors: ''},
+        netWorth: {errors: ''},
+        income: {errors: ''},
+
+        about: { errors: any },
+        hobbies: { errors: any },
+        looking: { errors: any },
+
+
+        about: {errors: []},
+        hobbies: {errors: []},
+        looking: {errors: []},
+
+
+        relationshipStatus: { errors: any },
+        children: { errors: any },
+        ethnicity: { errors: any },
+        religion: { errors: any },
+        languages: { errors: any },
+        education: { errors: any },
+        occupation: { errors: any },
+        smoking: { errors: any },
+        drinking: { errors: any },
+        purposes: { errors: any },
+        height: { errors: any },
+        body: { errors: any },
+        eyes: { errors: any },
+        hair: { errors: any },
+        features: { errors: any },
+        status: { errors: any },
+        netWorth: { errors: any },
+        income: { errors: any },
+
+
+        agree: {errors: []},
+        region: {errors: []},
+        area: {errors: []},
+        zipCode: {errors: []},
+        body: {errors: []}
+        password: {children: {first: {errors: [[]]}, second: {errors: [[]]}}},
+        gender: {errors: []},
+
+
+        region: { errors: any },
+        area: { errors: any },
+        zipCode: { errors: any },
+        agree: { errors: any },
+        body: { errors: any },
+        password: { children: { first: { errors: any }, second: { errors: any } } },
+        gender: { errors: any },
+
+    */
 
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
@@ -433,7 +448,7 @@ export class EditProfilePage {
                 this.form_step_three.form_step_three = data.json().form;
                 //this.form_step_three.form_step_three.about.label
             }
-            console.log('Data Step', this.form);
+            //console.log('Data Step', this.form);
             this.step = step;
         });
     }
@@ -441,7 +456,7 @@ export class EditProfilePage {
     setSelected() {
         if (this.step == 1) {
             var params = JSON.stringify({
-                profile_one: {
+                profileOne: {
                     username: this.form.form.username.value,
                     email: {first: this.form.form.email.first.value, second: this.form.form.email.second.value},
                     birthday: this.form.form.birthday.value,
@@ -454,7 +469,7 @@ export class EditProfilePage {
             });
         } else if (this.step == 2) {
             var params = JSON.stringify({
-                profile_two: {
+                profileTwo: {
                     relationshipStatus: this.form.form.relationshipStatus.value,
                     ethnicity: this.form.form.ethnicity.value,
                     religion: this.form.form.religion.value,
@@ -478,7 +493,7 @@ export class EditProfilePage {
             });
         } else if (this.step == 3) {
             var params = JSON.stringify({
-                profile_three: {
+                profileThree: {
                     about: this.form.form.about.value,
                     hobbies: this.form.form.hobbies.value,
                     looking: this.form.form.looking.value,
@@ -674,25 +689,29 @@ export class EditProfilePage {
 
         if (this.step == 1) {
 
+        console.log("step:"+this.step);
+
             var date_arr = ['', '', ''];
 
             if (typeof this.mydate != 'undefined') {
                 date_arr = this.mydate.split('-');
             }
             var params = JSON.stringify({
-                profile_one: {
+                profileOne: {
                     username: this.form.form.username.value,
                     email: {first: this.form.form.email.first.value, second: this.form.form.email.second.value},
                     birthday: {
-                        day: parseInt(date_arr[2]),
+                        year: parseInt(date_arr[0]),
                         month: parseInt(date_arr[1]),
-                        year: parseInt(date_arr[0])
+                        day: parseInt(date_arr[2])
+                          
                     },
                     phone: this.form.form.phone.value,
                     _token: this.form.form._token.value
                 }
             });
         } else if (this.step == 2) {
+        console.log("step:"+this.step);
 
             /*var netWorth;
             var status;
@@ -711,22 +730,23 @@ export class EditProfilePage {
             }*/
 
             var params = JSON.stringify({
-                profile_two: {
-                    relationshipStatus: this.form_step_two.form_step_two.relationshipStatus.value,
-                    city: this.form_step_two.form_step_two.city.value,
+                profileTwo: {
                     region: this.form_step_two.form_step_two.region.value,
-                    sexOrientation: this.form_step_two.form_step_two.sexOrientation.value,
-                    religion: this.form_step_two.form_step_two.religion.value,
+                    city: this.form_step_two.form_step_two.city.value,
+                    relationshipStatus: this.form_step_two.form_step_two.relationshipStatus.value,
                     occupation: this.form_step_two.form_step_two.occupation.value,
                     education: this.form_step_two.form_step_two.education.value,
+                    religion: this.form_step_two.form_step_two.religion.value,
+                    sexOrientation: this.form_step_two.form_step_two.sexOrientation.value,
                     purposes: this.form_step_two.form_step_two.purposes.value,
+                    submit: this.form_step_two.form_step_two.submit,
                     _token: this.form_step_two.form_step_two._token.value
                 }
             });
         } else if (this.step == 3) {
+        console.log("step:"+this.step);
             var params = JSON.stringify({
-                profile_three: {
-
+                profileThree: {
                     about: this.form_step_three.form_step_three.about.value,
                     animals: this.form_step_three.form_step_three.animals.value,
                     body: this.form_step_three.form_step_three.body.value,
@@ -748,13 +768,15 @@ export class EditProfilePage {
                     politicalAffiliation: this.form_step_three.form_step_three.politicalAffiliation.value,
                     smoking: this.form_step_three.form_step_three.smoking.value,
                     sport: this.form_step_three.form_step_three.sport.value,
+                    type: this.form_step_three.form_step_three.type.value,
+                    veggieReasons: this.form_step_three.form_step_three.veggieReasons.value,
                     _token: this.form_step_three.form_step_three._token.value
 
                 }
             });
         }
 
-        this.http.post(this.api.url + '/app_dev.php/api/v1/edits/profiles', params, this.api.setHeaders(true)).subscribe(data => this.validate(data.json()));
+        this.http.post(this.api.url + '/api/v1/edits/profiles', params, this.api.setHeaders(true)).subscribe(data => this.validate(data.json()));
     }
 
     /*
@@ -806,15 +828,15 @@ export class EditProfilePage {
         }
 
         if (this.step == 1) {
-            /*this.err = response.errors.form.children;*/
+            //this.err = response.errors.form.children;
             console.log('ERRORS',this.err);
-            /*this.errKeys = Object.keys(this.err_step_two);*/
+            //this.errKeys = Object.keys(this.err_step_two);
         } else if (this.step == 2) {
-            /*this.err_step_two = response.errors.form.children;
-            this.errKeys = Object.keys(this.err_step_two);*/
+            //this.err_step_two = response.errors.form.children;
+            //this.errKeys = Object.keys(this.err_step_two);
         } else {
-            /*this.err_step_three = response.errors.form.children;
-            this.errKeys = Object.keys(this.err_step_three);*/
+            //this.err_step_three = response.errors.form.children;
+            //this.errKeys = Object.keys(this.err_step_three);
         }
 
         this.api.setStorageData({label: 'username', value: this.form.form.username.value});
