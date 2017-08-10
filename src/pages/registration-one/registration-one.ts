@@ -194,7 +194,7 @@ export class RegistrationOnePage {
 
         this.api.showLoad();
 
-        if(this.form.form.username.value == '' || this.form.form.email.first.value == '' || this.form.form.email.second.value == '' || this.form.form.password.first.value == '' || this.form.form.password.second.value == '' || this.form.form.gender.value == '' || this.form.form.birthday.value == undefined ){
+        /*if(this.form.form.username.value == '' || this.form.form.email.first.value == '' || this.form.form.email.second.value == '' || this.form.form.password.first.value == '' || this.form.form.password.second.value == '' || this.form.form.gender.value == '' || this.form.form.birthday.value == undefined ){
            this.allfields = 'יש למלא את כל השדות המסומנים בכוכבית';
            this.api.hideLoad();
 
@@ -205,7 +205,7 @@ export class RegistrationOnePage {
         this.api.hideLoad();
         }
         else{
-            this.allfields = '';
+            this.allfields = '';*/
 
 
         this.storage.set('user_data', {
@@ -247,7 +247,7 @@ export class RegistrationOnePage {
          console.log("token: " + this.form.form._token.value + "name: "+this.form.form.username.value +" email-1: "+ this.form.form.email.first.value +" email-2:  " +this.form.form.email.second.value + " pass-1: "+ this.form.form.password.first.value +" pass-2: "+ this.form.form.password.second.value + " gender: " +this.form.form.gender.value + " birtthday: "+this.form.form.birthday.value);
 
         this.http.post(this.api.url + '/open_api/signs/ups', data, this.api.header).subscribe(data => this.validate(data.json()));
-        }
+        //}
 
     }
 

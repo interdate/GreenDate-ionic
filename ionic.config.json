@@ -1,0 +1,11 @@
+{
+  "name": "Greendate",
+  "app_id": "",
+  "proxies": [
+    {
+      "path": "/",
+      "proxyUrl": "https://www.greendate.co.il"
+    }
+  ],
+  "type": "ionic-angular"
+}
