@@ -154,7 +154,8 @@ export class MyApp {
             this.menu_items_contacts[5].count = statistics.favoritedMe;
             this.menu_items_contacts[6].count = statistics.blacklisted;
             //Footer Menu
-            this.menu_items_footer2[2].count = statistics.newNotificationsNumber;
+            //this.menu_items_footer2[2].count = statistics.newNotificationsNumber;
+            this.menu_items_footer2[2].count = 0;
             this.menu_items_footer1[3].count = statistics.newMessagesNumber;
             this.menu_items_footer2[0].count = statistics.favorited;
             this.menu_items_footer2[1].count = statistics.favoritedMe;
@@ -182,7 +183,7 @@ export class MyApp {
             {_id: 'notifications', icon: '', title: menu.notifications, component: NotificationsPage, count: ''},
             {_id: 'stats', icon: 'stats', title: menu.contacts, component: ProfilePage, count: ''},
             {_id: '', icon: 'search', title: menu.search, component: SearchPage, count: ''},
-            {_id: '', icon: 'information-circle', title: 'FAQ', component: FaqPage, count: ''},
+            {_id: '', icon: 'information-circle', title: 'שאלות נפוצות', component: FaqPage, count: ''},
         ];
 
         this.menu_items_login = [
@@ -191,7 +192,7 @@ export class MyApp {
             {_id: 'notifications', icon: '', title: menu.notifications, component: NotificationsPage, count: ''},
             {_id: 'stats', icon: 'stats', title: menu.contacts, component: ProfilePage, count: ''},
             {_id: '', icon: 'search', title: menu.search, component: SearchPage, count: ''},
-            {_id: '', icon: 'information-circle', title: 'FAQ', component: FaqPage, count: ''},
+            {_id: '', icon: 'information-circle', title: 'שאלות נפוצות', component: FaqPage, count: ''},
             {_id: '', icon: 'mail', title: menu.contact_us, component: ContactUsPage, count: ''},
         ];
 
@@ -202,10 +203,11 @@ export class MyApp {
             {_id: 'change_password', icon: '', title: menu.change_password, component: ChangePasswordPage, count: ''},
             {_id: 'freeze_account', icon: '', title: menu.freeze_account, component: FreezeAccountPage, count: ''},
             {_id: 'notifications', icon: '', title: menu.notifications, component: NotificationsPage, count: ''},
-            {_id: 'settings', icon: 'cog', title: menu.settings, component: SettingsPage, count: ''},
             {_id: '', icon: 'mail', title: menu.contact_us, component: ContactUsPage, count: ''},
             {_id: 'logout', icon: 'log-out', title: menu.log_out, component: LoginPage, count: ''}
         ];
+
+        //{_id: 'settings', icon: 'cog', title: menu.settings, component: SettingsPage, count: ''},
 
         this.menu_items_contacts = [
             {_id: 'viewed', icon: '', title: menu.viewed, component: HelloIonicPage, list: 'viewed', count: ''},
@@ -274,7 +276,7 @@ export class MyApp {
             {
                 _id: 'near-me',
                 src_img: '',
-                title: 'Near Me',
+                title: 'קרוב אלי',
                 list: 'distance',
                 icon: 'pin',
                 component: HelloIonicPage,

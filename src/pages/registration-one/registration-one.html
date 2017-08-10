@@ -40,7 +40,7 @@
 
         <div class="input text">
             <div [ngClass]="{'yellow-bg':  err.password.children.first.errors && err.password.children.first.errors?.length != 0 }"
-                 class="placeholder">{{ form.form.password.first.label }}
+                 class="placeholder">{{ form.form.password.first.label }}  (מינימום 7 תווים)
             </div>
             <ion-item>
                 <ion-input type="password" [(ngModel)]="form.form.password.first.value"></ion-input>
@@ -50,7 +50,7 @@
 
         <div class="input text">
             <div [ngClass]="{'yellow-bg':  err.password.children.first.errors && err.password.children.first.errors?.length != 0 }"
-                 class="placeholder">{{ form.form.password.second.label }}
+                 class="placeholder">{{ form.form.password.second.label }} 
             </div>
             <ion-item>
                 <ion-input type="password" [(ngModel)]="form.form.password.second.value"></ion-input>
@@ -100,51 +100,10 @@
             </div>
             <ion-item>
                 <ion-datetime [(ngModel)]="birth" displayFormat="YYYY MMM DD" max="1999"
-                              pickerFormat="YYYY MM DD"></ion-datetime>
+                              pickerFormat="YYYY MM DD" [doneText]="'אישור'" [cancelText]="'ביטול'"></ion-datetime>
             </ion-item>
             <div class="err">{{err.birthday.errors}}</div>
         </div>
-
-<!--         <div class="input">
-            <div [ngClass]="{'yellow-bg':  err.zipCode.errors  && err.zipCode.errors != 0 }" class="placeholder">{{
-                form.form.region.label }}
-            </div>
-            <ion-item>
-                <select-alertless [ngClass]="rtl" class="rtl" item-content interface="action-sheet" [(ngModel)]="form.form.region.value"
-                                  (ionChange)="festSelected('region')" [ngStyle]="{ 'text-align': 'right' }">
-                    <ion-option value="{{rs.value}}" *ngFor="let rs of form.form.region.choices ">{{rs.label}}
-                    </ion-option>
-                </select-alertless>
-            </ion-item>
-            <div class="err">{{err.region.errors}}</div>
-        </div> -->
-
-<!--         <div class="input">
-            <div [ngClass]="{'yellow-bg':  err.zipCode.errors  && err.zipCode.errors != 0 }" class="placeholder">{{
-                form.form.area.label }}
-            </div>
-            <ion-item>
-                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.form.area.value"
-                                  (ionChange)="festSelected('area')">
-                    <ion-option value="{{area.value}}" *ngFor="let area of form.form.area.choices ">{{area.label}}
-                    </ion-option>
-                </select-alertless>
-            </ion-item>
-        </div> -->
-
-<!--         <div class="input">
-            <div [ngClass]="{'yellow-bg':  err.zipCode.errors  && err.zipCode.errors != 0 }" class="placeholder">{{
-                form.form.zipCode.label }}
-            </div>
-            <ion-item>
-                <select-alertless  item-content interface="action-sheet" [(ngModel)]="form.form.zipCode.value">
-                    <ion-option value="{{zipCode.value}}" *ngFor="let zipCode of form.form.zipCode.choices ">
-                        {{zipCode.label}}
-                    </ion-option>
-                </select-alertless>
-            </ion-item>
-            <div class="err">{{err.zipCode.errors}}</div>
-        </div> -->
 
         <div class="input text">
             <div [ngClass]="{'yellow-bg':  err.phone.errors && err.phone.errors?.length != 0 }"

@@ -6,7 +6,7 @@ import {Http} from '@angular/http';
 import {RegistrationTwoPage} from '../registration-two/registration-two'
 import {Storage} from '@ionic/storage';
 import {PagePage} from '../page/page';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 /*
  Generated class for the One page.
@@ -34,7 +34,6 @@ export class RegistrationOnePage {
             agree: {},
             _token: {},
             flow_signUp_step: 1
-
         }
     };
     err: {
@@ -76,20 +75,6 @@ export class RegistrationOnePage {
     phone_err: any;
     allfields = '';
 
-    /*
-
-        //region: {choices: [[]]},
-        //area: {choices: [[]]},
-        //zipCode: {choices: [[]]},
-
-        //region: { errors: any },
-        //area: { errors: any },
-        //zipCode: { errors: any },
-
-        //region: {errors: []},
-        //area: {errors: []},
-        //zipCode: {errors: []},
-    */
 
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
@@ -109,7 +94,6 @@ export class RegistrationOnePage {
             console.log("Oops!");
         });
 
-        //this.usernameControl = new FormControl('',Validators.required);
     }
 
     festSelected(str) {
@@ -210,6 +194,20 @@ export class RegistrationOnePage {
 
         this.api.showLoad();
 
+        if(this.form.form.username.value == '' || this.form.form.email.first.value == '' || this.form.form.email.second.value == '' || this.form.form.password.first.value == '' || this.form.form.password.second.value == '' || this.form.form.gender.value == '' || this.form.form.birthday.value == undefined ){
+           this.allfields = 'יש למלא את כל השדות המסומנים בכוכבית';
+           this.api.hideLoad();
+
+           console.log("name: "+this.form.form.username.value +" email-1: "+ this.form.form.email.first.value +" email-2:  " +this.form.form.email.second.value + " pass-1: "+ this.form.form.password.first.value +" pass-2: "+ this.form.form.password.second.value + " gender: " +this.form.form.gender.value + " birtthday: "+this.form.form.birthday.value);
+
+        }else if(this.form.form.agree.value == false){
+        this.allfields = 'יש לאשר את תנאי השימוש';
+        this.api.hideLoad();
+        }
+        else{
+            this.allfields = '';
+
+
         this.storage.set('user_data', {
             username: this.form.form.username.value,
             password: this.form.form.password.first.value
@@ -224,19 +222,17 @@ export class RegistrationOnePage {
         }
 
         var data = JSON.stringify({
-
             signUpOne: {
                 username: this.form.form.username.value,
-                email: {
-                    first: this.form.form.email.first.value,
-                    second: this.form.form.email.second.value
-                },
                 password: {
                     first: this.form.form.password.first.value,
                     second: this.form.form.password.second.value
                 },
+                email: {
+                    first: this.form.form.email.first.value,
+                    second: this.form.form.email.second.value
+                },
                 gender: this.form.form.gender.value,
-
                 birthday: {
                     day: parseInt(date_arr[2]),
                     month: parseInt(date_arr[1]),
@@ -244,12 +240,14 @@ export class RegistrationOnePage {
                 },
                 phone: this.form.form.phone.value,
                 agree: this.form.form.agree.value,
-                _token: this.form.form._token.value
+               _token: this.form.form._token.value
             }
-
         });
 
+         console.log("token: " + this.form.form._token.value + "name: "+this.form.form.username.value +" email-1: "+ this.form.form.email.first.value +" email-2:  " +this.form.form.email.second.value + " pass-1: "+ this.form.form.password.first.value +" pass-2: "+ this.form.form.password.second.value + " gender: " +this.form.form.gender.value + " birtthday: "+this.form.form.birthday.value);
+
         this.http.post(this.api.url + '/open_api/signs/ups', data, this.api.header).subscribe(data => this.validate(data.json()));
+        }
 
     }
 
@@ -271,14 +269,7 @@ export class RegistrationOnePage {
          phone: { errors:any },
          agree: { errors:any },*/
 
-        if(this.form.form.username.value == '' || this.form.form.email.first.value == '' || this.form.form.email.second.value == '' || this.form.form.password.first.value == '' || this.form.form.password.second.value == '' || this.form.form.gender.value == '' || this.form.form.birthday.value == undefined ){
-           this.allfields = 'יש למלאות את כל השדות המסומנות ב*';
 
-           console.log("name: "+this.form.form.username.value +" email-1: "+ this.form.form.email.first.value +" email-2:  " +this.form.form.email.second.value + " pass-1: "+ this.form.form.password.first.value +" pass-2: "+ this.form.form.password.second.value + " gender: " +this.form.form.gender.value + " birtthday: "+this.form.form.birthday.value);
-
-        }else if(this.form.form.agree.value == false){this.allfields = 'יש לאשר את תנאי השימוש';}
-        else{
-            this.allfields = '';
             if (typeof response.user.form.flow_signUp_step != 'undefined' && response.user.form.flow_signUp_step.value == 2) {
 
             this.navCtrl.push(RegistrationTwoPage, {
@@ -292,13 +283,12 @@ export class RegistrationOnePage {
             this.err.username.errors;
           }
 
-        }
-
-
+        
 
         this.api.hideLoad();
     }
 
     ionViewDidLoad() {
     }
+
 }

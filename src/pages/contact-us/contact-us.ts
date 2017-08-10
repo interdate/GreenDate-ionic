@@ -23,6 +23,7 @@ export class ContactUsPage {
     email_err: any;
     text_err: any;
     subject_err: any;
+    allfields = '';
 
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
@@ -41,16 +42,24 @@ export class ContactUsPage {
 
     formSubmit() {
 
-        var params = JSON.stringify({
+    if(this.form.form.email.value == '' || this.form.form.text.value == '' || this.form.form.subject.value == ''){
+    this.allfields = 'יש למלאות את כל השדות';
+    }else{
+           this.allfields = '';
+
+            var params = JSON.stringify({
             contact: {
                 email: this.form.form.email.value,
                 text: this.form.form.text.value,
                 subject: this.form.form.subject.value,
                 _token: this.form.form._token.value,
             }
-        });
+          });
 
-        this.http.post(this.api.url + '/open_api/contacts', params, this.api.header).subscribe(data => this.validate(data.json()));
+          this.http.post(this.api.url + '/open_api/contacts', params, this.api.header).subscribe(data => this.validate(data.json()));
+
+         }
+
     }
 
     back() {
@@ -73,9 +82,9 @@ export class ContactUsPage {
             this.form.form.subject.value = "";
 
             const toast = this.toastCtrl.create({
-                message: 'Your request successfully sent',
+                message: 'ההודעה נשלחה בהצלחה',
                 showCloseButton: true,
-                closeButtonText: 'Ok'
+                closeButtonText: 'אישור'
             });
             toast.present();
         }

@@ -23,6 +23,7 @@ export class EditProfilePage {
     private select: Select;
     public test: any = "First";
     public mydate: string = "";
+    allfields = '';
 
     @ViewChild('select')
     public set ex(select: any | undefined) {
@@ -71,7 +72,8 @@ export class EditProfilePage {
         form: {
             username: {},
             email: {first: {}, second: {}},
-            birthday: {value: {day: {}, month: {}, year: {}}},
+            birthday: {value: {day: {}, month: {}, year: {}}
+            },
             phone: {},
             _token: {}
         }
@@ -88,10 +90,11 @@ export class EditProfilePage {
             relationshipStatus: { choices: [[]] },
             religion: { choices: [[]] },
             sexOrientation: { choices: [[]] },
-            submit: '',
             _token: {}
         }
     };
+
+               
 
     form_step_three: { form_step_three: any } = {
         form_step_three: {
@@ -165,13 +168,13 @@ export class EditProfilePage {
 
     err: {
         username: { errors: any },
-        email: { first: { errors: any }, second: { errors: any } },
+        email: { children: { first: { errors: any }, second: { errors: any } } },
         birthday: { errors: any },
         phone: { errors: any },
         _token: { errors: any },
     } = {
         username: {errors: []},
-        email: {first: {errors: []}, second: {errors: []}},
+        email: {children: {first: {errors: []}, second: {errors: []}}},
         birthday: {errors: []},
         phone: {errors: []},
         _token: {errors: []}
@@ -188,15 +191,15 @@ export class EditProfilePage {
         sexOrientation: { errors: any },
         _token: { errors: any }
     } = {
-        city: { errors: '' },
-        education: { errors: '' },
-        occupation: { errors: '' },
-        purposes: { errors: '' },
-        region: { errors: '' },
-        relationshipStatus: { errors: '' },
-        religion: { errors: '' },
-        sexOrientation: { errors: '' },
-        _token: {errors: []}
+        city: { errors: [] },
+        education: { errors: [] },
+        occupation: { errors: [] },
+        purposes: { errors: [] },
+        region: { errors: [] },
+        relationshipStatus: { errors: [] },
+        religion: { errors: [] },
+        sexOrientation: { errors: [] },
+        _token: {errors: [] }
     };
 
     err_step_three: {
@@ -248,7 +251,7 @@ export class EditProfilePage {
             sport: { errors: [] },
             type: { errors: [] },
             veggieReasons: { errors: [] },
-            _token: {errors: []}
+            _token: { errors: [] }
     };
 
     errKeys: any;
@@ -696,8 +699,13 @@ export class EditProfilePage {
             if (typeof this.mydate != 'undefined') {
                 date_arr = this.mydate.split('-');
             }
-            var params = JSON.stringify({
-                profileOne: {
+
+            if(this.form.form.username.value == '' || this.form.form.email.first.value == '' || this.form.form.email.second.value == ''){
+            this.allfields = 'יש למלא את כל השדות המסומנים בכוכבית';
+            }else{
+            this.allfields = '';
+                var params = JSON.stringify({
+                profile_one: {
                     username: this.form.form.username.value,
                     email: {first: this.form.form.email.first.value, second: this.form.form.email.second.value},
                     birthday: {
@@ -710,6 +718,10 @@ export class EditProfilePage {
                     _token: this.form.form._token.value
                 }
             });
+
+
+            }
+
         } else if (this.step == 2) {
         console.log("step:"+this.step);
 
@@ -729,8 +741,13 @@ export class EditProfilePage {
                 income = this.form_step_two.form_step_two.income.value;
             }*/
 
-            var params = JSON.stringify({
-                profileTwo: {
+            if(this.form_step_two.form_step_two.purposes.value == ''){
+               this.allfields = 'יש למלא את כל השדות המסומנים בכוכבית';
+            }else{
+            this.allfields = '';
+
+                var params = JSON.stringify({
+                profile_two: {
                     region: this.form_step_two.form_step_two.region.value,
                     city: this.form_step_two.form_step_two.city.value,
                     relationshipStatus: this.form_step_two.form_step_two.relationshipStatus.value,
@@ -739,14 +756,23 @@ export class EditProfilePage {
                     religion: this.form_step_two.form_step_two.religion.value,
                     sexOrientation: this.form_step_two.form_step_two.sexOrientation.value,
                     purposes: this.form_step_two.form_step_two.purposes.value,
-                    submit: this.form_step_two.form_step_two.submit,
                     _token: this.form_step_two.form_step_two._token.value
                 }
             });
+
+            }
+
         } else if (this.step == 3) {
         console.log("step:"+this.step);
-            var params = JSON.stringify({
-                profileThree: {
+
+            if(this.form_step_three.form_step_three.veggieReasons.value == '' || this.form_step_three.form_step_three.interests.value == ''){
+                this.allfields = 'יש למלא את כל השדות המסומנים בכוכבית';
+            }else if(this.form_step_three.form_step_three.about.value.length < 10 || this.form_step_three.form_step_three.looking.value.length < 10 ){
+                this.allfields = 'יש לכתוב בשדות קצת עליי ומה אני מחפש לפחות 10 תווים';
+            }else{
+            this.allfields = '';
+                var params = JSON.stringify({
+                profile_three: {
                     about: this.form_step_three.form_step_three.about.value,
                     animals: this.form_step_three.form_step_three.animals.value,
                     body: this.form_step_three.form_step_three.body.value,
@@ -774,9 +800,13 @@ export class EditProfilePage {
 
                 }
             });
-        }
 
-        this.http.post(this.api.url + '/api/v1/edits/profiles', params, this.api.setHeaders(true)).subscribe(data => this.validate(data.json()));
+            }
+
+        }
+        if(this.allfields == ''){
+            this.http.post(this.api.url + '/api/v1/edits/profiles', params, this.api.setHeaders(true)).subscribe(data => this.validate(data.json()));
+        }
     }
 
     /*
@@ -828,15 +858,15 @@ export class EditProfilePage {
         }
 
         if (this.step == 1) {
-            //this.err = response.errors.form.children;
-            console.log('ERRORS',this.err);
-            //this.errKeys = Object.keys(this.err_step_two);
+            this.err = response.errors.form.children;
+            console.log('ERRORS',this.err.email.children.first.errors);
+            this.errKeys = Object.keys(this.err);
         } else if (this.step == 2) {
-            //this.err_step_two = response.errors.form.children;
-            //this.errKeys = Object.keys(this.err_step_two);
+            this.err_step_two = response.errors.form.children;
+            this.errKeys = Object.keys(this.err_step_two);
         } else {
-            //this.err_step_three = response.errors.form.children;
-            //this.errKeys = Object.keys(this.err_step_three);
+            this.err_step_three = response.errors.form.children;
+            this.errKeys = Object.keys(this.err_step_three);
         }
 
         this.api.setStorageData({label: 'username', value: this.form.form.username.value});

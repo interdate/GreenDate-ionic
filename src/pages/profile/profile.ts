@@ -53,10 +53,10 @@ export class ProfilePage {
         this.storage = storage;
 
         let loading = this.loadingCtrl.create({
-            content: 'Please wait...'
+            content: 'אנא המתן...'
         });
 
-        //loading.present();
+        loading.present();
 
         var user = navParams.get('user');
 
@@ -99,7 +99,7 @@ export class ProfilePage {
     addFavorites(user) {
         user.isAddFavorite = true;
         let toast = this.toastCtrl.create({
-            message: user.username + ' ' + 'has been added to Favorites',
+            message: user.username + ' ' + 'הוסף לרשימת המועדפים שלך',
             duration: 2000
         });
 

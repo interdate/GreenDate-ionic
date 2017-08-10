@@ -10,7 +10,7 @@ page-profile {
   .pmtitle {
     position: relative;
     background: #e9e8e5;
-    padding: 9px 10px 6px 40px;
+    padding: 9px 34px 6px 40px;
     font-size: 21px;
   }
   .pmtitle span {
@@ -45,6 +45,14 @@ page-profile {
       margin-right: 5px;
     }
 
+  .profile-sub-title{
+    width: 100%;
+    padding: 5px 0 6px 0;
+    background-color: black;
+    color: white;
+    text-align: center;
+  }
+
   li {
     list-style-type: none;
   }
@@ -78,12 +86,25 @@ page-profile {
       border-radius: 50%;
   }
   .online-user {
-    background: url(../img/icons/online.gif) no-repeat;
-    width: 25px;
-    height: 30px;
+    top: 13px;
+    right: 10px;
+    height: 16px;
+    width: 16px;
+    background-color: #45d362;
     position: absolute;
-    background-size: cover;
-    right: 8px;
-    top: 10px;
+    border-radius: 100%;
   }
+
+
+.three{
+  display: block;
+  margin-top: 1%;
 }
+
+ion-textarea>textarea {
+text-align: center;
+}
+
+}
+
+

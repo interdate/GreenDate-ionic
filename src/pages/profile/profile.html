@@ -42,69 +42,89 @@
         <!--<div *ngIf="user.photos">
           <div (click)="fullPagePhotos(user)" class="avatar" [ngStyle]="{ 'background-image': 'url(' + api.url + user.photos[0].url+ ')'}"></div>
         </div>-->
-        <div class="photos">
+        <div class="photos"   [ngStyle]="{ 'direction': 'ltr'}">
             <div *ngIf="user.photo" (click)="fullPagePhotos(user)" class="avatar"
                  [ngStyle]="{ 'background-image': 'url(' + user.url+ ')'}"></div>
             <ion-slides pager="true">
                 <ion-slide *ngFor="let usr of user.photos">
-                    <div (click)="fullPagePhotos(user)" class="avatar"
-                         [ngStyle]="{ 'background-image': 'url(' + usr.url+ ')'}"></div>
+                <div *ngIf="usr.url == '/images/no_photo_2.jpg' || usr.url == '/images/no_photo_1.jpg'" [ngStyle]="{ 'background-image': 'url('+ api.url + usr.url + ')'}"
+                     class="avatar"></div>
+
+                <div *ngIf="usr.url != '/images/no_photo_2.jpg' && usr.url != '/images/no_photo_1.jpg'" (click)="fullPagePhotos(user)" [ngStyle]="{ 'background-image': 'url(' + usr.url + ')'}"
+                     class="avatar"></div>
                 </ion-slide>
             </ion-slides>
         </div>
         <div class="pmtitle">
             <div *ngIf="user.isNew" class="new-user"></div>
             <div *ngIf="user.isOnline" class="online-user"></div>
-            <strong>{{user.username}},</strong> {{user.age}} <span>{{user.region_name}}</span>
+            {{user.age}} <strong style="float:right;">{{user.username}},</strong>  <span>{{user.region_name}}</span>
         </div>
 
         <div class="pmdetail cf">
             <ul padding class="pmbotul">
+            <div class="profile-sub-title">אני בקצרה</div>
                 <li *ngIf="user.relationshipStatus?.value"><span
                         class="one">{{user.relationshipStatus?.label }}</span><span
                         class="two">{{user.relationshipStatus?.value }}</span></li>
                 <li *ngIf="user.zodiac?.value"><span class="one">{{user.zodiac?.label }}</span><span class="two">{{user.zodiac?.value }}</span>
                 </li>
+                <li *ngIf="user.smoking?.value"><span class="one">{{user.smoking?.label }}</span><span class="two">{{user.smoking?.value }}</span>
+                </li>
                 <li *ngIf="user.status?.value"><span class="one">{{user.status?.label }}</span><span class="two">{{user.status?.value }}</span>
                 </li>
-                <li *ngIf="user.netWorth?.value"><span class="one">{{user.netWorth?.label }}</span><span class="two">{{user.netWorth?.value }}</span>
+                <li *ngIf="user.sexOrientation?.value"><span class="one">{{user.sexOrientation?.label }}</span><span class="two">{{user.sexOrientation?.value }}</span>
                 </li>
-                <li *ngIf="user.income?.value"><span class="one">{{user.income?.label }}</span><span class="two">{{user.income?.value }}</span>
+                <li *ngIf="user.children?.value"><span class="one">{{user.children?.label }}</span><span class="two">{{user.children?.value }}</span>
                 </li>
-                <li *ngIf="user.purposes?.value"><span class="one">{{user.purposes?.label }}</span><span class="two">{{user.purposes?.value }}</span>
+                <li *ngIf="user.occupation?.value"><span class="one">{{user.occupation?.label }}</span><span class="two">{{user.occupation?.value }}</span>
                 </li>
+                <li *ngIf="user.religion?.value"><span class="one">{{user.religion?.label }}</span><span class="two">{{user.religion?.value }}</span>
+                </li>
+                <li *ngIf="user.education?.value"><span class="one">{{user.education?.label }}</span><span class="two">{{user.education?.value }}</span>
+                </li>
+                 <div class="profile-sub-title">אני בהרחבה</div>
+                <li *ngIf="user.nutrition?.value"><span class="one">{{user.nutrition?.label }}</span><span class="two">{{user.nutrition?.value }}</span>
+                </li>
+                <li *ngIf="user.veggieReasons?.value"><span class="one">{{user.veggieReasons?.label }}</span><span class="two">{{user.veggieReasons?.value }}</span>
+                </li>
+                <li *ngIf="user.drinking?.value"><span class="one">{{user.drinking?.label }}</span><span class="two">{{user.drinking?.value }}</span>
+                </li>
+                <li *ngIf="user.sport?.value"><span class="one">{{user.sport?.label }}</span><span class="two">{{user.sport?.value }}</span>
+                </li>
+                <li *ngIf="user.green?.value"><span class="one">{{user.green?.label }}</span><span class="two">{{user.green?.value }}</span>
+                </li>
+                <li *ngIf="user.animals?.value"><span class="one">{{user.animals?.label }}</span><span class="two">{{user.animals?.value }}</span>
+                </li>
+                <li *ngIf="user.interests?.value"><span class="one">{{user.interests?.label }}</span><span class="two">{{user.interests?.value }}</span>
+                </li>
+                <li *ngIf="user.politicalAffiliation?.value"><span class="one">{{user.politicalAffiliation?.label }}</span><span class="two">{{user.politicalAffiliation?.value }}</span>
+                </li>
+                <div class="profile-sub-title">איך אני נראה/ית</div>
                 <li *ngIf="user.height?.value"><span class="one">{{user.height?.label }}</span><span class="two">{{user.height?.value }}</span>
                 </li>
                 <li *ngIf="user.body?.value"><span class="one">{{user.body?.label }}</span><span class="two">{{user.body?.value }}</span>
                 </li>
-                <li *ngIf="user.ethnicity?.value"><span class="one">{{user.ethnicity?.label }}</span><span class="two">{{user.ethnicity?.value }}</span>
+                <li *ngIf="user.eyes?.value"><span class="one">{{user.eyes?.label }}</span><span class="two">{{user.eyes?.value }}</span>
                 </li>
                 <li *ngIf="user.hair?.value"><span class="one">{{user.hair?.label }}</span><span class="two">{{user.hair?.value }}</span>
                 </li>
-                <li *ngIf="user.eyes?.value"><span class="one">{{user.eyes?.label }}</span><span class="two">{{user.eyes?.value }}</span>
+                <div class="profile-sub-title">אני בכמה מילים</div>
+                <li *ngIf="user.about?.value"><span class="one">{{user.about?.label }}</span><span class="three">{{user.about?.value }}</span>
                 </li>
-                <li *ngIf="user.education?.value"><span class="one">{{user.education?.label }}</span><span class="two">{{user.education?.value }}</span>
+                <div class="profile-sub-title">עוד קצת עליי</div>
+                <li *ngIf="user.perfectDate?.value"><span class="one">{{user.perfectDate?.label }}</span><span class="three">{{user.perfectDate?.value }}</span>
                 </li>
-                <li *ngIf="user.occupation?.value"><span class="one">{{user.occupation?.label }}</span><span
-                        class="two">{{user.occupation?.value }}</span>
+                <li *ngIf="user.favoriteDish?.value"><span class="one">{{user.favoriteDish?.label }}</span><span class="three">{{user.favoriteDish?.value }}</span>
                 </li>
-                <li *ngIf="user.children?.value"><span class="one">{{user.children?.label }}</span><span class="two">{{user.children?.value }}</span>
+                <li *ngIf="user.favoriteRestaurant?.value"><span class="one">{{user.favoriteRestaurant?.label }}</span><span class="three">{{user.favoriteRestaurant?.value }}</span>
                 </li>
-                <li *ngIf="user.smoking?.value"><span class="one">{{user.smoking?.label }}</span><span class="two">{{user.smoking?.value }}</span>
+                <li *ngIf="user.favoriteBooks?.value"><span class="one">{{user.favoriteBooks?.label }}</span><span class="three">{{user.favoriteBooks?.value }}</span>
                 </li>
-                <li *ngIf="user.drinking?.value"><span class="one">{{user.drinking?.label }}</span><span class="two">{{user.drinking?.value }}</span>
+                <li *ngIf="user.music?.value"><span class="one">{{user.music?.label }}</span><span class="three">{{user.music?.value }}</span>
                 </li>
-                <li *ngIf="user.religion?.value"><span class="one">{{user.religion?.label }}</span><span class="two">{{user.religion?.value }}</span>
-                </li>
-                <li *ngIf="user.languages?.value"><span class="one">{{user.languages?.label }}</span><span class="two">{{user.languages?.value }}</span>
-                </li>
-                <li *ngIf="user.hobbies?.value"><span class="one">{{user.hobbies?.label }}</span><span class="two">{{user.hobbies?.value }}</span>
-                </li>
-                <li *ngIf="user.features?.value"><span class="one">{{user.features?.label }}</span><span class="two">{{user.features?.value }}</span>
-                </li>
-                <li *ngIf="user.looking?.value"><span class="one">{{user.looking?.label }}</span><span class="two">{{user.looking?.value }}</span>
-                </li>
-                <li *ngIf="user.about?.value"><span class="one">{{user.about?.label }}</span><span class="two">{{user.about?.value }}</span>
+                <div class="profile-sub-title">מה אני מחפש</div>
+                <li *ngIf="user.looking?.value"><span class="one">{{user.looking?.label }}</span><span class="three">{{user.looking?.value }}</span>
                 </li>
             </ul>
 

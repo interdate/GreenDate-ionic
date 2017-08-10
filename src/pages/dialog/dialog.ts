@@ -23,7 +23,7 @@ export class DialogPage {
 
     user: { id: string, isOnline: string, nick_name: string, image: string };
     users: Array<{ id: string, isOnline: string, nick_name: string, image: string }>;
-    texts: any = {a_conversation_with: '', title: ''};
+    texts: any = {a_conversation_with: '', title: '', photo: ''};
     message: any;
     messages: Array<{ id: string, isRead: any, text: string, dateTime: string, from: any }>;
     checkChat: any;

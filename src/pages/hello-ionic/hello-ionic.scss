@@ -125,6 +125,17 @@ page-hello-ionic {
     }
   }
 
+  .new-user{
+    background: url(../img/icons/new.png) no-repeat;
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    background-size: cover;
+    left: 8px;
+    top: 2px;
+    z-index: 999;
+  }
+
   }
 
 .platform-ios page-hello-ionic .sorting {
@@ -168,6 +179,7 @@ ion-card {
 .page-hello-ionic .name, .location {
   font-size: 16px;
   font-weight: bold;
+  float: right;
 }
 
 .page-hello-ionic, .location {

@@ -180,7 +180,7 @@ export class HelloIonicPage {
             user.isAddFavorite = true;
 
             let toast = this.toastCtrl.create({
-                message: user.username + ' ' + 'has been added to Favorites',
+                message: user.username + ' ' + 'הוסף לרשימת המועדפים שלך',
                 duration: 2000
             });
 

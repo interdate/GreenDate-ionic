@@ -19,9 +19,10 @@
 </div>
 <ion-list>
       <ion-item>
-        <ion-textarea rows="8" placeholder="The reason for freezing"></ion-textarea>
+        <ion-textarea [(ngModel)]="this.form.text.value" rows="8" placeholder="The reason for freezing"></ion-textarea>
       </ion-item>
  	  <ion-item>
+    <div *ngIf="allfields  && allfields?.length != 0" class="err">{{ allfields }}</div>
  	  <button color="danger" (click)="submit()" full ion-button>Freeze</button>
  	  </ion-item>
 </ion-list>

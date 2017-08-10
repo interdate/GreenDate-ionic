@@ -22,8 +22,8 @@
     <ion-item>
       <!--<ion-avatar (click)="toProfilePage()" item-left>
       </ion-avatar>-->
-      <p class="dialog-avatar" (click)="toProfilePage()" [ngStyle]="{ 'background-image': 'url(' + user.image + ')'}">{{texts.a_conversation_with}} {{user.nick_name}}</p>
-
+      <p class="dialog-avatar" *ngIf="texts?.photo != ''" (click)="toProfilePage()" [ngStyle]="{ 'background-image': 'url(' + texts?.photo + ')'}">{{texts.a_conversation_with}} {{texts.name}}</p>
+       <p class="dialog-avatar" *ngIf="texts.photo == ''" (click)="toProfilePage()" [ngStyle]="{ 'background-image': 'url(' + api.url + '/images/no_photo_' + user.gender + '.jpg' + ')'}">{{texts.a_conversation_with}} {{texts.name}}</p> 
     </ion-item>
     <p></p>
   </ion-card>

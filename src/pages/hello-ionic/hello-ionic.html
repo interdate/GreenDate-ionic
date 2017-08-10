@@ -8,7 +8,7 @@
 
 <div *ngIf="filter" class="member cf sorting">
     <div *ngIf="options.filter == 1">
-        <div class="mem-left">Sort By:</div>
+        <div class="mem-left">מיין לפי:</div>
         <div class="mem-right">
             <div class="sortby">
                 <select-alertless (ionChange)="sortBy()" item-content interface="action-sheet" [(ngModel)]="filter">
@@ -31,13 +31,17 @@
         <ion-card class="usr_profile" ion-item *ngFor="let user of users">
             <div class="user-section">
                 <div *ngIf="user.isOnline == true" class="online"></div>
-                <div (click)="itemTapped(user)" [ngStyle]="{ 'background-image': 'url(' + user.photo + ')'}"
+                <div *ngIf="user.isNew" class="new-user"></div>
+                <div *ngIf="user.photo == '/images/no_photo_2.jpg' || user.photo == '/images/no_photo_1.jpg'" (click)="itemTapped(user)" [ngStyle]="{ 'background-image': 'url('+ api.url + user.photo + ')'}"
+                     class="avatar"></div>
+
+                <div *ngIf="user.photo != '/images/no_photo_2.jpg' && user.photo != '/images/no_photo_1.jpg'" (click)="itemTapped(user)" [ngStyle]="{ 'background-image': 'url(' + user.photo + ')'}"
                      class="avatar"></div>
                 <div class="wrap">
                     <ion-card-title>
-                        <div class="name">{{user.username}}, {{user.age}}</div>
-                        <div class="distance">{{user.distance}}</div>
-                        <div class="location">{{user.region_name}}</div>
+                        <div class="name">{{user.username}},</div>
+                        <div>{{user.age}}</div>
+                        <div class="location">{{user.region}}</div>
                     </ion-card-title>
                     <ul class="profile-btn">
                         <div class="btn" (click)=toDialog(user)>

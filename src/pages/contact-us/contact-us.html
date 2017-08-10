@@ -35,7 +35,7 @@
                     placeholder="{{ form.form.text.label }}"></ion-textarea>
     </ion-item>
     <div class="err">{{ text_err }}</div>
-
+    <div *ngIf="allfields  && allfields?.length != 0" class="err">{{ allfields }}</div>
       <button (click)="formSubmit(form)" right color="danger" full ion-button>{{form.form.submit}}
       </button>
 

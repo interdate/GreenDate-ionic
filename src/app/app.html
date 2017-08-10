@@ -11,8 +11,10 @@
     <ion-content>
         <ion-list>
             <ion-icon *ngIf="is_login" class="settings" name="settings" (click)="menu2Active()"></ion-icon>
-            <div (click)="openPage(menu_items_settings[1])" class="profile" *ngIf="is_login"
-                 [ngStyle]="{ 'background-image': 'url(' + avatar + ')'}"></div>
+            <div (click)="openPage(menu_items_settings[1])" class="profile" *ngIf="is_login && avatar == '/images/no_photo_2.jpg' || avatar == '/images/no_photo_1.jpg'" [ngStyle]="{ 'background-image': 'url(' + api.url + avatar + ')'}"></div>
+
+            <div (click)="openPage(menu_items_settings[1])" class="profile" *ngIf="is_login && avatar != '/images/no_photo_2.jpg' && avatar != '/images/no_photo_1.jpg'" [ngStyle]="{ 'background-image': 'url(' + avatar + ')'}"></div>
+
             <div *ngIf="is_login" (click)="openPage(menu_items_settings[2])" class="username">{{ username }}</div>
             <button ion-item *ngFor="let menu_item of menu_items" (click)="openPage(menu_item)">
                 <ion-icon id="{{menu_item._id}}" name="{{menu_item.icon}}"></ion-icon>

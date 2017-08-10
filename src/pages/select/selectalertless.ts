@@ -47,8 +47,8 @@ export class SelectAlertless implements AfterContentInit, ControlValueAccessor, 
 
     private __options: QueryList<Option>;
 
-    @Input() cancelText: string = 'Cancel';
-    @Input() okText: string = 'OK';
+    @Input() cancelText: string = 'ביטול';
+    @Input() okText: string = 'אישור';
     @Input() placeholder: string;
     @Input() selectOptions: any = {};
     @Input() interface: string = '';

@@ -128,58 +128,14 @@ export class RegistrationTwoPage {
 
   formSubmit() {
 
-   /* this.api.showLoad(); */
+    this.api.showLoad(); 
 
-    /*if( typeof this.form.form.status != 'undefined' ) {
-        var data = JSON.stringify({
-              flow_signUp_instance: this.form.form.flow_signUp_instance.value,
-              flow_signUp_step: this.form.form.flow_signUp_step.value,
-              sign_up_two: {
-                  relationshipStatus: this.form.form.relationshipStatus.value,
-                  children:     this.form.form.children.value,
-                  ethnicity: this.form.form.ethnicity.value,
-                  religion: this.form.form.religion.value,
-                  languages: this.form.form.languages.value,
-                  education: this.form.form.education.value,
-                  occupation: this.form.form.occupation.value,
-                  smoking: this.form.form.smoking.value,
-                  drinking: this.form.form.drinking.value,
-                  purposes: this.form.form.purposes.value,
-                  height: this.form.form.height.value,
-                  body: this.form.form.body.value,
-                  eyes: this.form.form.eyes.value,
-                  hair: this.form.form.hair.value,
-                  features: this.form.form.features.value,
-                  status: this.form.form.status.value,
-                  netWorth: this.form.form.netWorth.value,
-                  income: this.form.form.income.value,
-                  _token: this.form.form._token.value
-              }
-            });
-    } else {
-        var data = JSON.stringify({
-              flow_signUp_instance: this.form.form.flow_signUp_instance.value,
-              flow_signUp_step: this.form.form.flow_signUp_step.value,
-              sign_up_two: {
-                  relationshipStatus: this.form.form.relationshipStatus.value,
-                  children:     this.form.form.children.value,
-                  ethnicity: this.form.form.ethnicity.value,
-                  religion: this.form.form.religion.value,
-                  languages: this.form.form.languages.value,
-                  education: this.form.form.education.value,
-                  occupation: this.form.form.occupation.value,
-                  smoking: this.form.form.smoking.value,
-                  drinking: this.form.form.drinking.value,
-                  purposes: this.form.form.purposes.value,
-                  height: this.form.form.height.value,
-                  body: this.form.form.body.value,
-                  eyes: this.form.form.eyes.value,
-                  hair: this.form.form.hair.value,
-                  features: this.form.form.features.value,
-                  _token: this.form.form._token.value
-              }
-            });
-    }*/
+     if(this.form.form.relationshipStatus.value == '' || this.form.form.region.value == '' || this.form.form.city.value == '' || this.form.form.religion.value == '' || this.form.form.education.value == '' || this.form.form.occupation.value == '' || this.form.form.purposes.value == '' || this.form.form.sexOrientation.value == ''){
+           this.allfields = 'יש למלא את כל השדות המסומנים בכוכבית';
+           this.api.hideLoad();
+           }
+           else{
+              this.allfields = '';
 
        var data = JSON.stringify({
               flow_signUp_instance: this.form.form.flow_signUp_instance.value,
@@ -201,16 +157,11 @@ export class RegistrationTwoPage {
 
 
        this.http.post(this.api.url+'/open_api/signs/ups',data, this.api.header).subscribe(data => this.validate( data.json() ) );
+       }
 
     }
 
     validate(response) {
-
-       if(this.form.form.relationshipStatus.value == '' || this.form.form.region.value == '' || this.form.form.city.value == '' || this.form.form.religion.value == '' || this.form.form.education.value == '' || this.form.form.occupation.value == '' || this.form.form.purposes.value == '' || this.form.form.sexOrientation.value == ''){
-           this.allfields = 'יש למלאות את כל השדות המסומנות ב*';
-           }
-           else{
-              this.allfields = '';
 
               if( typeof response.user.form.flow_signUp_step != 'undefined' && response.user.form.flow_signUp_step.value == 3 ) {
 
@@ -224,10 +175,6 @@ export class RegistrationTwoPage {
                 this.errKeys = Object.keys(this.err);
               }
   
-
-           }
-
-
 
         this.api.hideLoad();
 

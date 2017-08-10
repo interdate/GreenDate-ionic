@@ -29,8 +29,8 @@ export class ApiQuery {
                 public loadingCtrl: LoadingController,
                 private sanitizer: DomSanitizer) {
 
-        this.url = 'http://localhost:8100';
-        //this.url = 'https://www.greendate.co.il';
+        //this.url = 'http://localhost:8100';
+        this.url = 'https://www.greendate.co.il';
 
         this.storage.get('user_id').then((val) => {
             this.storage.get('username').then((username) => {
@@ -79,7 +79,7 @@ export class ApiQuery {
          */
     }
 
-    showLoad(txt = 'Please wait...') {
+    showLoad(txt = 'אנא המתן...') {
 
         this.loading = this.loadingCtrl.create({
             content: txt

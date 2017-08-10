@@ -40,7 +40,7 @@ export class ChangePasswordPage {
   formSubmit() {
 
   var params = JSON.stringify({
-        change_password: {
+        changePassword: {
             oldPassword: this.form.form.oldPassword.value,
             password: {
               first: this.form.form.password.first.value,

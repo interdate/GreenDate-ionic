@@ -17,7 +17,7 @@
   <div class="no_results" *ngIf="users?.length == 0">{{ texts?.no_results }}</div>
 <ion-card *ngFor="let user of users" (click)="toDialogPage(user)">
   <ion-card-content >
-  <div class="usr_img" *ngIf="user.faceWebPath" [ngStyle]="{ 'background-image': 'url(' + api.url + user.faceWebPath + ')'}" ></div>
+  <div class="usr_img" *ngIf="user.photoName" [ngStyle]="{ 'background-image': 'url('  + user.photoName + ')'}" ></div>
   <div class="usr_img" *ngIf="user.noPhoto" [ngStyle]="{ 'background-image': 'url(' + api.url  + user.noPhoto + ')'}" ></div>
     <ion-card-title>
       <div class="name">{{ user.username }}</div>

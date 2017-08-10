@@ -24,19 +24,6 @@
         <div class="clr"></div>
     </div>
     <ion-list>
-        <div class="input">
-            <div [ngClass]="{'yellow-bg':  err.relationshipStatus.errors && err.relationshipStatus.errors?.length != 0 }"
-                 class="placeholder">{{ form.form.relationshipStatus.label }}
-            </div>
-            <ion-item>
-                <select-alertless item-content [(ngModel)]="form.form.relationshipStatus.value">
-                    <ion-option value="{{rs.value}}" *ngFor="let rs of form.form.relationshipStatus.choices">
-                        {{rs.label}}
-                    </ion-option>
-                </select-alertless>
-            </ion-item>
-            <div class="err">{{ err.relationshipStatus.errors }}</div>
-        </div>
 
         <div class="input">
             <div [ngClass]="{'yellow-bg':  err.region.errors && err.region.errors?.length != 0 }"
@@ -52,6 +39,7 @@
             <div class="err">{{ err.region.errors }}</div>
         </div>
 
+
         <div class="input">
             <div [ngClass]="{'yellow-bg':  err.city.errors && err.city.errors?.length != 0 }"
                  class="placeholder">{{ form.form.city.label }}
@@ -64,6 +52,50 @@
                 </select-alertless>
             </ion-item>
             <div class="err">{{ err.city.errors }}</div>
+        </div>
+
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  err.relationshipStatus.errors && err.relationshipStatus.errors?.length != 0 }"
+                 class="placeholder">{{ form.form.relationshipStatus.label }}
+            </div>
+            <ion-item>
+                <select-alertless item-content [(ngModel)]="form.form.relationshipStatus.value">
+                    <ion-option value="{{rs.value}}" *ngFor="let rs of form.form.relationshipStatus.choices">
+                        {{rs.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div class="err">{{ err.relationshipStatus.errors }}</div>
+        </div>
+
+
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  err.occupation.errors && err.occupation.errors?.length != 0 }"
+                 class="placeholder">{{ form.form.occupation.label }}
+            </div>
+            <ion-item>
+                <select-alertless item-content [(ngModel)]="form.form.occupation.value">
+                    <ion-option value="{{ educ.value }}" *ngFor="let educ of form.form.occupation.choices">
+                        {{educ.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div class="err">{{ err.occupation.errors }}</div>
+        </div>
+
+
+        <div class="input">
+            <div [ngClass]="{'yellow-bg':  err.education.errors && err.education.errors?.length != 0 }"
+                 class="placeholder">{{ form.form.education.label }}
+            </div>
+            <ion-item>
+                <select-alertless item-content [(ngModel)]="form.form.education.value">
+                    <ion-option value="{{ educ.value }}" *ngFor="let educ of form.form.education.choices">
+                        {{educ.label}}
+                    </ion-option>
+                </select-alertless>
+            </ion-item>
+            <div class="err">{{ err.education.errors }}</div>
         </div>
 
 
@@ -96,32 +128,22 @@
         </div>
 
         <div class="input">
-            <div [ngClass]="{'yellow-bg':  err.education.errors && err.education.errors?.length != 0 }"
-                 class="placeholder">{{ form.form.education.label }}
+            <div [ngClass]="{'yellow-bg':  err.purposes.errors && err.purposes.errors?.length != 0 }"
+                 class="placeholder">{{ form.form.purposes.label }}
             </div>
             <ion-item>
-                <select-alertless item-content [(ngModel)]="form.form.education.value">
-                    <ion-option value="{{ educ.value }}" *ngFor="let educ of form.form.education.choices">
-                        {{educ.label}}
+                <select-alertless item-content [(ngModel)]="form.form.purposes.value" multiple="true">
+                    <ion-option value="{{ here_f.value }}" *ngFor="let here_f of form.form.purposes.choices">
+                        {{here_f.label}}
                     </ion-option>
                 </select-alertless>
             </ion-item>
-            <div class="err">{{ err.education.errors }}</div>
+            <div class="err">{{ err.purposes.errors }}</div>
         </div>
 
-        <div class="input">
-            <div [ngClass]="{'yellow-bg':  err.occupation.errors && err.occupation.errors?.length != 0 }"
-                 class="placeholder">{{ form.form.occupation.label }}
-            </div>
-            <ion-item>
-                <select-alertless item-content [(ngModel)]="form.form.occupation.value">
-                    <ion-option value="{{ educ.value }}" *ngFor="let educ of form.form.occupation.choices">
-                        {{educ.label}}
-                    </ion-option>
-                </select-alertless>
-            </ion-item>
-            <div class="err">{{ err.occupation.errors }}</div>
-        </div>
+
+
+
 
 <!--         <div class="input text">
             <div [ngClass]="{'yellow-bg':  err.occupation.errors && err.occupation.errors?.length != 0 }"
@@ -161,19 +183,7 @@
             <div class="err">{{ err.drinking.errors }}</div>
         </div> -->
 
-        <div class="input">
-            <div [ngClass]="{'yellow-bg':  err.purposes.errors && err.purposes.errors?.length != 0 }"
-                 class="placeholder">{{ form.form.purposes.label }}
-            </div>
-            <ion-item>
-                <select-alertless item-content [(ngModel)]="form.form.purposes.value" multiple="true">
-                    <ion-option value="{{ here_f.value }}" *ngFor="let here_f of form.form.purposes.choices">
-                        {{here_f.label}}
-                    </ion-option>
-                </select-alertless>
-            </ion-item>
-            <div class="err">{{ err.purposes.errors }}</div>
-        </div>
+
 
 <!--         <div class="input" *ngIf="form.form.status">
             <div [ngClass]="{'yellow-bg':  err.status.errors && err.status.errors?.length != 0 }" class="placeholder">{{

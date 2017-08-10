@@ -17,6 +17,7 @@ export class FullScreenProfilePage {
 
     user:any;
     myId:any;
+    defurl:any; 
 
     constructor(public toastCtrl:ToastController,
                 public navCtrl:NavController,

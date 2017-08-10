@@ -64,15 +64,15 @@ export class ChangePhotosPage {
 
     delete(photo) {
         let confirm = this.alertCtrl.create({
-            title: 'Delete this photo?',
+            title: 'האם למחוק את התמונה?',
             buttons: [
                 {
-                    text: 'No',
+                    text: 'לא',
                     handler: () => {
                         console.log('Disagree clicked');
                     }
                 }, {
-                    text: 'Yes',
+                    text: 'כן',
                     handler: () => {
                         this.postPageData('deleteImage', photo);
                     }
@@ -185,7 +185,7 @@ export class ChangePhotosPage {
             this.dataPage.texts.approved : this.dataPage.texts.waiting_for_approval;
 
         let actionSheet = this.actionSheetCtrl.create({
-            title: 'Edit Photo',
+            title: 'ערוך תמונה',
 
             subTitle: this.dataPage.texts.status + ': ' + status,
 
@@ -285,7 +285,7 @@ export class ChangePhotosPage {
     uploadPhoto(url) {
 
         let loading = this.loadingCtrl.create({
-            content: 'Please wait...'
+            content: 'אנא המתן...'
         });
 
         loading.present();
