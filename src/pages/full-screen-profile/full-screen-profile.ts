@@ -54,7 +54,7 @@ export class FullScreenProfilePage {
     addFavorites(user) {
         user.isAddFavorite = true;
         let toast = this.toastCtrl.create({
-            message: user.nickName + ' ' + 'has been added to Favorites',
+            message: user.nickName + ' ' + 'הוסף לרשימת המועדפים שלך',
             duration: 2000
         });
 
@@ -74,7 +74,7 @@ export class FullScreenProfilePage {
     addLike(user) {
         user.isAddLike = true;
         let toast = this.toastCtrl.create({
-            message: user.nickName + ' ' + ' liked',
+            message: user.nickName + ' ' + 'עשית/ה לייק ל',
             duration: 2000
         });
 

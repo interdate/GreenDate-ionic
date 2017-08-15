@@ -36,7 +36,7 @@ export class HelloIonicPage {
     //url: any;
     users: Array<{ id: string, isOnline: string, isAddBlackListed: string, username: string, photo: string, age: string, region_name: string, image: string, about: {}, component: any}>;
     texts: { like: string, add: string, message: string, remove: string, unblock: string, no_results: string };
-    params: { action: any, page: any, list: any } = {action: 'new', page: 1, list: ''};
+    params: { action: any, filter: any, page: any, list: any } = {action: 'search',filter: 'new', page: 1, list: ''};
     params_str: any;
 
     constructor(public toastCtrl: ToastController,
@@ -112,7 +112,7 @@ export class HelloIonicPage {
             user.isAddLike = true;
 
             let toast = this.toastCtrl.create({
-                message: 'You liked ' + user.username,
+                message: 'עשית/ה לייק ל' + user.username,
                 duration: 2000
             });
 
@@ -166,7 +166,7 @@ export class HelloIonicPage {
         this.http.post(this.api.url + '/api/v1/lists/' + user.id, params, this.api.setHeaders(true, this.username, this.password)).subscribe(data => {
 
             toast = this.toastCtrl.create({
-                message: user.username + data.json().success,
+                message: data.json().success,
                 duration: 2000
             });
             toast.present();
@@ -219,7 +219,7 @@ export class HelloIonicPage {
     getUsers() {
 
         let loading = this.loadingCtrl.create({
-            content: 'Please wait...'
+            content: 'אנא המתן...'
         });
 
         if (this.navParams.get('params') == 'login') {

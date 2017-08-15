@@ -20,7 +20,7 @@
     <div *ngFor="let photo of photos">
       <div *ngIf="photo == 0 && dataPage.noPhoto != dataPage.photos[0].face"  class="main photo" (click)="edit(dataPage.photos[photo])">
         <div class="wrap" >
-          <div class="photo-img" [ngStyle]="{ 'background-image': 'url(' + api.url+dataPage.photos[photo].face + ')'}"></div>
+          <div class="photo-img" [ngStyle]="{ 'background-image': 'url(' +dataPage.photos[photo].face + ')'}"></div>
           <span class="num">1</span>
           <div class="remove" ><ion-icon name="create"></ion-icon></div>
         </div>
@@ -28,8 +28,7 @@
 
       <div *ngIf="photo != 0" class="photo" (click)="edit(dataPage.photos[photo])">
           <div class="wrap">
-            <div class="photo-img"
-                 [ngStyle]="{ 'background-image': 'url(' + api.url+dataPage.photos[photo].face + ')'}"></div>
+            <div class="photo-img" [ngStyle]="{ 'background-image': 'url(' +dataPage.photos[photo].face + ')'}"></div>
             <span class="num">{{ getCount(photo) }}</span>
             <div class="remove" ><ion-icon name="create"></ion-icon></div>
           </div>
@@ -40,7 +39,7 @@
     <div *ngIf="photos?.length > 0 && dataPage.noPhoto != dataPage.photos[0].face" class="photo" (click)="add()">
       <div class="wrap">
         <div class="photo-img"
-             [ngStyle]="{ 'background-image': 'url(' + api.url+dataPage.noPhoto + ')'}"></div>
+             [ngStyle]="{ 'background-image': 'url(' +api.url+dataPage.noPhoto + ')'}"></div>
         <span class="num">{{ dataPage.photos?.length }}</span>
         <span class="add"><ion-icon name="md-add"></ion-icon></span>
       </div>
@@ -48,7 +47,7 @@
 
     <div *ngIf="photos?.length == 1 && dataPage.noPhoto == dataPage.photos[0].face"  class="main photo" (click)="add()">
       <div class="wrap" >
-        <div class="photo-img" [ngStyle]="{ 'background-image': 'url(' + api.url+dataPage.photos[0].face + ')'}"></div>
+        <div class="photo-img" [ngStyle]="{ 'background-image': 'url('+api.url+dataPage.photos[0].face + ')'}"></div>
         <span class="num">1</span>
         <span class="add"><ion-icon name="md-add"></ion-icon></span>
       </div>

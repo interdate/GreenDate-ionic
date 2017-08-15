@@ -29,19 +29,21 @@ page-registration, page-edit-profile {
   }
 
   .inner_form_top {
-    padding: 27px 10px 21px 11%;
+    padding: 27px 0px 21px 8.5%;
     border-bottom: 3px solid #fffefe;
   }
 
   .inner_form_top ul {
     display: block;
     overflow: hidden;
+    margin: 10px auto;
+    width: 80%;
   }
 
   .inner_form_top ul li {
     background: url(../img/innerformarrow.png) no-repeat right top;
     float: left;
-    margin: 0 10px 0 0;
+    margin: 0 10px 0 1px;
     padding: 0 28px 0 0;
   }
 

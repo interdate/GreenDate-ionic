@@ -66,6 +66,7 @@ export class AdvancedSearchPage {
       sexOrientation: { choices: [[]], },
       smoking: { choices: [[]], },
       withPhoto: { choices: [[]], },
+      type: { choices: [[]] }
      }
   } ;
 
@@ -122,7 +123,8 @@ export class AdvancedSearchPage {
       religion: this.form.form.religion.value,
       sexOrientation: this.form.form.sexOrientation.value,
       smoking: this.form.form.smoking.value,
-      withPhoto: this.form.form.withPhoto.value
+      withPhoto: this.form.form.withPhoto.value,
+      type: this.form.form.type.value
 
       }
     });

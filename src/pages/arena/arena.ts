@@ -68,7 +68,7 @@ export class ArenaPage {
                         let toast = this.toastCtrl.create({
                             message: data.json().arenaStatus,
                             showCloseButton: true,
-                            closeButtonText: 'Ok'
+                            closeButtonText: 'אישור'
                         });
 
                         toast.present();

@@ -570,7 +570,7 @@ export class MyApp {
                 let toast = this.toastCtrl.create({
                     message: this.texts.photoMessage,
                     showCloseButton: true,
-                    closeButtonText: 'Ok'
+                    closeButtonText: 'אישור'
                 });
                 if (this.texts.photoMessage) {
                     toast.present();
@@ -591,7 +591,7 @@ export class MyApp {
             title: title,
             subTitle: subTitle,
             buttons: [{
-                text: 'Ok',
+                text: 'אישור',
                 handler: data => {
                     Market.open('com.nysd');
                 }

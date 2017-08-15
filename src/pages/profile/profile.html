@@ -109,8 +109,8 @@
                 </li>
                 <li *ngIf="user.hair?.value"><span class="one">{{user.hair?.label }}</span><span class="two">{{user.hair?.value }}</span>
                 </li>
-                <div class="profile-sub-title">אני בכמה מילים</div>
-                <li *ngIf="user.about?.value"><span class="one">{{user.about?.label }}</span><span class="three">{{user.about?.value }}</span>
+                <div class="profile-sub-title">{{user.about?.label }}</div>
+                <li *ngIf="user.about?.value"><span class="three">{{user.about?.value }}</span>
                 </li>
                 <div class="profile-sub-title">עוד קצת עליי</div>
                 <li *ngIf="user.perfectDate?.value"><span class="one">{{user.perfectDate?.label }}</span><span class="three">{{user.perfectDate?.value }}</span>
@@ -123,8 +123,8 @@
                 </li>
                 <li *ngIf="user.music?.value"><span class="one">{{user.music?.label }}</span><span class="three">{{user.music?.value }}</span>
                 </li>
-                <div class="profile-sub-title">מה אני מחפש</div>
-                <li *ngIf="user.looking?.value"><span class="one">{{user.looking?.label }}</span><span class="three">{{user.looking?.value }}</span>
+                <div class="profile-sub-title">{{user.looking?.label }}</div>
+                <li *ngIf="user.looking?.value"><span class="three">{{user.looking?.value }}</span>
                 </li>
             </ul>
 

@@ -73,6 +73,8 @@ export class LoginPage {
         let username = this.form.login.username.value;
         let password = this.form.login.password.value;
 
+       //window.alert(encodeURIComponent(this.form.login.username.value)); 
+
         if (username == "") {
             username = "nologin";
         }
@@ -108,7 +110,7 @@ export class LoginPage {
         myHeaders.append('Content-type', 'application/json');
         myHeaders.append('Accept', '*/*');
         myHeaders.append('Access-Control-Allow-Origin', '*');
-        myHeaders.append("username", this.form.login.username.value);
+        myHeaders.append("username", encodeURIComponent(this.form.login.username.value));/*@encodeURIComponent(this.form.login.username.value)*/
         myHeaders.append("password", this.form.login.password.value);
 
         this.header = new RequestOptions({
@@ -118,14 +120,16 @@ export class LoginPage {
     }
 
     validate(response) {
-        this.storage.set('username', this.form.login.username.value);
-        this.storage.set('password', this.form.login.password.value);
-        this.storage.set('status', response.status);
-        this.storage.set('user_id', response.id);
-        this.storage.set('user_photo', response.photo);
 
-        this.api.setHeaders(true, this.form.login.username.value, this.form.login.password.value);
+        if (response.status != "not_activated") {
+            this.storage.set('username', this.form.login.username.value);
+            this.storage.set('password', this.form.login.password.value);
+            this.storage.set('status', response.status);
+            this.storage.set('user_id', response.id);
+            this.storage.set('user_photo', response.photo);
 
+            this.api.setHeaders(true, this.form.login.username.value, this.form.login.password.value);
+        }
         if (response.status == "login") {
             this.navCtrl.push(HelloIonicPage, {
                 params: 'login',
@@ -139,7 +143,7 @@ export class LoginPage {
             let toast = this.toastCtrl.create({
                 message: response.texts.photoMessage,
                 showCloseButton: true,
-                closeButtonText: 'Ok'
+                closeButtonText: 'אישור'
             });
 
             toast.present();
@@ -149,7 +153,13 @@ export class LoginPage {
                 password: this.form.login.password.value
             });
         } else if (response.status == "not_activated") {
-            this.navCtrl.push(ActivationPage);
+             let toast = this.toastCtrl.create({
+                message:response.texts.notActiveMessage,
+                showCloseButton: true,
+                closeButtonText: 'אישור'
+            });
+            toast.present();
+            this.navCtrl.push(LoginPage);
         }
         this.storage.get('deviceToken').then((deviceToken) => {
             this.api.sendPhoneId(deviceToken);

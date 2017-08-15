@@ -28,7 +28,7 @@ export class ChangePhotosPage {
     new_user: any = false;
 
     dataPage: { noPhoto: any, texts: any, photos: Array<{ _id: string, face: string, isValid: string, isMain: string, url: any}> };
-    description: { text1: any, text2: any, text3: any, text4: any };
+    description: any;
 
     constructor(public actionSheetCtrl: ActionSheetController,
                 public navCtrl: NavController,
@@ -84,7 +84,7 @@ export class ChangePhotosPage {
 
 
     getCount(num) {
-        return parseInt(num) + 1;
+        return parseInt(num)/* + 1*/;
     }
 
 
@@ -107,7 +107,7 @@ export class ChangePhotosPage {
     }
 
 
-    postPageData(type, params) {
+    postPageData(type, params) {//not active
 
         if (type == 'mainImage') {
             console.log('Param', params);
@@ -124,7 +124,7 @@ export class ChangePhotosPage {
         myHeaders.append('Content-type', 'application/json');
         myHeaders.append('Accept', '*/*');
         myHeaders.append('Access-Control-Allow-Origin', '*');
-        myHeaders.append("Authorization", "Basic " + btoa(this.username + ":" + this.password));
+        myHeaders.append("Authorization", "Basic " + btoa(encodeURIComponent(this.username) + ':' + this.password));/*@encodeURIComponent(this.username)*/
         let header = new RequestOptions({
             headers: myHeaders
         });
@@ -139,6 +139,7 @@ export class ChangePhotosPage {
         });
     }
 
+    //btoa(this.username + ":" + this.password) 
 
     edit(photo) {
 
@@ -297,7 +298,7 @@ export class ChangePhotosPage {
                 fileName: 'test.jpg',
                 chunkedMode: false,
                 mimeType: "image/jpg",
-                headers: {Authorization: "Basic " + btoa(this.username + ":" + this.password)}
+                headers: {Authorization: "Basic " + btoa(encodeURIComponent(this.username) + ":" + this.password)}/*@*/
             };
 
             const fileTransfer = new Transfer();

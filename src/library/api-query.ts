@@ -128,13 +128,21 @@ export class ApiQuery {
         myHeaders.append('Access-Control-Allow-Origin', '*');
 
         if (is_auth == true) {
-            myHeaders.append("Authorization", "Basic " + btoa(this.username + ':' + this.password));
+            myHeaders.append("Authorization", "Basic " + btoa(encodeURIComponent(this.username) + ':' + this.password));/*@encodeURIComponent(this.username)*/
         }
         this.header = new RequestOptions({
             headers: myHeaders
         });
         return this.header;
     }
+
+//     b64EncodeUnicode(str) {
+//     return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match,p1)  {
+//         return String.fromCharCode(0 + p1);
+//     }));
+// }
+
+    //btoa(this.username + ':' + this.password)
 
     ngAfterViewInit() {
 

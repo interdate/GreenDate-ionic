@@ -176,7 +176,7 @@ ion-card {
   clear: both;
 }
 
-.page-hello-ionic .name, .location {
+.page-hello-ionic .name {
   font-size: 16px;
   font-weight: bold;
   float: right;
@@ -184,6 +184,7 @@ ion-card {
 
 .page-hello-ionic, .location {
   font-size: 15px;
+  clear: both;
 }
 
 .page-hello-ionic ion-card-title {

@@ -21,7 +21,7 @@ declare var $: any;
 export class DialogPage {
     @ViewChild(Content) content: Content;
 
-    user: { id: string, isOnline: string, nick_name: string, image: string };
+    user: { id: string, isOnline: string, nick_name: string, image: string ,gender: string};
     users: Array<{ id: string, isOnline: string, nick_name: string, image: string }>;
     texts: any = {a_conversation_with: '', title: '', photo: ''};
     message: any;
@@ -42,6 +42,7 @@ export class DialogPage {
             this.user = data.json().dialog.contact;
             this.texts = data.json().texts;
             this.messages = data.json().history;
+            //console.log("messages: "+this.messages);
             this.scrollToBottom();
         }, err => {
             console.log("Oops!");
@@ -92,16 +93,28 @@ export class DialogPage {
             if (data.json().newMessages.length > 0) {
                 for (let message of data.json().newMessages) {
                     this.readMessagesStatus();
-                    this.messages.push(message);
-                    this.scrollToBottom();
-                    var params = JSON.stringify({
-                        message_id: message.id
-                    });
-                    this.http.post(this.api.url + '/api/v1/reads/' + this.user.id + '/messages', params, this.api.setHeaders(true)).subscribe(data => {
-                    });
+                    if(message.text != 'ok-1990234'){
+                        this.messages.push(message);
+                        this.scrollToBottom();
+                        var params = JSON.stringify({
+                            message_id: message.id
+                        });
+                        this.http.post(this.api.url + '/api/v1/reads/' + this.user.id + '/messages', params, this.api.setHeaders(true)).subscribe(data => {
+                        });
+                    }
                 }
                 //this.messages.push(data.json().newMessages);
+                this.sandReadMessage();
             }
+        });
+    }
+
+    sandReadMessage(){
+        var params = JSON.stringify({
+            message: 'ok-1990234'
+        });
+
+        this.http.post(this.api.url + '/api/v1/sends/' + this.user.id + '/messages', params, this.api.setHeaders(true)).subscribe(data => {
         });
     }
 
@@ -136,5 +149,6 @@ export class DialogPage {
             // clean textareaa after submit
             $('textarea').val('');
         });
+
     }
 }

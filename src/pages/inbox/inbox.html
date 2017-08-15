@@ -14,7 +14,7 @@
 
 
 <ion-content padding>
-  <div class="no_results" *ngIf="users?.length == 0">{{ texts?.no_results }}</div>
+  <div class="no_results" *ngIf="!users">{{ texts?.no_results }}</div>
 <ion-card *ngFor="let user of users" (click)="toDialogPage(user)">
   <ion-card-content >
   <div class="usr_img" *ngIf="user.photoName" [ngStyle]="{ 'background-image': 'url('  + user.photoName + ')'}" ></div>

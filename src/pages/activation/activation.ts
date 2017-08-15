@@ -40,7 +40,7 @@ export class ActivationPage {
     getForm(data = '') {
 
         let loading = this.loadingCtrl.create({
-            content: 'Please wait...'
+            content: 'אנא המתן...'
         });
 
         loading.present();

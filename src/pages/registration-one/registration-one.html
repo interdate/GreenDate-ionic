@@ -1,5 +1,5 @@
 <!--
-  Generated template for the EditProfile page.
+  Generated template for the RegisterProfile page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>edit-profile</ion-title>
+        <ion-title>register-profile</ion-title>
     </ion-navbar>
     <!--<ion-title><button></button><ion-icon name="arrow-round-back"></ion-icon></button></ion-title>-->
 </ion-header>
@@ -22,7 +22,7 @@
             <li class="active"><span class="fnumber profileSpan">1</span><span class="ftext"></span></li>
             <li><span class="fnumber profileSpan">2</span></li>
             <li><span class="fnumber profileSpan">3</span></li>
-            <li [ngStyle]="{ 'background': 'transparent' }"><span class="fnumber profileSpan">4</span></li>
+            <li [ngStyle]="{ 'background': 'transparent', 'padding': '0' }"><span class="fnumber profileSpan">4</span></li>
         </ul>
         <div class="clr"></div>
     </div>
@@ -84,9 +84,8 @@
                 form.form.gender.label }}
             </div>
             <ion-item>
-                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.form.gender.value"
-                                  (ionChange)="selectedGender()">
-                    <ion-option value="{{gender.value}}" *ngFor="let gender of form.form.gender.choices ">
+                <select-alertless item-content interface="action-sheet" [(ngModel)]="form.form.gender.value">
+                    <ion-option value="{{gender.value}}" *ngFor="let gender of form.form.gender.choices">
                         {{gender.label}}
                     </ion-option>
                 </select-alertless>
@@ -99,7 +98,7 @@
                 form.form.birthday.label }}
             </div>
             <ion-item>
-                <ion-datetime [(ngModel)]="birth" displayFormat="YYYY MMM DD" max="1999"
+                <ion-datetime [(ngModel)]="birth" displayFormat="YYYY MM DD" max="1999"
                               pickerFormat="YYYY MM DD" [doneText]="'אישור'" [cancelText]="'ביטול'"></ion-datetime>
             </ion-item>
             <div class="err">{{err.birthday.errors}}</div>

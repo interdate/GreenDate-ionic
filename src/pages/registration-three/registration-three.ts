@@ -152,7 +152,17 @@ export class RegistrationThreePage {
 
     formSubmit() {
 
-        //this.api.showLoad();
+        this.api.showLoad();
+        if(this.form.form.green.value == '' || this.form.form.smoking.value == '' || this.form.form.drinking.value == '' || this.form.form.children.value == '' || this.form.form.animals.value == '' || this.form.form.interests.value == '' || this.form.form.politicalAffiliation.value == '' || this.form.form.height.value == '' || this.form.form.body.value == '' || this.form.form.eyes.value == '' || this.form.form.hair.value == '' || this.form.form.type.value == '' || this.form.form.nutrition.value == '' || this.form.form.veggieReasons.value == '' || this.form.form.sport.value == ''){
+           this.allfields = 'יש למלא את כל השדות המסומנים בכוכבית';
+           this.api.hideLoad();
+           }
+           else if(this.form.form.about.value.length < 10 || this.form.form.looking.value.length < 10){
+                this.allfields = 'יש לכתוב בשדות קצת עליי ומה אני מחפש לפחות 10 תווים';
+                this.api.hideLoad();
+           }
+           else{
+           this.allfields = '';
 
         var data = JSON.stringify({
             flow_signUp_instance: this.form.form.flow_signUp_instance.value,
@@ -191,18 +201,10 @@ export class RegistrationThreePage {
             }, err => {
                 alert(JSON.stringify(err));
             });
+        }
     }
 
     validate(response) {
-
-     if(this.form.form.green.value == '' || this.form.form.smoking.value == '' || this.form.form.drinking.value == '' || this.form.form.children.value == '' || this.form.form.animals.value == '' || this.form.form.interests.value == '' || this.form.form.politicalAffiliation.value == '' || this.form.form.height.value == '' || this.form.form.body.value == '' || this.form.form.eyes.value == '' || this.form.form.hair.value == '' || this.form.form.type.value == '' || this.form.form.nutrition.value == '' || this.form.form.veggieReasons.value == '' || this.form.form.sport.value == ''){
-           this.allfields = 'יש למלא את כל השדות המסומנים בכוכבית';
-           }
-           else if(this.form.form.about.value.length < 10 || this.form.form.looking.value.length < 10){
-                this.allfields = 'יש לכתוב בשדות קצת עליי ומה אני מחפש לפחות 10 תווים';
-           }
-           else{
-           this.allfields = '';
 
             if (typeof response.user != 'undefined' && typeof response.user.form.flow_signUp_step != 'undefined' && response.user.form.flow_signUp_step.value == 3) {
             console.log('Response1: ', response);
@@ -214,10 +216,7 @@ export class RegistrationThreePage {
              });
              */
             } else {
-
-
             //let user = this.api.getUserData();
-
             //this.storage.set('username', user.username );
             //this.storage.set('password', user.password);
             this.storage.set('status', response.status);
@@ -255,14 +254,7 @@ export class RegistrationThreePage {
 
             }
 
-
         }
-
-
-
-
-           }
-
 
         this.api.hideLoad();
     }

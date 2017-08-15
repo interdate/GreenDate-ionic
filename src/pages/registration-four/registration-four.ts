@@ -66,15 +66,15 @@ export class RegistrationFourPage {
 
     delete(photo) {
         let confirm = this.alertCtrl.create({
-            title: 'Delete this photo?',
+            title: 'האם למחוק את התמונה?',
             buttons: [
                 {
-                    text: 'No',
+                    text: 'לא',
                     handler: () => {
                         console.log('Disagree clicked');
                     }
                 }, {
-                    text: 'Yes',
+                    text: 'כן',
                     handler: () => {
                         this.postPageData('deleteImage', photo);
                     }
@@ -141,7 +141,7 @@ export class RegistrationFourPage {
         myHeaders.append('Content-type', 'application/json');
         myHeaders.append('Accept', '*/*');
         myHeaders.append('Access-Control-Allow-Origin', '*');
-        myHeaders.append("Authorization", "Basic " + btoa(this.username + ":" + this.password));
+        myHeaders.append("Authorization", "Basic " + btoa(encodeURIComponent(this.username) + ":" + this.password));/*@encodeURIComponent(this.username)*/
         let header = new RequestOptions({
             headers: myHeaders
         });
@@ -202,7 +202,7 @@ export class RegistrationFourPage {
             this.dataPage.texts.approved : this.dataPage.texts.waiting_for_approval;
 
         let actionSheet = this.actionSheetCtrl.create({
-            title: 'Edit Photo',
+            title: 'עורך תמונה',
 
             subTitle: this.dataPage.texts.status + ': ' + status,
 
@@ -287,7 +287,7 @@ export class RegistrationFourPage {
     uploadPhoto(url) {
 
         let loading = this.loadingCtrl.create({
-            content: 'Please wait...'
+            content: 'אנא המתן...'
         });
 
         loading.present();
@@ -299,7 +299,7 @@ export class RegistrationFourPage {
                 fileName: 'test.jpg',
                 chunkedMode: false,
                 mimeType: "image/jpg",
-                headers: {Authorization: "Basic " + btoa(this.username + ":" + this.password)}
+                headers: {Authorization: "Basic " + btoa(encodeURIComponent(this.username) + ":" + this.password)}/*@*/
             };
 
             const fileTransfer = new Transfer();

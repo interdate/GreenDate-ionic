@@ -16,18 +16,130 @@
 <ion-content padding><!--yes-->
     <ion-item>
         <ion-label>{{form.form.region.label}}</ion-label>
-        <ion-select (ionChange)="selectedRegion()" [(ngModel)]="form.form.region.value">
+        <ion-select okText="אישור" cancelText="ביטול" multiple="true" [(ngModel)]="form.form.region.value">
             <ion-option value="{{ region.value }}" *ngFor="let region of form.form.region.choices">{{region.label}}
             </ion-option>
         </ion-select>
     </ion-item>
+    <ion-item class="border-top"><!--yes-->
+        <ion-label>מגיל</ion-label>
+        <select-alertless item-content name="area" [(ngModel)]="form?.form?.ageFrom.value">
+            <ion-option value="{{ageFrom.num}}" *ngFor="let ageFrom of ages">{{ageFrom.num}}
+            </ion-option>
+        </select-alertless>
+    </ion-item>
+    <ion-item class="border-top"><!--yes-->
+        <ion-label>עד גיל</ion-label>
+        <select-alertless item-content name="area" [(ngModel)]="form?.form?.ageTo.value">
+            <ion-option value="{{ageTo.num}}" *ngFor="let ageTo of ages">{{ageTo.num}}
+            </ion-option>
+        </select-alertless>
+    </ion-item>
+    <ion-item class="border-top"><!--yes-->
+        <ion-label>מגובה</ion-label>
+        <select-alertless item-content [(ngModel)]="form.form.heightFrom.value">
+            <ion-option value="{{ hght.value }}" *ngFor="let hght of form.form.heightFrom.choices">{{hght.label}}
+            </ion-option>
+        </select-alertless>
+    </ion-item>
+    <ion-item><!--yes-->
+        <ion-label>עד גובה</ion-label>
+        <select-alertless item-content [(ngModel)]="form.form.heightTo.value">
+            <ion-option value="{{ hght.value }}" *ngFor="let hght of form.form.heightTo.choices">{{hght.label}}
+            </ion-option>
+        </select-alertless>
+    </ion-item>
+    <ion-item class="border-top"><!--yes-->
+        <ion-label>{{form.form.body.label}}</ion-label>
+        <ion-select okText="אישור" cancelText="ביטול" multiple="true" [(ngModel)]="form.form.body.value">
+            <ion-option value="{{ body_t.value }}" *ngFor="let body_t of form.form.body.choices">{{body_t.label}}
+            </ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item class="border-top"><!--yes-->
+        <ion-label>{{ form.form.relationshipStatus.label }}</ion-label>
+        <ion-select okText="אישור" cancelText="ביטול" multiple="true" [(ngModel)]="form.form.relationshipStatus.value">
+            <ion-option value="{{ status.value }}" *ngFor="let status of form.form.relationshipStatus.choices">
+                {{status.label}}
+            </ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item class="border-top">
+        <ion-label>{{form.form.type.label}}</ion-label>
+        <ion-select okText="אישור" cancelText="ביטול" multiple="true" [(ngModel)]="form.form.type.value">
+            <ion-option value="{{ typ.value }}" *ngFor="let typ of form.form.type.choices">
+                {{typ.label}}
+            </ion-option>
+        </ion-select>
+    </ion-item> 
+    <ion-item class="border-top">
+        <ion-label>{{form.form.occupation.label}}</ion-label>
+        <ion-select okText="אישור" cancelText="ביטול" multiple="true" [(ngModel)]="form.form.occupation.value">
+            <ion-option value="{{ occ_w.value }}" *ngFor="let occ_w of form.form.occupation.choices">{{occ_w.label}}
+            </ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item class="border-top"><!--yes-->
+        <ion-label>{{form.form.education.label}}</ion-label>
+        <ion-select okText="אישור" cancelText="ביטול" multiple="true" [(ngModel)]="form.form.education.value">
+            <ion-option value="{{ educ.value }}" *ngFor="let educ of form.form.education.choices">{{educ.label}}
+            </ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item class="border-top"><!--yes-->
+        <ion-label>{{form.form.religion.label}}</ion-label>
+        <ion-select okText="אישור" cancelText="ביטול" multiple="true" [(ngModel)]="form.form.religion.value">
+            <ion-option value="{{ religion.value }}" *ngFor="let religion of form.form.religion.choices">
+                {{religion.label}}
+            </ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item class="border-top">
+        <ion-label>{{form.form.sexOrientation.label}}</ion-label>
+        <ion-select okText="אישור" cancelText="ביטול" multiple="true" [(ngModel)]="form.form.sexOrientation.value">
+            <ion-option value="{{ sex_status.value }}" *ngFor="let sex_status of form.form.sexOrientation.choices">
+                {{sex_status.label}}
+            </ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item class="border-top"><!--yes-->
+        <ion-label>{{form.form.purposes.label}}</ion-label>
+        <ion-select okText="אישור" cancelText="ביטול" multiple="true" [(ngModel)]="form.form.purposes.value">
+            <ion-option value="{{ here_f.value }}" *ngFor="let here_f of form.form.purposes.choices">{{here_f.label}}
+            </ion-option>
+        </ion-select>
+    </ion-item> 
+    <ion-item class="border-top"><!--yes-->
+        <ion-label>{{form.form.smoking.label}}</ion-label>
+        <ion-select okText="אישור" cancelText="ביטול" multiple="true" [(ngModel)]="form.form.smoking.value">
+            <ion-option value="{{ smkg.value }}" *ngFor="let smkg of form.form.smoking.choices">{{smkg.label}}
+            </ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item class="border-top"><!--yes-->
+        <ion-label>{{form.form.drinking.label}}</ion-label>
+        <ion-select okText="אישור" cancelText="ביטול" multiple="true" [(ngModel)]="form.form.drinking.value">
+            <ion-option value="{{ drkg.value }}" *ngFor="let drkg of form.form.drinking.choices">{{drkg.label}}
+            </ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item class="border-top"><!--yes-->
+        <ion-label>{{form.form.children.label}}</ion-label>
+        <ion-select okText="אישור" cancelText="ביטול" multiple="true" [(ngModel)]="form.form.children.value">
+            <ion-option value="{{ child.value }}" *ngFor="let child of form.form.children.choices">{{child.label}}
+            </ion-option>
+        </ion-select>
+    </ion-item>
+
+
+
+
 <!--     <ion-item>
         <ion-label>{{form.form.area.label}}</ion-label>
         <ion-select multiple="true" [(ngModel)]="form.form.area.value">
             <ion-option value="{{ area.value }}" *ngFor="let area of form.form.area.choices">{{area.label}}</ion-option>
         </ion-select>
     </ion-item> -->
-
 
     <!--<div class="or">OR</div>
     <ion-item>
@@ -47,20 +159,7 @@
         </ion-range>
     </ion-item>-->
 
-    <ion-item class="border-top"><!--yes-->
-        <ion-label>מי גיל</ion-label>
-        <select-alertless item-content name="area" [(ngModel)]="form?.form?.ageFrom.value">
-            <ion-option value="{{ageFrom.num}}" *ngFor="let ageFrom of ages">{{ageFrom.num}}
-            </ion-option>
-        </select-alertless>
-    </ion-item>
-    <ion-item class="border-top"><!--yes-->
-        <ion-label>עד גיל</ion-label>
-        <select-alertless item-content name="area" [(ngModel)]="form?.form?.ageTo.value">
-            <ion-option value="{{ageTo.num}}" *ngFor="let ageTo of ages">{{ageTo.num}}
-            </ion-option>
-        </select-alertless>
-    </ion-item>
+
 <!--     <ion-item class="border-top"><no>
         <ion-label>{{form.form.zodiac.label}}</ion-label>
         <ion-select multiple="true" [(ngModel)]="form.form.zodiac.value">
@@ -68,21 +167,8 @@
             </ion-option>
         </ion-select>
     </ion-item> -->
-    <ion-item class="border-top"><!--yes-->
-        <ion-label>{{form.form.purposes.label}}</ion-label>
-        <ion-select multiple="true" [(ngModel)]="form.form.purposes.value">
-            <ion-option value="{{ here_f.value }}" *ngFor="let here_f of form.form.purposes.choices">{{here_f.label}}
-            </ion-option>
-        </ion-select>
-    </ion-item>
-    <ion-item class="border-top">
-        <ion-label>{{form.form.sexOrientation.label}}</ion-label>
-        <ion-select multiple="true" [(ngModel)]="form.form.sexOrientation.value">
-            <ion-option value="{{ sex_status.value }}" *ngFor="let sex_status of form.form.sexOrientation.choices">
-                {{sex_status.label}}
-            </ion-option>
-        </ion-select>
-    </ion-item> 
+
+
 <!--     <ion-item class="border-top"><no>
         <ion-label>{{form.form.languages.label}}</ion-label>
         <ion-select multiple="true" [(ngModel)]="form.form.languages.value">
@@ -91,28 +177,9 @@
             </ion-option>
         </ion-select>
     </ion-item> -->
-    <ion-item class="border-top"><!--yes-->
-        <ion-label>{{form.form.children.label}}</ion-label>
-        <ion-select [(ngModel)]="form.form.children.value">
-            <ion-option value="{{ child.value }}" *ngFor="let child of form.form.children.choices">{{child.label}}
-            </ion-option>
-        </ion-select>
-    </ion-item>
-    <ion-item class="border-top"><!--yes-->
-        <ion-label>{{ form.form.relationshipStatus.label }}</ion-label>
-        <ion-select multiple="true" [(ngModel)]="form.form.relationshipStatus.value">
-            <ion-option value="{{ status.value }}" *ngFor="let status of form.form.relationshipStatus.choices">
-                {{status.label}}
-            </ion-option>
-        </ion-select>
-    </ion-item>
-    <ion-item class="border-top">
-        <ion-label>{{form.form.occupation.label}}</ion-label>
-        <ion-select multiple="true" [(ngModel)]="form.form.occupation.value">
-            <ion-option value="{{ occ_w.value }}" *ngFor="let occ_w of form.form.occupation.choices">{{occ_w.label}}
-            </ion-option>
-        </ion-select>
-    </ion-item>
+
+
+
 <!--     <ion-item class="border-top"><no>
         <ion-label>{{form.form.income.label}}</ion-label>
         <ion-select multiple="true" [(ngModel)]="form.form.income.value">
@@ -120,27 +187,8 @@
             </ion-option>
         </ion-select>
     </ion-item> -->
-    <ion-item class="border-top"><!--yes-->
-        <ion-label>מי גובה</ion-label>
-        <select-alertless item-content [(ngModel)]="form.form.heightFrom.value">
-            <ion-option value="{{ hght.value }}" *ngFor="let hght of form.form.heightFrom.choices">{{hght.label}}
-            </ion-option>
-        </select-alertless>
-    </ion-item>
-    <ion-item><!--yes-->
-        <ion-label>עד גובה</ion-label>
-        <select-alertless item-content [(ngModel)]="form.form.heightTo.value">
-            <ion-option value="{{ hght.value }}" *ngFor="let hght of form.form.heightTo.choices">{{hght.label}}
-            </ion-option>
-        </select-alertless>
-    </ion-item>
-    <ion-item class="border-top"><!--yes-->
-        <ion-label>{{form.form.body.label}}</ion-label>
-        <ion-select multiple="true" [(ngModel)]="form.form.body.value">
-            <ion-option value="{{ body_t.value }}" *ngFor="let body_t of form.form.body.choices">{{body_t.label}}
-            </ion-option>
-        </ion-select>
-    </ion-item>
+
+
 
 <!--     <ion-item class="border-top"><no>
         <ion-label>{{form.form.eyes.label}}</ion-label>
@@ -166,21 +214,6 @@
         </ion-select>
     </ion-item> -->
 
-    <ion-item class="border-top"><!--yes-->
-        <ion-label>{{form.form.smoking.label}}</ion-label>
-        <ion-select multiple="true" [(ngModel)]="form.form.smoking.value">
-            <ion-option value="{{ smkg.value }}" *ngFor="let smkg of form.form.smoking.choices">{{smkg.label}}
-            </ion-option>
-        </ion-select>
-    </ion-item>
-
-    <ion-item class="border-top"><!--yes-->
-        <ion-label>{{form.form.drinking.label}}</ion-label>
-        <ion-select multiple="true" [(ngModel)]="form.form.drinking.value">
-            <ion-option value="{{ drkg.value }}" *ngFor="let drkg of form.form.drinking.choices">{{drkg.label}}
-            </ion-option>
-        </ion-select>
-    </ion-item>
 
 <!--     <ion-item class="border-top"><no>
         <ion-label>{{form.form.ethnicity.label}}</ion-label>
@@ -191,22 +224,6 @@
         </ion-select>
     </ion-item> -->
 
-    <ion-item class="border-top"><!--yes-->
-        <ion-label>{{form.form.religion.label}}</ion-label>
-        <ion-select multiple="true" [(ngModel)]="form.form.religion.value">
-            <ion-option value="{{ religion.value }}" *ngFor="let religion of form.form.religion.choices">
-                {{religion.label}}
-            </ion-option>
-        </ion-select>
-    </ion-item>
-
-    <ion-item class="border-top"><!--yes-->
-        <ion-label>{{form.form.education.label}}</ion-label>
-        <ion-select multiple="true" [(ngModel)]="form.form.education.value">
-            <ion-option value="{{ educ.value }}" *ngFor="let educ of form.form.education.choices">{{educ.label}}
-            </ion-option>
-        </ion-select>
-    </ion-item>
 
 <!--     <ion-item><no>
         <ion-label>{{ form.form.distance.label }} ({{form.form.distance.description}})</ion-label>

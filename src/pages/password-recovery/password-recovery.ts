@@ -58,7 +58,7 @@ export class PasswordRecoveryPage {
          const toast = this.toastCtrl.create({
             message: response.success,
             showCloseButton: true,
-            closeButtonText: 'Ok'
+            closeButtonText: 'אישור'
           });
          toast.present();
       }

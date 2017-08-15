@@ -3,7 +3,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {NavController, NavParams, AlertController} from 'ionic-angular';
 import {ApiQuery} from '../../library/api-query';
 import {Http} from '@angular/http';
-import {RegistrationTwoPage} from '../registration-two/registration-two'
+import {RegistrationTwoPage} from '../registration-two/registration-two';
 import {Storage} from '@ionic/storage';
 import {PagePage} from '../page/page';
 
@@ -45,7 +45,7 @@ export class RegistrationOnePage {
         phone: { errors: any },
         agree: { errors: any },
         _token: { errors: any },
-        flow_signUp_step: { errors: any },
+        flow_signUp_step: { errors: any }
     } = {
         username: {errors: []},
         email: {children: {first: {errors: []}, second: {errors: []}}},
@@ -96,7 +96,7 @@ export class RegistrationOnePage {
 
     }
 
-    festSelected(str) {
+    /*festSelected(str) {
         var data = JSON.stringify({
             sign_up_one: {
                 region: this.form.form.region.value,
@@ -187,25 +187,25 @@ export class RegistrationOnePage {
             ]
         });
         alert.present();
-    }
+    }*/
 
 
     formSubmit() {
 
         this.api.showLoad();
 
-        /*if(this.form.form.username.value == '' || this.form.form.email.first.value == '' || this.form.form.email.second.value == '' || this.form.form.password.first.value == '' || this.form.form.password.second.value == '' || this.form.form.gender.value == '' || this.form.form.birthday.value == undefined ){
+        if(this.form.form.username.value == '' || this.form.form.email.first.value == '' || this.form.form.email.second.value == '' || this.form.form.password.first.value == '' || this.form.form.password.second.value == '' || this.form.form.gender.value == '' || this.form.form.birthday.value == undefined ){
            this.allfields = 'יש למלא את כל השדות המסומנים בכוכבית';
            this.api.hideLoad();
 
-           console.log("name: "+this.form.form.username.value +" email-1: "+ this.form.form.email.first.value +" email-2:  " +this.form.form.email.second.value + " pass-1: "+ this.form.form.password.first.value +" pass-2: "+ this.form.form.password.second.value + " gender: " +this.form.form.gender.value + " birtthday: "+this.form.form.birthday.value);
+           //console.log("name: "+this.form.form.username.value +" email-1: "+ this.form.form.email.first.value +" email-2:  " +this.form.form.email.second.value + " pass-1: "+ this.form.form.password.first.value +" pass-2: "+ this.form.form.password.second.value + " gender: " +this.form.form.gender.value + " birtthday: "+this.form.form.birthday.value);
 
         }else if(this.form.form.agree.value == false){
         this.allfields = 'יש לאשר את תנאי השימוש';
         this.api.hideLoad();
         }
         else{
-            this.allfields = '';*/
+            this.allfields = '';
 
 
         this.storage.set('user_data', {
@@ -222,15 +222,16 @@ export class RegistrationOnePage {
         }
 
         var data = JSON.stringify({
+            
             signUpOne: {
                 username: this.form.form.username.value,
-                password: {
-                    first: this.form.form.password.first.value,
-                    second: this.form.form.password.second.value
-                },
                 email: {
                     first: this.form.form.email.first.value,
                     second: this.form.form.email.second.value
+                },
+                password: {
+                    first: this.form.form.password.first.value,
+                    second: this.form.form.password.second.value
                 },
                 gender: this.form.form.gender.value,
                 birthday: {
@@ -240,14 +241,14 @@ export class RegistrationOnePage {
                 },
                 phone: this.form.form.phone.value,
                 agree: this.form.form.agree.value,
-               _token: this.form.form._token.value
+                _token: this.form.form._token.value
             }
         });
 
-         console.log("token: " + this.form.form._token.value + "name: "+this.form.form.username.value +" email-1: "+ this.form.form.email.first.value +" email-2:  " +this.form.form.email.second.value + " pass-1: "+ this.form.form.password.first.value +" pass-2: "+ this.form.form.password.second.value + " gender: " +this.form.form.gender.value + " birtthday: "+this.form.form.birthday.value);
+        //  console.log("token: " + this.form.form._token.value + "name: "+this.form.form.username.value +" email-1: "+ this.form.form.email.first.value +" email-2:  " +this.form.form.email.second.value + " pass-1: "+ this.form.form.password.first.value +" pass-2: "+ this.form.form.password.second.value + " gender: " +this.form.form.gender.value + " birtthday: "+this.form.form.birthday.value);
 
         this.http.post(this.api.url + '/open_api/signs/ups', data, this.api.header).subscribe(data => this.validate(data.json()));
-        //}
+        }
 
     }
 

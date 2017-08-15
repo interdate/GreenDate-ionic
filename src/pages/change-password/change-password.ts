@@ -71,9 +71,9 @@ export class ChangePasswordPage {
       this.form.form.oldPassword.value = "";
 
        const toast = this.toastCtrl.create({
-          message: 'Your request successfully sent',
+          message: 'הבקשה שלך נשלחה בהצלחה',
           showCloseButton: true,
-          closeButtonText: 'Ok'
+          closeButtonText: 'אישור'
         });
        toast.present();
     }
