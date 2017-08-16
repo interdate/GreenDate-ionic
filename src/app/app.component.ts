@@ -203,11 +203,11 @@ export class MyApp {
             {_id: 'change_password', icon: '', title: menu.change_password, component: ChangePasswordPage, count: ''},
             {_id: 'freeze_account', icon: '', title: menu.freeze_account, component: FreezeAccountPage, count: ''},
             {_id: 'notifications', icon: '', title: menu.notifications, component: NotificationsPage, count: ''},
+            {_id: 'settings', icon: 'cog', title: menu.settings, component: SettingsPage, count: ''},
             {_id: '', icon: 'mail', title: menu.contact_us, component: ContactUsPage, count: ''},
             {_id: 'logout', icon: 'log-out', title: menu.log_out, component: LoginPage, count: ''}
         ];
 
-        //{_id: 'settings', icon: 'cog', title: menu.settings, component: SettingsPage, count: ''},
 
         this.menu_items_contacts = [
             {_id: 'viewed', icon: '', title: menu.viewed, component: HelloIonicPage, list: 'viewed', count: ''},
@@ -386,7 +386,7 @@ export class MyApp {
         }
         let push = Push.init({
             android: {
-                senderID: "48205136182"
+                senderID: "72562107329‏"
             },
             ios: {
                 alert: "true",

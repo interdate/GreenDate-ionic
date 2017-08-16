@@ -32,7 +32,7 @@
                      (click)="edit(dataPage.photos[photo])">
                     <div class="wrap">
                         <div class="photo-img"
-                             [ngStyle]="{ 'background-image': 'url(' + api.url+dataPage.photos[photo].face + ')'}"></div>
+                             [ngStyle]="{ 'background-image': 'url(' +dataPage.photos[photo].face + ')'}"></div>
                         <span class="num">1</span>
                         <div class="remove">
                             <ion-icon name="create"></ion-icon>
@@ -43,7 +43,7 @@
                 <div *ngIf="photo != 0" class="photo" (click)="edit(dataPage.photos[photo])">
                     <div class="wrap">
                         <div class="photo-img"
-                             [ngStyle]="{ 'background-image': 'url(' + api.url+dataPage.photos[photo].face + ')'}"></div>
+                             [ngStyle]="{ 'background-image': 'url(' +dataPage.photos[photo].face + ')'}"></div>
                         <span class="num">{{ getCount(photo) }}</span>
                         <div class="remove">
                             <ion-icon name="create"></ion-icon>
@@ -69,7 +69,7 @@
                  (click)="add()">
                 <div class="wrap">
                     <div class="photo-img"
-                         [ngStyle]="{ 'background-image': 'url(' + dataPage.photos[0].face + ')'}"></div>
+                         [ngStyle]="{ 'background-image': 'url('+ api.url + dataPage.photos[0].face + ')'}"></div>
                     <span class="num">1</span>
                     <span class="add"><ion-icon name="md-add"></ion-icon></span>
                 </div>

@@ -27,6 +27,7 @@ export class DialogPage {
     message: any;
     messages: Array<{ id: string, isRead: any, text: string, dateTime: string, from: any }>;
     checkChat: any;
+    notReadMessage: any = [];
     //keyboard: Keyboard;
 
     constructor(public navCtrl: NavController,
@@ -42,7 +43,11 @@ export class DialogPage {
             this.user = data.json().dialog.contact;
             this.texts = data.json().texts;
             this.messages = data.json().history;
-            //console.log("messages: "+this.messages);
+            for (let i = 0; i < this.messages.length; i++) {
+                if(this.messages[i].isRead == false) {
+                    this.notReadMessage.push(this.messages[i].id);
+                }
+            }
             this.scrollToBottom();
         }, err => {
             console.log("Oops!");
@@ -64,6 +69,10 @@ export class DialogPage {
         }, 500);
     }
 
+    sendPush() {
+        this.http.post(this.api.url + '/api/v1/sends/' + this.user.id + '/pushes', {}, this.api.setHeaders(true)).subscribe(data => {});
+    }
+
     sendMessage() {
 
         var params = JSON.stringify({
@@ -75,6 +84,8 @@ export class DialogPage {
             if (mess) {
                 mess.text = this.message;
                 this.messages.push(mess);
+                this.notReadMessage.push(mess.id);
+                this.sendPush();
             } else {
                 let toast = this.toastCtrl.create({
                     message: data.json().errorMessage,
@@ -89,22 +100,50 @@ export class DialogPage {
 
     getNewMessages() {
 
-        this.http.get(this.api.url + '/api/v1/chats/' + this.user.id + '/new/messages', this.api.setHeaders(true)).subscribe(data => {
+        var notReadMessageStr = '';
+
+        for (let i = 0; i < this.notReadMessage.length; i++) {
+            if(i == 0) {
+                notReadMessageStr += '?messages[]=' + this.notReadMessage[i];
+            }else {
+                notReadMessageStr += '&messages[]=' + this.notReadMessage[i];
+            }
+
+        }
+
+        this.http.get(this.api.url + '/api/v1/chats/' + this.user.id + '/new/messages' + notReadMessageStr, this.api.setHeaders(true)).subscribe(data => {
             if (data.json().newMessages.length > 0) {
                 for (let message of data.json().newMessages) {
                     this.readMessagesStatus();
-                    if(message.text != 'ok-1990234'){
-                        this.messages.push(message);
-                        this.scrollToBottom();
-                        var params = JSON.stringify({
-                            message_id: message.id
-                        });
-                        this.http.post(this.api.url + '/api/v1/reads/' + this.user.id + '/messages', params, this.api.setHeaders(true)).subscribe(data => {
-                        });
-                    }
+                    this.messages.push(message);
+                    this.scrollToBottom();
+                    var params = JSON.stringify({
+                        message_id: message.id
+                    });
+                    this.http.post(this.api.url + '/api/v1/reads/' + this.user.id + '/messages', params, this.api.setHeaders(true)).subscribe(data => {
+                    });
                 }
                 //this.messages.push(data.json().newMessages);
-                this.sandReadMessage();
+            }
+            if(data.json().readMessages.length > 0){
+                let readMess = data.json().readMessages;
+                for (let i = 0; i < this.messages.length; i++) {
+                    //alert(readMess.indexOf(this.messages[i].id));
+                    if (readMess.indexOf(this.messages[i].id) != '-1') {
+
+                        this.messages[i].isRead = 1;
+                        this.notReadMessage.splice(this.notReadMessage.indexOf(this.messages[i].id), 1);
+                    }
+                }
+                /*
+                for (let e = 0; this.notReadMessage.length; e++) {
+                    if (readMess.indexOf(this.notReadMessage[e]) != '-1') {
+                        this.notReadMessage.splice(e, 1);
+                        //this.notReadMessage[e] = '';
+                        //delete this.notReadMessage[e];
+                    }
+                }
+                */
             }
         });
     }
@@ -119,8 +158,25 @@ export class DialogPage {
     }
 
     readMessagesStatus() {
-        for (let i = 0; i < this.messages.length; i++) {
-            this.messages[i].isRead = 1;
+        //alert(this.notReadMessage.length);
+        if(this.notReadMessage.length > 0) {
+            var params = JSON.stringify({
+                messages: this.notReadMessage
+            });
+
+            this.http.post(this.api.url + '/api/v1/checks/messages', params, this.api.setHeaders(true)).subscribe(data => {
+
+                for (let i = 0; i < this.messages.length; i++) {
+                    //if (data.json().readMessages.indexOf(this.messages[i].id) !== '-1') {
+                        //this.messages[i].isRead = 1;
+                    //}
+                }
+                for (let e = 0; this.notReadMessage.length; e++) {
+                    //if (data.json().readMessages.indexOf(this.notReadMessage[e]) !== '-1') {
+                        //delete this.notReadMessage[e];
+                    //}
+                }
+            });
         }
     }
 
