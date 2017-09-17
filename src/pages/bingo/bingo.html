@@ -17,13 +17,13 @@
   <div id="splashBingo">
     <div class="wrap">
       <div (click)="goBack();" class="cancel"></div>
-      <img class="bingoImg" src="{{ api.url }}/images/bingo/bingo.png">
+      <img class="bingoImg" src="img/bingo.png">
       <div class="clear"></div>
       <div class="rightPhoto">
-        <div class="imageBingo" [ngStyle]="{ 'background-image': 'url(' + api.url + data.user.photo1 + ')'}"></div>
+        <div class="imageBingo" [ngStyle]="{ 'background-image': 'url(' + data.user.photo1 + ')'}"></div>
       </div>
       <div class="leftPhoto">
-        <div class="imageBingo" [ngStyle]="{ 'background-image': 'url(' + api.url + data.user.photo2 +')'}"></div>
+        <div class="imageBingo" [ngStyle]="{ 'background-image': 'url(' + data.user.photo2 +')'}"></div>
       </div>
       <div class="plus"></div>
       <div class="clear"></div>

@@ -26,6 +26,7 @@ export class BingoPage {
 
     this.data.texts.text = this.data.texts.text.replace('USERNAME',this.data.user.username);
 
+
     //console.log(this.data.texts.text);
   }
 

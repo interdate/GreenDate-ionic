@@ -43,7 +43,7 @@ export class ContactUsPage {
     formSubmit() {
 
     if(this.form.form.email.value == '' || this.form.form.text.value == '' || this.form.form.subject.value == ''){
-    this.allfields = 'יש למלאות את כל השדות';
+    this.allfields = 'יש למלא את כל השדות';
     }else{
            this.allfields = '';
 

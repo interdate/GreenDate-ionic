@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams, LoadingController} from 'ionic-angular';
 import {DialogPage} from '../dialog/dialog';
 import {ApiQuery} from '../../library/api-query';
 import {Http} from '@angular/http';
@@ -22,12 +22,17 @@ export class InboxPage {
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 public http: Http,
+                public loadingCtrl: LoadingController,
                 public api: ApiQuery) {
 
-
+        let loading = this.loadingCtrl.create({
+            content: 'אנא המתן...'
+        });
+        loading.present();
         this.http.get(this.api.url + '/api/v1/inbox', this.api.setHeaders(true)).subscribe(data => {
             this.users = data.json().dialogs;
             this.texts = data.json().texts;
+            loading.dismiss();
         });
     }
 

@@ -42,7 +42,7 @@
             </ion-option>
         </select-alertless>
     </ion-item>
-    <ion-item><!--yes-->
+    <ion-item class="border-top"><!--yes-->
         <ion-label>עד גובה</ion-label>
         <select-alertless item-content [(ngModel)]="form.form.heightTo.value">
             <ion-option value="{{ hght.value }}" *ngFor="let hght of form.form.heightTo.choices">{{hght.label}}
@@ -131,6 +131,10 @@
         </ion-select>
     </ion-item>
 
+    <ion-item class="border-top">
+        <ion-label>{{ form.form.withPhoto.label }}</ion-label>
+        <ion-checkbox color="danger" item-right [(ngModel)]="form.form.withPhoto.value"></ion-checkbox>
+    </ion-item>
 
 
 
@@ -232,10 +236,6 @@
         </select-alertless>
     </ion-item> -->
 
-    <ion-item>
-        <ion-label item-left>{{ form.form.withPhoto.label }}</ion-label>
-        <ion-checkbox color="danger" item-right [(ngModel)]="form.form.withPhoto.value"></ion-checkbox>
-    </ion-item>
 
         <button full color="danger" (click)=toSearchResultsPage() ion-button>{{ form.form.submit }}</button>
 

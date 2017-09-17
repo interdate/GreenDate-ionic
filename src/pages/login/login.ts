@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams, ToastController} from 'ionic-angular';
+import {NavController, NavParams, ToastController, LoadingController} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {RegistrationOnePage} from '../registration-one/registration-one';
 import {PasswordRecoveryPage} from '../password-recovery/password-recovery';
@@ -37,8 +37,13 @@ export class LoginPage {
                 public http: Http,
                 public api: ApiQuery,
                 public storage: Storage,
+                public loadingCtrl: LoadingController,
                 //public myApp: MyApp,
                 public toastCtrl: ToastController) {
+        let loading = this.loadingCtrl.create({
+            content: 'אנא המתן...'
+        });
+        loading.dismiss();
 
         this.http.get(api.url + '/open_api/login', api.header).subscribe(data => {
             this.form = data.json();
@@ -58,13 +63,6 @@ export class LoginPage {
             this.storage.remove('password');
             this.storage.remove('user_id');
             this.storage.remove('user_photo');
-
-
-            /*this.storage.get('deviceToken').then((deviceToken) => {
-             this.storage.clear();
-             this.storage.set('deviceToken', deviceToken);
-             });
-             */
         }
     }
 
@@ -84,25 +82,24 @@ export class LoginPage {
         }
 
 
-        this.http.post(this.api.url + '/open_api/logins.json','', this.setHeaders()).map((res: Response) => res.json()).subscribe(data => {
+        this.http.post(this.api.url + '/app_dev.php/open_api/logins.json','', this.setHeaders()).map((res: Response) => res.json()).subscribe(data => {
+
+            setTimeout(function(){
+                this.errors = 'משתמש זה נחסם על ידי הנהלת האתר';
+            },300)
 
             this.validate(data);
 
         }, err => {
-            this.errors = this.form.errors.bad_credentials;
-            console.log(this.errors);
-        });
 
-        /*this.storage.get('status').then((val) => {
-            if (!val) {
-                let that = this;
-                setTimeout(function () {
-                    that.errors = that.form.errors.bad_credentials;
-                },900);
+            console.log(this.form.errors);
+
+            if(this.form.errors.is_not_active) {
+                this.errors = 'משתמש זה נחסם על ידי הנהלת האתר';
+            }else{
+                this.errors = this.form.errors.bad_credentials;
             }
-        });*/
-
-
+        });
     }
 
     setHeaders() {

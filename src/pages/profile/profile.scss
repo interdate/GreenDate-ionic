@@ -2,9 +2,16 @@ page-profile {
 
   .profile {
     background-position: center;
-    background-size:100%;
-    width:100%;
+    background-size: 100%;
+    width: 100%;
     height: 300px;
+  }
+
+  .pmtitle span.age {
+    clear: none;
+    display: inline;
+    margin-right: 4px;
+    font-size: 17px;
   }
 
   .pmtitle {
@@ -24,34 +31,54 @@ page-profile {
   .pmbotul li .one {
     font-weight: bold;
     width: 115px;
-    display: inline-block;
+    display: table-cell;
+  }
+
+  .pmbotul li .two {
+    //display: block;
+    //width: 57%;
+    //float: left;
+    display: table-cell;
   }
   .pmbotul li {
     margin-bottom: 5px;
+    //display: flow-root;
   }
 
   .pmtitle.bottom span {
-     display: inline;
+    display: inline;
   }
   .btn-opt {
-      text-align: center;
+    text-align: center;
   }
 
   .pmtitle.bottom {
-      text-align: center;
-      padding: 9px 10px 6px 10px;
+    text-align: center;
+    padding: 4px 10px 14px 10px;
   }
 
   .pmtitle.bottom span ion-icon {
-      margin-right: 5px;
-    }
+    margin-right: 5px;
+  }
 
-  .profile-sub-title{
+  textarea.text-input {
+    text-align: right;
+    direction: rtl;
+    width: 86%;
+    margin: 5px auto 0px;
+  }
+
+  .pmbotul .more-about-me li .one{
+    width: 100%;
+  }
+
+  .profile-sub-title {
     width: 100%;
     padding: 5px 0 6px 0;
     background-color: black;
     color: white;
-    text-align: center;
+    text-align: right;
+    padding-right: 5px;
   }
 
   li {
@@ -80,11 +107,11 @@ page-profile {
   .profile-buttons .favorite-profile-btn,
   .profile-buttons .like-profile-btn,
   .profile-buttons .message-profile-btn {
-      background: rgba(233,232,229,0.5);
-      width: 49px;
-      height: 49px;
-      margin-bottom: 5px;
-      border-radius: 50%;
+    background: rgba(233, 232, 229, 0.5);
+    width: 49px;
+    height: 49px;
+    margin-bottom: 5px;
+    border-radius: 50%;
   }
   .online-user {
     top: 13px;
@@ -96,15 +123,14 @@ page-profile {
     border-radius: 100%;
   }
 
+  .three {
+    display: block;
+    margin-top: 1%;
+  }
 
-.three{
-  display: block;
-  margin-top: 1%;
-}
-
-ion-textarea>textarea {
-text-align: center;
-}
+  ion-textarea > textarea {
+    text-align: center;
+  }
 
 }
 

@@ -15,6 +15,7 @@ import {PagePage} from '../page/page';
  Ionic pages and navigation.
  */
 
+
 @Component({
     selector: 'page-registration',
     templateUrl: 'registration-one.html',
@@ -71,10 +72,8 @@ export class RegistrationOnePage {
     gender_err: any;
     birthday_err: any;
     agree_err: any;
-    //region_err: any;
     phone_err: any;
     allfields = '';
-
 
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
@@ -96,195 +95,88 @@ export class RegistrationOnePage {
 
     }
 
-    /*festSelected(str) {
-        var data = JSON.stringify({
-            sign_up_one: {
-                region: this.form.form.region.value,
-                area: this.form.form.area.value
-            }
-        });
-
-        this.http.post(this.api.url + '/open_api/signs/ups/helpers', data, this.api.setHeaders(false)).subscribe(data => {
-            this.setFormOptions(str, data.json());
-        });
-    }
-
-    setFormOptions(str, data) {
-        if (str == 'region') {
-            this.form.form.area = data.form.area;
-            this.form.form.zipCode = data.form.zipCode;
-        } else if (str == 'area') {
-            this.form.form.zipCode = data.form.zipCode;
-        }
-    }
-
     getPage(id) {
         this.navCtrl.push(PagePage, {id: id});
     }
-
-    selectedGender() {
-      
-    }
-
-    presentPrompt(title) {
-
-        if (title == 'Username') {
-            this.name = 'username';
-            this.field_value = this.form.form.username.value;
-        } else if (title == 'Email') {
-            this.name = 'email';
-            this.field_value = this.form.form.email.first.value;
-        } else if (title == 'Retype Email') {
-            this.name = 'email_retype';
-            this.field_value = this.form.form.email.second.value;
-        } else if (title == 'Phone') {
-            this.name = 'phone';
-            this.field_value = this.form.form.phone.value;
-        } else if (title == 'Password') {
-            this.name = 'password';
-            this.field_value = this.form.form.password.first.value;
-        } else if (title == 'Retype Password') {
-            this.name = 'retype_password';
-            this.field_value = this.form.form.password.second.value;
-        }
-
-        let alert = this.alertCtrl.create({
-            title: title,
-            inputs: [
-                {
-                    name: this.name,
-                    placeholder: title,
-                    value: this.field_value
-                }
-
-            ],
-            buttons: [
-                {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    handler: data => {
-                        console.log('Cancel clicked');
-                    }
-                },
-                {
-                    text: 'Ok',
-                    handler: data => {
-                        if (title == 'Username') {
-                            this.form.form.username.value = data.username;
-                        } else if (title == 'Email') {
-                            this.form.form.email.first.value = data.email;
-                        } else if (title == 'Retype Email') {
-                            this.form.form.email.second.value = data.email_retype;
-                        } else if (title == 'Phone') {
-                            this.form.form.phone.value = data.phone;
-                        } else if (title == 'Password') {
-                            this.form.form.password.first.value = data.password;
-                        } else if (title == 'Retype Password') {
-                            this.form.form.password.second.value = data.retype_password;
-                        }
-                    }
-                }
-            ]
-        });
-        alert.present();
-    }*/
-
 
     formSubmit() {
 
         this.api.showLoad();
 
-        if(this.form.form.username.value == '' || this.form.form.email.first.value == '' || this.form.form.email.second.value == '' || this.form.form.password.first.value == '' || this.form.form.password.second.value == '' || this.form.form.gender.value == '' || this.form.form.birthday.value == undefined ){
-           this.allfields = 'יש למלא את כל השדות המסומנים בכוכבית';
-           this.api.hideLoad();
+        if (this.form.form.username.value == '' || this.form.form.email.first.value == '' || this.form.form.email.second.value == '' || this.form.form.password.first.value == '' || this.form.form.password.second.value == '' || this.form.form.gender.value == '' || this.form.form.birthday.value == undefined) {
+            this.allfields = 'יש למלא את כל השדות המסומנים בכוכבית';
+            this.api.hideLoad();
 
-           //console.log("name: "+this.form.form.username.value +" email-1: "+ this.form.form.email.first.value +" email-2:  " +this.form.form.email.second.value + " pass-1: "+ this.form.form.password.first.value +" pass-2: "+ this.form.form.password.second.value + " gender: " +this.form.form.gender.value + " birtthday: "+this.form.form.birthday.value);
+            //console.log("name: "+this.form.form.username.value +" email-1: "+ this.form.form.email.first.value +" email-2:  " +this.form.form.email.second.value + " pass-1: "+ this.form.form.password.first.value +" pass-2: "+ this.form.form.password.second.value + " gender: " +this.form.form.gender.value + " birtthday: "+this.form.form.birthday.value);
 
-        }else if(this.form.form.agree.value == false){
-        this.allfields = 'יש לאשר את תנאי השימוש';
-        this.api.hideLoad();
+        } else if (this.form.form.agree.value == false) {
+            this.allfields = 'יש לאשר את תנאי השימוש';
+            this.api.hideLoad();
         }
-        else{
+        else {
             this.allfields = '';
 
 
-        this.storage.set('user_data', {
-            username: this.form.form.username.value,
-            password: this.form.form.password.first.value
-        });
-
-        this.api.setUserData({username: this.form.form.username.value, password: this.form.form.password.first.value});
-
-        var date_arr = ['', '', ''];
-
-        if (typeof this.birth != 'undefined') {
-            date_arr = this.birth.split('-');
-        }
-
-        var data = JSON.stringify({
-            
-            signUpOne: {
+            this.storage.set('user_data', {
                 username: this.form.form.username.value,
-                email: {
-                    first: this.form.form.email.first.value,
-                    second: this.form.form.email.second.value
-                },
-                password: {
-                    first: this.form.form.password.first.value,
-                    second: this.form.form.password.second.value
-                },
-                gender: this.form.form.gender.value,
-                birthday: {
-                    day: parseInt(date_arr[2]),
-                    month: parseInt(date_arr[1]),
-                    year: parseInt(date_arr[0])
-                },
-                phone: this.form.form.phone.value,
-                agree: this.form.form.agree.value,
-                _token: this.form.form._token.value
+                password: this.form.form.password.first.value
+            });
+
+            this.api.setUserData({
+                username: this.form.form.username.value,
+                password: this.form.form.password.first.value
+            });
+
+            var date_arr = ['', '', ''];
+
+            if (typeof this.birth != 'undefined') {
+                date_arr = this.birth.split('-');
             }
-        });
 
-        //  console.log("token: " + this.form.form._token.value + "name: "+this.form.form.username.value +" email-1: "+ this.form.form.email.first.value +" email-2:  " +this.form.form.email.second.value + " pass-1: "+ this.form.form.password.first.value +" pass-2: "+ this.form.form.password.second.value + " gender: " +this.form.form.gender.value + " birtthday: "+this.form.form.birthday.value);
+            var data = JSON.stringify({
 
-        this.http.post(this.api.url + '/open_api/signs/ups', data, this.api.header).subscribe(data => this.validate(data.json()));
+                signUpOne: {
+                    username: this.form.form.username.value,
+                    email: {
+                        first: this.form.form.email.first.value,
+                        second: this.form.form.email.second.value
+                    },
+                    password: {
+                        first: this.form.form.password.first.value,
+                        second: this.form.form.password.second.value
+                    },
+                    gender: this.form.form.gender.value,
+                    birthday: {
+                        day: parseInt(date_arr[2]),
+                        month: parseInt(date_arr[1]),
+                        year: parseInt(date_arr[0])
+                    },
+                    phone: this.form.form.phone.value,
+                    agree: this.form.form.agree.value,
+                    _token: this.form.form._token.value
+                }
+            });
+
+            this.http.post(this.api.url + '/open_api/signs/ups', data, this.api.header).subscribe(data => this.validate(data.json()));
         }
 
     }
 
-                //flow_signUp_step: 1,
-                //flow_singUp_instance: this.form.form.flow_singUp_instance.value,
-                //region: this.form.form.region.value,
-                //area: this.form.form.area.value,
-                //zipCode: this.form.form.zipCode.value,
-
     validate(response) {
-        /*
-         email: { children:{ first: { errors: any }, second: { errors: any } } },
-         password: { children:{ first: { errors: any }, second:{ errors: any } } },
-         gender: { errors: any },
-         birthday: { errors: any },
-         region: { errors:any },
-         area: { errors:any },
-         zipCode: { errors:any },
-         phone: { errors:any },
-         agree: { errors:any },*/
 
-
-            if (typeof response.user.form.flow_signUp_step != 'undefined' && response.user.form.flow_signUp_step.value == 2) {
+        if (typeof response.user.form.flow_signUp_step != 'undefined' && response.user.form.flow_signUp_step.value == 2) {
 
             this.navCtrl.push(RegistrationTwoPage, {
                 form: response.user.form
             });
 
-           } else {
+        } else {
 
             this.err = response.user.errors.form.children;
             this.errKeys = Object.keys(this.err);
             this.err.username.errors;
-          }
+        }
 
-        
 
         this.api.hideLoad();
     }

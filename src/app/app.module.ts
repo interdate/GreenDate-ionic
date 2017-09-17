@@ -32,7 +32,6 @@ import {Storage} from '@ionic/storage';
 import {SelectAlertless} from '../pages/select/selectalertless';
 import {FaqPage} from "../pages/faq/faq";
 
-
 @NgModule({
     declarations: [
         MyApp,
@@ -72,6 +71,7 @@ import {FaqPage} from "../pages/faq/faq";
             scrollAssist: false,
             autoFocusAssist: false
         }),
+
     ],
     bootstrap: [IonicApp],
     entryComponents: [

@@ -36,7 +36,7 @@ export class HelloIonicPage {
     //url: any;
     users: Array<{ id: string, isOnline: string, isAddBlackListed: string, username: string, photo: string, age: string, region_name: string, image: string, about: {}, component: any}>;
     texts: { like: string, add: string, message: string, remove: string, unblock: string, no_results: string };
-    params: { action: any, filter: any, page: any, list: any } = {action: 'search',filter: 'new', page: 1, list: ''};
+    params: { action: any, filter: any, page: any, list: any } = {action: 'search', filter: 'new', page: 1, list: ''};
     params_str: any;
 
     constructor(public toastCtrl: ToastController,
@@ -112,8 +112,8 @@ export class HelloIonicPage {
             user.isAddLike = true;
 
             let toast = this.toastCtrl.create({
-                message: 'עשית/ה לייק ל' + user.username,
-                duration: 2000
+                message: ' עשית לייק ל' + user.username,
+                duration: 5000
             });
 
             toast.present();
@@ -167,7 +167,7 @@ export class HelloIonicPage {
 
             toast = this.toastCtrl.create({
                 message: data.json().success,
-                duration: 2000
+                duration: 3000
             });
             toast.present();
         });
@@ -176,21 +176,19 @@ export class HelloIonicPage {
     addFavorites(user) {
 
         if (user.isAddFavorite == false) {
-
             user.isAddFavorite = true;
-
-            let toast = this.toastCtrl.create({
-                message: user.username + ' ' + 'הוסף לרשימת המועדפים שלך',
-                duration: 2000
-            });
-
-            toast.present();
 
             let params = JSON.stringify({
                 list: 'Favorite'
             });
 
             this.http.post(this.api.url + '/api/v1/lists/' + user.id, params, this.api.setHeaders(true, this.username, this.password)).subscribe(data => {
+                let toast = this.toastCtrl.create({
+                    message: data.json().success,
+                    duration: 3000
+                });
+
+                toast.present();
                 this.events.publish('statistics:updated');
             });
         }
@@ -223,7 +221,7 @@ export class HelloIonicPage {
         });
 
         if (this.navParams.get('params') == 'login') {
-            loading.present();
+            //loading.present();
             this.username = this.navParams.get('username');
             this.password = this.navParams.get('password');
 
@@ -240,7 +238,7 @@ export class HelloIonicPage {
                 loading.dismiss();
             });
         } else {
-            //loading.present();
+            loading.present();
             this.http.post(this.api.url + '/api/v1/users/results', this.params_str, this.api.setHeaders(true)).subscribe(data => {
                 this.users = data.json().users;
                 this.texts = data.json().texts;
@@ -250,9 +248,11 @@ export class HelloIonicPage {
                 if (data.json().users.length < 10) {
                     this.loader = false;
                 }
-                loading.dismiss();
             });
         }
+
+        loading.dismiss();
+
     }
 
     getLocation() {
@@ -269,7 +269,7 @@ export class HelloIonicPage {
             this.params.page = this.page_counter;
             this.params_str = JSON.stringify(this.params);
 
-            this.http.post(this.api.url + '/api/v1/users/results', this.params_str, this.api.setHeaders(true)).subscribe(data => {
+            this.http.post(this.api.url + '/app_dev.php/api/v1/users/results', this.params_str, this.api.setHeaders(true)).subscribe(data => {
                 if (data.json().users.length < 10) {
                     this.loader = false;
                 }

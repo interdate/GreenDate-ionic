@@ -14,6 +14,18 @@
   // automatically applied to the <body> element in the app.
 
 
+ .banner {
+   position: absolute;
+   bottom: 65px;
+   z-index: 9;
+   width: 80%;
+   right: 10%;
+ }
+
+ /*.item-block{
+   width: auto;
+ }*/
+
 .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner {
   border-bottom-color: transparent;
   box-shadow: none;
@@ -35,6 +47,14 @@
 ion-menu .item-md [item-right] {
   margin: 15px 5px 0px 0;
 }
+
+ .searchbar-md .searchbar-input {
+   padding: 6px 10px;
+ }
+
+ .searchbar-md .searchbar-search-icon {
+   background: none;
+ }
 
 .back-btn {
   position: fixed;
@@ -62,11 +82,11 @@ ion-menu .item-md [item-right] {
   font-size: 18px;
 }
 
-/*
-.item-md [item-right], .item-ios [item-right] {
-  margin: 16px 8px 0px 0;
+
+.item-ios [item-right] {
+  margin: 22px 8px 4px 8px;
 }
-*/
+
 
 ion-range.range-md.range-has-pin, ion-range.range-ios.range-has-pin {
   padding-top: 10px;
@@ -144,6 +164,11 @@ ion-infinite-scroll {
   margin-right: 15px;
 }
 
+#menu3 .list-ios{
+  margin-left: 8px;
+  margin-right: -4px;
+}
+
 .list-ios {
   margin-top: 32px;
 }
@@ -167,6 +192,7 @@ ion-infinite-scroll {
 .side-menu ion-icon {
   margin-right: 20px;
   margin-left:5px;
+  font-size: 1.7em;
 }
 
 .profile-buttons {
@@ -226,107 +252,108 @@ textarea.text-input-ios, textarea.text-input-md {
 
 #the_area {
   background: url(../img/icons/the-arena.png) center no-repeat;
-  width: 20px;
+  width: 32px;
   height: 20px;
   background-size: contain;
 }
 
 #inbox {
   background: url(../img/icons/inbox.png) center no-repeat;
-  width: 20px;
+  width: 32px;
   height: 20px;
   background-size: contain;
 }
 
 #notifications {
   background: url(../img/icons/notifications_ft.png) center no-repeat;
-  width: 20px;
+  width: 32px;
   height: 20px;
   background-size: contain;
 }
 
 #edit_profile {
   background: url(../img/icons/edit-profile.png) center no-repeat;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 22px;
+  margin-left: 2px;
   background-size: contain;
 }
 
 #edit_photos {
   background: url(../img/icons/edit_photos.png) center no-repeat;
-  width: 20px;
+  width: 32px;
   height: 20px;
   background-size: contain;
 }
 
 #change_password {
   background: url(../img/icons/change_password.png) center no-repeat;
-  width: 20px;
+  width: 32px;
   height: 20px;
   background-size: contain;
 }
 
 #freeze_account {
   background: url(../img/icons/freeze_account.png) center no-repeat;
-  width: 20px;
+  width: 32px;
   height: 20px;
   background-size: contain;
 }
 
 #viewed {
   background: url(../img/icons/viewed.png) center no-repeat;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 22px;
   background-size: contain;
 }
 
 #viewed_me {
   background: url(../img/icons/viewed-me.png) center no-repeat;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 22px;
   background-size: contain;
 }
 
 #contacted {
   background: url(../img/icons/contacted.png) center no-repeat;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 22px;
   background-size: contain;
 }
 
 #contacted_me {
   background: url(../img/icons/contacted-me.png) center no-repeat;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 22px;
   background-size: contain;
   transform: scaleX(-1);
 }
 
 #favorited {
   background: url(../img/icons/favorited.png) center no-repeat;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 22px;
   background-size: contain;
 }
 
 #favorited_me {
   background: url(../img/icons/favorited_me.png) center no-repeat;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 22px;
   background-size: contain;
 }
 
 #blocked {
   background: url(../img/icons/blocked.png) center no-repeat;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 22px;
   background-size: contain;
 }
 
 #online {
   background: url(../img/icons/online.png) center no-repeat;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 22px;
   background-size: contain;
 }
 
@@ -336,6 +363,11 @@ textarea.text-input-ios, textarea.text-input-md {
 
 .toolbar-background-md, .toolbar-background-ios {
   background-color: black;
+}
+
+ .toolbar-background-ios {
+  height: 73%;
+  margin-top: 5.7%;
 }
 
 .md ion-menu .menu-inner .item-md, .ios ion-menu .menu-inner .item-ios {
@@ -369,6 +401,7 @@ ion-header button {
   margin: auto;
  // padding-top: 18px;
   display: block;
+  height:100%;
 }
 
 .footer-menu ul li.more-btn.menu-right {
@@ -440,13 +473,17 @@ ion-header button {
  }
 
 .md ion-menu .menu-inner, .ios ion-menu .menu-inner {
-  top: 56px;
+  top: 70px;
   background: #39393f;
 }
 
-.md ion-menu .menu-inner .list-md, .ios ion-menu .menu-inner .list-ios {
+/*.md ion-menu .menu-inner .list-md, .ios ion-menu .menu-inner .list-ios {
   margin-top: 55px;
-}
+}*/
+
+/*.ios ion-menu .menu-inner .list-ios {
+  margin-top: 50px;
+ }*/
 
 #menu3 .menu-inner .list-md, #menu3 .menu-inner .list-ios {
   margin-top: 25px;
@@ -579,7 +616,7 @@ ion-item.item-md, ion-item.item-ios {
 
 button.item-ios:not([detail-none]) .item-inner {
   background-image: none;
-  padding-right: 24px;
+  padding-right: 0px;
 }
 
 .messageNotify {
@@ -595,17 +632,17 @@ button.item-ios:not([detail-none]) .item-inner {
 }
 
 .messageNotify ion-icon {
-  float: right;
+  float: left;
   padding: 5px 10px;
 }
 
 .messageNotify .name {
-  text-align: left;
+  text-align: right;
   margin: 15px 0 10px;
 }
 
 .messageNotify .avatar {
-  float: left;
+  float: right;
   width: 20%;
   margin: 3%;
   height: 75%;
@@ -613,7 +650,7 @@ button.item-ios:not([detail-none]) .item-inner {
 }
 
 .messageNotify .content {
-  float: left;
+  float: right;
   font-size: 16px;
   color: #fff;
   font-weight: bold;
@@ -702,7 +739,7 @@ ion-footer.footer-ios::before {
 @media (max-width: 320px) {
 
 .ios ion-menu .menu-inner {
-    top: 70px;
+    top: 69px;
 }
 .footer-menu ul li {
     font-size: 0.7em;

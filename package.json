@@ -24,6 +24,7 @@
         "com.synconset.imagepicker": "https://github.com/Telerik-Verified-Plugins/ImagePicker",
         "com.xmartlabs.cordova.market": "1.1",
         "cordova-android": "^6.2.3",
+        "cordova-ios": "^4.4.0",
         "cordova-plugin-app-version": "~0.1.9",
         "cordova-plugin-camera": "~2.3.1",
         "cordova-plugin-console": "~1.0.5",
@@ -38,6 +39,7 @@
         "ionic-native": "^2.4.1",
         "ionic-plugin-keyboard": "~2.2.1",
         "ionicons": "3.0.0",
+        "osi": "^14.4.12",
         "phonegap-plugin-push": "~1.6.4",
         "rxjs": "5.0.0-beta.12",
         "sw-toolbox": "3.4.0",
@@ -93,7 +95,8 @@
             }
         },
         "platforms": [
-            "android"
+            "android",
+            "ios"
         ]
     }
 }

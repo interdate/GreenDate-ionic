@@ -1,5 +1,14 @@
 import {Component, ViewChild} from '@angular/core';
-import {Platform, MenuController, Nav, ViewController, ToastController, Content, AlertController, Events} from 'ionic-angular';
+import {
+    Platform,
+    MenuController,
+    Nav,
+    ViewController,
+    ToastController,
+    Content,
+    AlertController,
+    Events
+} from 'ionic-angular';
 import {StatusBar, Push, Splashscreen, AppVersion, Geolocation, Market} from 'ionic-native';
 import {Http} from '@angular/http';
 import {HelloIonicPage} from '../pages/hello-ionic/hello-ionic';
@@ -77,7 +86,6 @@ export class MyApp {
         this.storage = storage;
 
 
-
         this.http.get(api.url + '/open_api/menu', api.header).subscribe(data => {
 
             let menu = data.json().menu;
@@ -128,11 +136,12 @@ export class MyApp {
             var params = JSON.stringify({
                 latitude: pos.coords.latitude,
                 longitude: pos.coords.longitude
-            },err => {
             });
+
             this.http.post(this.api.url + '/api/v1/locations', params, this.api.setHeaders(true)).subscribe(data => {
                 console.log(data);
-            },err => {
+                console.log(params);
+
             });
         });
     }
@@ -154,14 +163,26 @@ export class MyApp {
             this.menu_items_contacts[5].count = statistics.favoritedMe;
             this.menu_items_contacts[6].count = statistics.blacklisted;
             //Footer Menu
-            //this.menu_items_footer2[2].count = statistics.newNotificationsNumber;
+            this.menu_items_footer2[2].count = statistics.newNotificationsNumber;
             this.menu_items_footer2[2].count = 0;
             this.menu_items_footer1[3].count = statistics.newMessagesNumber;
             this.menu_items_footer2[0].count = statistics.favorited;
             this.menu_items_footer2[1].count = statistics.favoritedMe;
+
         }, err => {
-            console.log("Oops!");
+            this.clearLocalStorage();
         });
+    }
+
+    clearLocalStorage() {
+        this.api.setHeaders(false, null, null);
+        // Removing data storage
+        this.storage.remove('status');
+        this.storage.remove('password');
+        this.storage.remove('user_id');
+        this.storage.remove('user_photo');
+
+        this.nav.push(LoginPage);
     }
 
     initMenuItems(menu) {
@@ -171,7 +192,7 @@ export class MyApp {
         this.stats = menu.stats;
 
         this.menu_items_logout = [
-            {_id: '', icon: 'log-out', title: menu.login, component: LoginPage, count: ''},
+            {_id: '', icon: 'log-in', title: menu.login, component: LoginPage, count: ''},
             {_id: 'blocked', icon: '', title: menu.forgot_password, component: PasswordRecoveryPage, count: ''},
             {_id: '', icon: 'mail', title: menu.contact_us, component: ContactUsPage, count: ''},
             {_id: '', icon: 'person-add', title: menu.join_free, component: RegistrationOnePage, count: ''},
@@ -202,7 +223,6 @@ export class MyApp {
             {_id: '', icon: 'person', title: menu.view_my_profile, component: ProfilePage, count: ''},
             {_id: 'change_password', icon: '', title: menu.change_password, component: ChangePasswordPage, count: ''},
             {_id: 'freeze_account', icon: '', title: menu.freeze_account, component: FreezeAccountPage, count: ''},
-            {_id: 'notifications', icon: '', title: menu.notifications, component: NotificationsPage, count: ''},
             {_id: 'settings', icon: 'cog', title: menu.settings, component: SettingsPage, count: ''},
             {_id: '', icon: 'mail', title: menu.contact_us, component: ContactUsPage, count: ''},
             {_id: 'logout', icon: 'log-out', title: menu.log_out, component: LoginPage, count: ''}
@@ -386,7 +406,7 @@ export class MyApp {
         }
         let push = Push.init({
             android: {
-                senderID: "72562107329‏"
+                senderID: "72562107329"
             },
             ios: {
                 alert: "true",
@@ -401,7 +421,6 @@ export class MyApp {
             this.storage.set('deviceToken', data.registrationId);
             console.log("device token ->", data.registrationId);
             this.api.sendPhoneId(data.registrationId);
-            //alert(data.registrationId);
             //TODO - send device token to server
         });
 
@@ -421,7 +440,7 @@ export class MyApp {
         });
 
         push.on('error', (e) => {
-            console.log("PUSH PLUGIN ERROR: " + JSON.stringify(e));
+            alert("PUSH PLUGIN ERROR: " + JSON.stringify(e));
         });
     }
 
@@ -503,7 +522,7 @@ export class MyApp {
     getBingo() {
         this.storage.get('user_id').then((val) => {
             if (val) {
-                this.http.get(this.api.url + '/api/v1/bingo', this.api.setHeaders(true)).subscribe(data => {
+                this.http.get(this.api.url + '/app_dev.php/api/v1/bingo', this.api.setHeaders(true)).subscribe(data => {
                     this.storage.set('status', this.status);
                     this.avatar = data.json().texts.photo;
                     this.texts = data.json().texts;
@@ -516,7 +535,7 @@ export class MyApp {
                     }
                     if (data.json().user) {
                         this.nav.push(BingoPage, {data: data.json()});
-                        this.http.get(this.api.url + '/api/v1/bingo?likeMeId=' + data.json().user.id, this.api.setHeaders(true)).subscribe(data => {
+                        this.http.get(this.api.url + '/app_dev.php/api/v1/bingo?likeMeId=' + data.json().user.id, this.api.setHeaders(true)).subscribe(data => {
                         });
                     }
                 });
@@ -525,9 +544,9 @@ export class MyApp {
         //this.nav.push(BingoPage);
     }
 
-    loginPage() {
-        this.nav.push(LoginPage);
-    }
+    /*loginPage() {
+     this.nav.push(LoginPage);
+     }*/
 
     dialogPage() {
         let user = {id: this.new_message.userId};
@@ -616,10 +635,6 @@ export class MyApp {
         });
     }
 
-    ngAfterViewChecked() {
-
-    }
-
     ngAfterViewInit() {
 
         this.nav.viewDidEnter.subscribe((view) => {
@@ -635,34 +650,55 @@ export class MyApp {
             let page = this.nav.getActive();
 
             if (page.instance instanceof HelloIonicPage) {
-                if(this.api.status != ''){
+                if (this.api.status != '') {
                     this.status = this.api.status;
                 }
                 this.setLocation();
             }
 
+            if (page.instance instanceof DialogPage) {
+            }else{
+                if(this.api.footer == true){
+                    $('.footerMenu').show();
+                }
+            }
+
             let el = this;
             window.addEventListener('native.keyboardshow', function () {
-
+                let page = el.nav.getActive();
                 //this.keyboard.disabledScroll(true);
 
-                $('.footerMenu').hide();
+                //$('.footerMenu, .back-btn').hide();
+                $('.back-btn').hide();
+                
 
                 if (page.instance instanceof DialogPage) {
-                    $('.scroll-content, .fixed-content').css({'margin-bottom': '58px'});
-                    $('.form-dialog').css({'margin-bottom': '-20px'});
+                    $('.banner').hide();
+                    
+                    setTimeout(function () {
+                        //$('.scroll-content, .fixed-content').css({'margin-bottom': '57px'});
+                        $('.scroll-content, .fixed-content').css({'margin-bottom': '0px'});
+                        //$('.form-dialog').css({'margin-bottom': '-20px'});
+                    }, 200);
                 } else {
-                    $('.scroll-content, .fixed-content').css({'margin-bottom': '0px'});
+                    //$('.banner').show();
+                    setTimeout(function () {
+                        $('.scroll-content, .fixed-content').css({'margin-bottom': '0px'});
+                    }, 200);
+                    
                 }
 
             });
             window.addEventListener('native.keyboardhide', function () {
-                $('.footerMenu').show();
+                let page = el.nav.getActive();
+                //$('.footerMenu, .back-btn').show();
+                $('.back-btn').show();
                 if (page.instance instanceof DialogPage && el.api.back == false) {
                     setTimeout(function () {
-                        $('.scroll-content, .fixed-content').css({'margin-bottom': '115px'});
+                        //$('.scroll-content, .fixed-content').css({'margin-bottom': '115px'});
+                        $('.scroll-content, .fixed-content').css({'margin-bottom': '57px'});
                         el.content.scrollTo(0, 999999, 300);
-                    },600);
+                    }, 600);
                 } else {
                     el.storage.get('user_id').then((user_id) => {
                         if (user_id) {

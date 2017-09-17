@@ -38,10 +38,15 @@
                 <div *ngIf="user.photo != '/images/no_photo_2.jpg' && user.photo != '/images/no_photo_1.jpg'" (click)="itemTapped(user)" [ngStyle]="{ 'background-image': 'url(' + user.photo + ')'}"
                      class="avatar"></div>
                 <div class="wrap">
-                    <ion-card-title>
-                        <div class="name">{{user.username}},</div>
-                        <div>{{user.age}}</div>
-                        <div class="location">{{user.region_name}}</div>
+                    <ion-card-title (click)="itemTapped(user)">
+                        <div class="row">
+                            <span class="name" [ngClass]="{'long-name': user.username?.length >= 12 }">{{user.username}}</span>
+                            <span class="age">,{{user.age}}</span>
+                        </div>
+                        <div class="row">
+                            <span class="location">{{user.region_name}}</span>
+                            <span class="distance">{{user.distance}}</span>
+                        </div>
                     </ion-card-title>
                     <ul class="profile-btn">
                         <div class="btn" (click)=toDialog(user)>

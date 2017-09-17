@@ -12,11 +12,11 @@
 
 </ion-header>
 
-
-<ion-content id="dialog" padding>
   <div (click)="back()" class="back-btn">
     <ion-icon name="ios-arrow-forward-outline"></ion-icon>
   </div>
+
+<ion-content id="dialog" padding>
   <!--<div class="no_results" *ngIf="messages">{{ texts?.no_results }}</div>-->
   <ion-card>
     <ion-item>
@@ -31,9 +31,9 @@
   <ion-card [ngClass]="{'other-msg': user.id == msg?.from }" *ngFor="let msg of messages" class="usr_msg msg-item">
   <ion-grid>
     <ion-row>
-      <ion-col width-75> <ion-card-content [innerHTML]="msg?.text" item-left>
+      <ion-col width-67> <ion-card-content [innerHTML]="msg?.text" item-left>
     </ion-card-content></ion-col>
-    <ion-col  width-25> <ion-card-content class="date" item-right>
+    <ion-col  width-33> <ion-card-content class="date" item-right>
       {{msg.dateTime}}
       <!--<ion-icon *ngIf="user?.id == msg.from" name="checkmark"></ion-icon>-->
       <ion-icon *ngIf="user?.id != msg.from && !msg.isRead" name="done-all"></ion-icon>
@@ -51,8 +51,6 @@
   	<button class="send-msg" (click)="sendMessage()" ion-button color="danger">שלח</button>
   </ion-toolbar>
 
-  <ion-navbar class="footerMenu" >
-    <ion-title></ion-title>
-  </ion-navbar>
+  
 
 </ion-footer>

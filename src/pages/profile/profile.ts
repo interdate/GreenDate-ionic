@@ -25,12 +25,14 @@ export class ProfilePage {
 
     isAbuseOpen: any = false;
 
-    user: { id: any, username: any, isAddBlackListed: any, about: { label: any }, photos: any, photo: any, url: any } = {
+    user: { id: any, type: any, username: any, music: any, isAddBlackListed: any, about: { label: any }, photos: any, photo: any, url: any } = {
         id: '',
         isAddBlackListed: false,
+        music: '',
         username: '',
         about: {label: ''},
         photos: '',
+        type: '',
         photo: '',
         url: ''
     };
@@ -64,7 +66,7 @@ export class ProfilePage {
 
             this.user = user;
 
-            this.http.get(api.url + '/api/v1/users/' + this.user.id, api.setHeaders(true)).subscribe(data => {
+            this.http.get(api.url + '/app_dev.php/api/v1/users/' + this.user.id, api.setHeaders(true)).subscribe(data => {
                 this.user = data.json();
                 this.formReportAbuse = data.json().formReportAbuse;
                 this.texts = data.json().texts;
@@ -76,7 +78,7 @@ export class ProfilePage {
                 if (val) {
                     this.myId = val;
                     this.user.id = val;
-                    this.http.get(api.url + '/api/v1/users/' + this.user.id, api.setHeaders(true)).subscribe(data => {
+                    this.http.get(api.url + '/app_dev.php/api/v1/users/' + this.user.id, api.setHeaders(true)).subscribe(data => {
 
                         this.user = data.json();
                         this.formReportAbuse = data.json().formReportAbuse;
@@ -98,12 +100,7 @@ export class ProfilePage {
 
     addFavorites(user) {
         user.isAddFavorite = true;
-        let toast = this.toastCtrl.create({
-            message: user.username + ' ' + 'הוסף לרשימת המועדפים שלך',
-            duration: 2000
-        });
 
-        toast.present();
 
         let params = JSON.stringify({
             list: 'Favorite',
@@ -111,8 +108,12 @@ export class ProfilePage {
 
         this.http.post(this.api.url + '/api/v1/lists/' + user.id, params, this.api.setHeaders(true)).subscribe(data => {
             console.log(data);
-        }, err => {
-            console.log("Oops!");
+            let toast = this.toastCtrl.create({
+                message: data.json().success,
+                duration: 2000
+            });
+
+            toast.present();
         });
     }
 
@@ -133,20 +134,18 @@ export class ProfilePage {
         this.http.post(this.api.url + '/api/v1/lists/' + this.user.id, params, this.api.setHeaders(true)).subscribe(data => {
             let toast = this.toastCtrl.create({
                 message: data.json().success,
-                duration: 2000
+                duration: 3000
             });
 
             toast.present();
 
-        }, err => {
-            console.log("Oops!");
         });
     }
 
     addLike(user) {
         user.isAddLike = true;
         let toast = this.toastCtrl.create({
-            message: user.username + ' ' + ' liked',
+            message: ' עשית לייק ל' + user.username,
             duration: 2000
         });
 

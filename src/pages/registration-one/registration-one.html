@@ -98,7 +98,7 @@
                 form.form.birthday.label }}
             </div>
             <ion-item>
-                <ion-datetime [(ngModel)]="birth" displayFormat="YYYY MM DD" max="1999"
+                <ion-datetime  [(ngModel)]="birth" displayFormat="YYYY MM DD" max="1999"
                               pickerFormat="YYYY MM DD" [doneText]="'אישור'" [cancelText]="'ביטול'"></ion-datetime>
             </ion-item>
             <div class="err">{{err.birthday.errors}}</div>
@@ -143,7 +143,7 @@
 
         <div *ngIf="allfields  && allfields?.length != 0" class="err">{{ allfields }}</div>
 
-            <button right color="danger" (click)="formSubmit(form)" full ion-button>{{form.form.submit}}
+            <button right color="danger" (click)="formSubmit(form)" full ion-button>{{form.form.next_step}}
             </button>
 
     </ion-list>

@@ -84,7 +84,7 @@ export class ChangePhotosPage {
 
 
     getCount(num) {
-        return parseInt(num)/* + 1*/;
+        return parseInt(num) + 1;
     }
 
 
@@ -95,7 +95,6 @@ export class ChangePhotosPage {
             this.dataPage = data.json();
             this.description = data.json().texts.description;
             this.photos = Object.keys(this.dataPage.photos);
-            console.log('DESCR', this.description);
         }, err => {
             console.log("Oops!");
         });
@@ -257,7 +256,7 @@ export class ChangePhotosPage {
             targetHeight: 600,
             saveToPhotoAlbum: true,
             chunkedMode: true,
-            correctOrientation: true
+            //correctOrientation: true
         };
 
         Camera.getPicture(cameraOptions).then((imageData) => {

@@ -47,8 +47,6 @@ export class PasswordRecoveryPage {
 
     validate(response) {
 
-      console.log(response);
-
       this.email_err = response.errors.form.children.email.errors;
 
       if( response.send == true ) {

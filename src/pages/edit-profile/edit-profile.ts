@@ -23,7 +23,10 @@ export class EditProfilePage {
     private select: Select;
     public test: any = "First";
     public mydate: string = "";
-    allfields = '';
+    public allfields = '';
+    public items = [];
+
+    public searchQuery: string = '';
 
     @ViewChild('select')
     public set ex(select: any | undefined) {
@@ -47,32 +50,12 @@ export class EditProfilePage {
     }
 
 
-
-    /*form: { form: any } = {
-        form: {
-            submit: '',
-            username: {},
-            email: {first: {}, second: {}},
-            password: {first: {}, second: {}},
-            gender: {choices: [[]]},
-            birthday: {value: {day: {}, month: {}, year: {}}},
-            region: {choices: [[]]},
-            area: {choices: [[]]},
-            zipCode: {choices: [[]]},
-            phone: {},
-            agree: {},
-            _token: {},
-            body: {choices: [[]]},
-            income: {},
-            netWorth: {}
-        }
-    };*/
-
     form: { form: any } = {
         form: {
             username: {},
             email: {first: {}, second: {}},
-            birthday: {value: {day: {}, month: {}, year: {}}
+            birthday: {
+                value: {day: {}, month: {}, year: {}}
             },
             phone: {},
             _token: {}
@@ -82,89 +65,48 @@ export class EditProfilePage {
 
     form_step_two: { form_step_two: any } = {
         form_step_two: {
-            city: { choices: [[]] },
-            education: { choices: [[]] },
-            occupation: { choices: [[]] },
-            purposes: { choices: [[]] },
-            region: { choices: [[]] },
-            relationshipStatus: { choices: [[]] },
-            religion: { choices: [[]] },
-            sexOrientation: { choices: [[]] },
+            city: {choices: [[]]},
+            education: {choices: [[]]},
+            occupation: {choices: [[]]},
+            purposes: {choices: [[]]},
+            region: {choices: [[]]},
+            relationshipStatus: {choices: [[]]},
+            religion: {choices: [[]]},
+            sexOrientation: {choices: [[]]},
             _token: {}
         }
     };
 
-               
 
     form_step_three: { form_step_three: any } = {
         form_step_three: {
             about: {},
-            animals: { choices: [[]] },
-            body: { choices: [[]] },
-            children: { choices: [[]] },
+            animals: {choices: [[]]},
+            body: {choices: [[]]},
+            children: {choices: [[]]},
             dinnerWith: {},
-            drinking: { choices: [[]] },
-            eyes: { choices: [[]] },
+            drinking: {choices: [[]]},
+            eyes: {choices: [[]]},
             favoriteBooks: {},
             favoriteDish: {},
             favoriteRestaurant: {},
-            green:{ choices: [[]] },
-            hair: { choices: [[]] },
-            height: { choices: [[]] },
-            interests: { choices: [[]] },
-            looking:{},
-            music:{},
-            nutrition: { choices: [[]] },
-            perfectDate:{},
-            politicalAffiliation:{ choices: [[]] },
-            smoking: { choices: [[]] },
-            sport: { choices: [[]] },
-            type: { choices: [[]] },
-            veggieReasons: { choices: [[]] },
+            green: {choices: [[]]},
+            hair: {choices: [[]]},
+            height: {choices: [[]]},
+            interests: {choices: [[]]},
+            looking: {},
+            music: {},
+            nutrition: {choices: [[]]},
+            perfectDate: {},
+            politicalAffiliation: {choices: [[]]},
+            smoking: {choices: [[]]},
+            sport: {choices: [[]]},
+            type: {choices: [[]]},
+            veggieReasons: {choices: [[]]},
             _token: {}
-            
+
         }
     };
-
-    /*form_step_two: { form_step_two: any } = {
-        form_step_two: {
-            relationshipStatus: {choices: [[]]},
-            ethnicity: {choices: [[]]},
-            religion: {choices: [[]]},
-            languages: {choices: [[]]},
-            children: {choices: [[]]},
-            education: {choices: [[]]},
-            occupation: {},
-            smoking: {choices: [[]]},
-            drinking: {choices: [[]]},
-            purposes: {choices: [[]]},
-            height: {choices: [[]]},
-            body: {choices: [[]]},
-            eyes: {choices: [[]]},
-            hair: {choices: [[]]},
-            features: {choices: [[]]},
-            status: {choices: [[]]},
-            netWorth: {choices: [[]]},
-            income: {choices: [[]]}
-        }
-    };*/
-
-    /*form_step_three: { form_step_three: any } = {
-        form_step_three: {
-            username: {},
-            email: {first: {}, second: {}},
-            password: {first: {}, second: {}},
-            gender: {choices: [[]]},
-            birthday: {value: {day: {}, month: {}, year: {}}},
-            region: {choices: [[]]},
-            area: {choices: [[]]},
-            zipCode: {choices: [[]]},
-            phone: {},
-            agree: {},
-            _token: {},
-            body: {choices: [[]]}
-        }
-    };*/
 
     err: {
         username: { errors: any },
@@ -191,67 +133,67 @@ export class EditProfilePage {
         sexOrientation: { errors: any },
         _token: { errors: any }
     } = {
-        city: { errors: [] },
-        education: { errors: [] },
-        occupation: { errors: [] },
-        purposes: { errors: [] },
-        region: { errors: [] },
-        relationshipStatus: { errors: [] },
-        religion: { errors: [] },
-        sexOrientation: { errors: [] },
-        _token: {errors: [] }
+        city: {errors: []},
+        education: {errors: []},
+        occupation: {errors: []},
+        purposes: {errors: []},
+        region: {errors: []},
+        relationshipStatus: {errors: []},
+        religion: {errors: []},
+        sexOrientation: {errors: []},
+        _token: {errors: []}
     };
 
     err_step_three: {
-            about: { errors: any },
-            animals: { errors: any },
-            body: { errors: any },
-            children: { errors: any },
-            dinnerWith: { errors: any },
-            drinking: { errors: any },
-            eyes: { errors: any },
-            favoriteBooks: { errors: any },
-            favoriteDish: { errors: any },
-            favoriteRestaurant: { errors: any },
-            green:{ errors: any },
-            hair: { errors: any },
-            height: { errors: any },
-            interests: { errors: any },
-            looking:{ errors: any },
-            music:{ errors: any },
-            nutrition: { errors: any },
-            perfectDate:{ errors: any },
-            politicalAffiliation:{ errors: any },
-            smoking: { errors: any },
-            sport: { errors: any },
-            type: { errors: any },
-            veggieReasons: { errors: any },
-            _token: { errors: any }
+        about: { errors: any },
+        animals: { errors: any },
+        body: { errors: any },
+        children: { errors: any },
+        dinnerWith: { errors: any },
+        drinking: { errors: any },
+        eyes: { errors: any },
+        favoriteBooks: { errors: any },
+        favoriteDish: { errors: any },
+        favoriteRestaurant: { errors: any },
+        green: { errors: any },
+        hair: { errors: any },
+        height: { errors: any },
+        interests: { errors: any },
+        looking: { errors: any },
+        music: { errors: any },
+        nutrition: { errors: any },
+        perfectDate: { errors: any },
+        politicalAffiliation: { errors: any },
+        smoking: { errors: any },
+        sport: { errors: any },
+        type: { errors: any },
+        veggieReasons: { errors: any },
+        _token: { errors: any }
     } = {
-            about: { errors: [] },
-            animals: { errors: [] },
-            body: { errors: [] },
-            children: { errors: [] },
-            dinnerWith: { errors: [] },
-            drinking: { errors: [] },
-            eyes: { errors: [] },
-            favoriteBooks: { errors: [] },
-            favoriteDish: { errors: [] },
-            favoriteRestaurant: { errors: [] },
-            green:{ errors: [] },
-            hair: { errors: [] },
-            height: { errors: [] },
-            interests: { errors: [] },
-            looking:{ errors: [] },
-            music:{ errors: [] },
-            nutrition: { errors: [] },
-            perfectDate:{ errors: [] },
-            politicalAffiliation:{ errors: [] },
-            smoking: { errors: [] },
-            sport: { errors: [] },
-            type: { errors: [] },
-            veggieReasons: { errors: [] },
-            _token: { errors: [] }
+        about: {errors: []},
+        animals: {errors: []},
+        body: {errors: []},
+        children: {errors: []},
+        dinnerWith: {errors: []},
+        drinking: {errors: []},
+        eyes: {errors: []},
+        favoriteBooks: {errors: []},
+        favoriteDish: {errors: []},
+        favoriteRestaurant: {errors: []},
+        green: {errors: []},
+        hair: {errors: []},
+        height: {errors: []},
+        interests: {errors: []},
+        looking: {errors: []},
+        music: {errors: []},
+        nutrition: {errors: []},
+        perfectDate: {errors: []},
+        politicalAffiliation: {errors: []},
+        smoking: {errors: []},
+        sport: {errors: []},
+        type: {errors: []},
+        veggieReasons: {errors: []},
+        _token: {errors: []}
     };
 
     errKeys: any;
@@ -262,77 +204,6 @@ export class EditProfilePage {
     step: any = 1;
 
 
-
-    /*
-
-    relationshipStatus: {errors: ''},
-        children: {errors: ''},
-        ethnicity: {errors: ''},
-        religion: {errors: ''},
-        languages: {errors: ''},
-        education: {errors: ''},
-        occupation: {errors: ''},
-        smoking: {errors: ''},
-        drinking: {errors: ''},
-        purposes: {errors: ''},
-        height: {errors: ''},
-        body: {errors: ''},
-        eyes: {errors: ''},
-        hair: {errors: ''},
-        features: {errors: ''},
-        status: {errors: ''},
-        netWorth: {errors: ''},
-        income: {errors: ''},
-
-        about: { errors: any },
-        hobbies: { errors: any },
-        looking: { errors: any },
-
-
-        about: {errors: []},
-        hobbies: {errors: []},
-        looking: {errors: []},
-
-
-        relationshipStatus: { errors: any },
-        children: { errors: any },
-        ethnicity: { errors: any },
-        religion: { errors: any },
-        languages: { errors: any },
-        education: { errors: any },
-        occupation: { errors: any },
-        smoking: { errors: any },
-        drinking: { errors: any },
-        purposes: { errors: any },
-        height: { errors: any },
-        body: { errors: any },
-        eyes: { errors: any },
-        hair: { errors: any },
-        features: { errors: any },
-        status: { errors: any },
-        netWorth: { errors: any },
-        income: { errors: any },
-
-
-        agree: {errors: []},
-        region: {errors: []},
-        area: {errors: []},
-        zipCode: {errors: []},
-        body: {errors: []}
-        password: {children: {first: {errors: [[]]}, second: {errors: [[]]}}},
-        gender: {errors: []},
-
-
-        region: { errors: any },
-        area: { errors: any },
-        zipCode: { errors: any },
-        agree: { errors: any },
-        body: { errors: any },
-        password: { children: { first: { errors: any }, second: { errors: any } } },
-        gender: { errors: any },
-
-    */
-
     constructor(public navCtrl: NavController,
                 public navParams: NavParams,
                 public alertCtrl: AlertController,
@@ -342,20 +213,33 @@ export class EditProfilePage {
                 public storage: Storage) {
 
         this.http.get(api.url + '/api/v1/edit/profile?step=' + this.step, api.setHeaders(true)).subscribe(data => {
-
             this.form = data.json();
-            this.mydate = this.form.form.birthday.value.year+'-'+this.check2Numbers(this.form.form.birthday.value.month)+'-'+this.check2Numbers(this.form.form.birthday.value.day);
-            console.log('Edit data', this.form);
-            console.log('date', this.mydate);
-
+            $('ion-list.search').hide();
+            this.form_step_three.form_step_three.about.label += '(מינימום 10 תווים) ';
+            this.form_step_three.form_step_three.looking.label += '(מינימום 10 תווים) ';
+            this.mydate = this.form.form.birthday.value.year + '-' + this.check2Numbers(this.form.form.birthday.value.month) + '-' + this.check2Numbers(this.form.form.birthday.value.day);
         });
     }
 
-    check2Numbers(number:string){
-        if(number.length < 2){
-          number = '0'+number;
+    check2Numbers(number: string) {
+        if (number.length < 2) {
+            number = '0' + number;
         }
         return number;
+    }
+
+    selectCity(city) {
+        this.searchQuery = city;
+        $('ion-list.search').hide();
+    }
+
+    closeDropDown() {
+        $('ion-list.search').hide();
+    }
+    onKeydown() {
+        if ($('ion-list.search:hidden')) {
+            $('ion-list.search').show();
+        }
     }
 
     open() {
@@ -443,15 +327,13 @@ export class EditProfilePage {
     }
 
     step_edit(step) {
-
         this.http.get(this.api.url + '/api/v1/edit/profile?step=' + step, this.api.setHeaders(true)).subscribe(data => {
             if (step == 2) {
                 this.form_step_two.form_step_two = data.json().form;
+                this.searchQuery = this.form_step_two.form_step_two.city.textValue;
             } else if (step == 3) {
                 this.form_step_three.form_step_three = data.json().form;
-                //this.form_step_three.form_step_three.about.label
             }
-            //console.log('Data Step', this.form);
             this.step = step;
         });
     }
@@ -504,10 +386,8 @@ export class EditProfilePage {
                 }
             });
         }
-
-        //this.http.post(this.api.url+'/api/v1/edits/profiles',params, this.api.setHeaders(true)).subscribe(data => this.validate(data.json()));
-
     }
+
 
     festSelected(str) {
         var data = JSON.stringify({
@@ -535,95 +415,7 @@ export class EditProfilePage {
         }
     }
 
-    /*
-     presentPrompt(title) {
 
-
-     if(title == 'Username') {
-     this.name = 'username';
-     this.field_value = this.user.username;
-     }else if(title == 'Email') {
-     this.name = 'email';
-     this.field_value = this.user.email;
-     }else if(title == 'Retype Email') {
-     this.name = 'email_retype';
-     this.field_value = this.user.email_retype;
-     }else if( title == 'Area' ) {
-     this.name = 'area';
-     this.field_value = this.user.area;
-     }else if(title == 'Neighborhood') {
-     this.name = 'neighborhood';
-     this.field_value = this.user.neighborhood;
-     }else if(title == 'Zip Code') {
-     this.name = 'zip_code';
-     this.field_value = this.user.zip_code;
-     }else if(title == 'Phone') {
-     this.name = 'phone';
-     this.field_value = this.user.phone;
-     }else if(title == 'Occupation') {
-     this.name = 'occupation';
-     this.field_value = this.user.occupation;
-     }else if(title == 'About Me'){
-     this.name = 'about_me';
-     this.field_value = this.user.looking_for;
-     }
-     else if(title == 'What Am I Looking For')
-     {
-     this.name = 'looking_for';
-     this.field_value = this.user.looking_for;
-     }
-
-     let alert = this.alertCtrl.create({
-     title: title,
-     inputs: [
-     {
-     name: this.name,
-     placeholder: title,
-     value:  this.field_value
-     }
-
-     ],
-     buttons: [
-     {
-     text: 'Cancel',
-     role: 'cancel',
-     handler: data => {
-     console.log('Cancel clicked');
-     }
-     },
-     {
-     text: 'Save',
-     handler: data => {
-     if(title == 'Username'){
-     this.user.username = data.username;
-     }else if(title == 'Email') {
-     this.user.email = data.email;
-     }else if( title == 'Retype Email') {
-     this.user.email_retype = data.email_retype;
-     }else if( title == 'Area' ) {
-     this.user.area = data.area;
-     }else if(title == 'Neighborhood') {
-     this.user.neighborhood = data.neighborhood;
-     }else if(title == 'Zip Code') {
-     this.user.zip_code = data.zip_code;
-     }else if(title == 'Phone') {
-     this.user.phone = data.phone;
-     }else if(title == 'Occupation') {
-     this.user.occupation = data.occupation;
-     }else if(title == 'About Me'){
-     this.user.about_me = data.about_me;
-     }else if(title == 'What Am I Looking For'){
-     this.user.looking_for = data.looking_for;
-     }
-     console.log(data);
-     console.log(title);
-     }
-     }
-     ]
-     });
-     alert.present();
-     }
-     */
     presentPrompt(title) {
 
         if (title == 'Username') {
@@ -692,156 +484,143 @@ export class EditProfilePage {
 
         if (this.step == 1) {
 
-        console.log("step:"+this.step);
-
             var date_arr = ['', '', ''];
 
             if (typeof this.mydate != 'undefined') {
                 date_arr = this.mydate.split('-');
             }
 
-            if(this.form.form.username.value == '' || this.form.form.email.first.value == '' || this.form.form.email.second.value == ''){
-            this.allfields = 'יש למלא את כל השדות המסומנים בכוכבית';
-            }else{
-            this.allfields = '';
+            if (this.form.form.username.value == '' || this.form.form.email.first.value == '' || this.form.form.email.second.value == '') {
+                this.allfields = 'יש למלא את כל השדות המסומנים בכוכבית';
+            } else {
+                this.allfields = '';
                 var params = JSON.stringify({
-                profile_one: {
-                    username: this.form.form.username.value,
-                    email: {first: this.form.form.email.first.value, second: this.form.form.email.second.value},
-                    birthday: {
-                        year: parseInt(date_arr[0]),
-                        month: parseInt(date_arr[1]),
-                        day: parseInt(date_arr[2])
-                          
-                    },
-                    phone: this.form.form.phone.value,
-                    _token: this.form.form._token.value
-                }
-            });
+                    profile_one: {
+                        username: this.form.form.username.value,
+                        email: {first: this.form.form.email.first.value, second: this.form.form.email.second.value},
+                        birthday: {
+                            year: parseInt(date_arr[0]),
+                            month: parseInt(date_arr[1]),
+                            day: parseInt(date_arr[2])
+
+                        },
+                        phone: this.form.form.phone.value,
+                        _token: this.form.form._token.value
+                    }
+                });
 
 
             }
 
         } else if (this.step == 2) {
-        console.log("step:"+this.step);
 
-            /*var netWorth;
-            var status;
-            var income;
-
-            if (typeof this.form_step_two.form_step_two.netWorth == 'undefined' &&
-                typeof this.form_step_two.form_step_two.status == 'undefined' &&
-                typeof this.form_step_two.form_step_two.income == 'undefined') {
-                netWorth = '';
-                status = '';
-                income = '';
+            if (this.form_step_two.form_step_two.purposes.value == '') {
+                this.allfields = 'יש למלא את כל השדות המסומנים בכוכבית';
             } else {
-                netWorth = this.form_step_two.form_step_two.netWorth.value;
-                status = this.form_step_two.form_step_two.status.value;
-                income = this.form_step_two.form_step_two.income.value;
-            }*/
+                this.allfields = '';
 
-            if(this.form_step_two.form_step_two.purposes.value == ''){
-               this.allfields = 'יש למלא את כל השדות המסומנים בכוכבית';
-            }else{
-            this.allfields = '';
+
+                let city = this.form_step_two.form_step_two.city.choices.findIndex(i => i.label === this.searchQuery);
+
+
+                if (city != -1) {
+                    this.form_step_two.form_step_two.city.value = this.form_step_two.form_step_two.city.choices[city].value;
+                } else {
+                    this.allfields = 'יש למלא את כל השדות המסומנים בכוכבית';
+                }
 
                 var params = JSON.stringify({
-                profile_two: {
-                    region: this.form_step_two.form_step_two.region.value,
-                    city: this.form_step_two.form_step_two.city.value,
-                    relationshipStatus: this.form_step_two.form_step_two.relationshipStatus.value,
-                    occupation: this.form_step_two.form_step_two.occupation.value,
-                    education: this.form_step_two.form_step_two.education.value,
-                    religion: this.form_step_two.form_step_two.religion.value,
-                    sexOrientation: this.form_step_two.form_step_two.sexOrientation.value,
-                    purposes: this.form_step_two.form_step_two.purposes.value,
-                    _token: this.form_step_two.form_step_two._token.value
-                }
-            });
+                    profile_two: {
+                        region: this.form_step_two.form_step_two.region.value,
+                        city: this.form_step_two.form_step_two.city.value,
+                        relationshipStatus: this.form_step_two.form_step_two.relationshipStatus.value,
+                        occupation: this.form_step_two.form_step_two.occupation.value,
+                        education: this.form_step_two.form_step_two.education.value,
+                        religion: this.form_step_two.form_step_two.religion.value,
+                        sexOrientation: this.form_step_two.form_step_two.sexOrientation.value,
+                        purposes: this.form_step_two.form_step_two.purposes.value,
+                        _token: this.form_step_two.form_step_two._token.value
+                    }
+                });
 
             }
 
         } else if (this.step == 3) {
-        console.log("step:"+this.step);
-
-            if(this.form_step_three.form_step_three.veggieReasons.value == '' || this.form_step_three.form_step_three.interests.value == ''){
+            if (this.form_step_three.form_step_three.veggieReasons.value == '' || this.form_step_three.form_step_three.interests.value == '') {
                 this.allfields = 'יש למלא את כל השדות המסומנים בכוכבית';
-            }else if(this.form_step_three.form_step_three.about.value.length < 10 || this.form_step_three.form_step_three.looking.value.length < 10 ){
+            } else if (this.form_step_three.form_step_three.about.value.length < 10 || this.form_step_three.form_step_three.looking.value.length < 10) {
                 this.allfields = 'יש לכתוב בשדות קצת עליי ומה אני מחפש לפחות 10 תווים';
-            }else{
-            this.allfields = '';
+            } else {
+                this.allfields = '';
                 var params = JSON.stringify({
-                profile_three: {
-                    about: this.form_step_three.form_step_three.about.value,
-                    animals: this.form_step_three.form_step_three.animals.value,
-                    body: this.form_step_three.form_step_three.body.value,
-                    children: this.form_step_three.form_step_three.children.value,
-                    dinnerWith: this.form_step_three.form_step_three.dinnerWith.value,
-                    drinking: this.form_step_three.form_step_three.drinking.value,
-                    eyes: this.form_step_three.form_step_three.eyes.value,
-                    favoriteBooks: this.form_step_three.form_step_three.favoriteBooks.value,
-                    favoriteDish: this.form_step_three.form_step_three.favoriteDish.value,
-                    favoriteRestaurant: this.form_step_three.form_step_three.favoriteRestaurant.value,
-                    green: this.form_step_three.form_step_three.green.value,
-                    hair: this.form_step_three.form_step_three.hair.value,
-                    height: this.form_step_three.form_step_three.height.value,
-                    interests: this.form_step_three.form_step_three.interests.value,
-                    looking: this.form_step_three.form_step_three.looking.value,
-                    music: this.form_step_three.form_step_three.music.value,
-                    nutrition: this.form_step_three.form_step_three.nutrition.value,
-                    perfectDate: this.form_step_three.form_step_three.perfectDate.value,
-                    politicalAffiliation: this.form_step_three.form_step_three.politicalAffiliation.value,
-                    smoking: this.form_step_three.form_step_three.smoking.value,
-                    sport: this.form_step_three.form_step_three.sport.value,
-                    type: this.form_step_three.form_step_three.type.value,
-                    veggieReasons: this.form_step_three.form_step_three.veggieReasons.value,
-                    _token: this.form_step_three.form_step_three._token.value
+                    profile_three: {
+                        about: this.form_step_three.form_step_three.about.value,
+                        animals: this.form_step_three.form_step_three.animals.value,
+                        body: this.form_step_three.form_step_three.body.value,
+                        children: this.form_step_three.form_step_three.children.value,
+                        dinnerWith: this.form_step_three.form_step_three.dinnerWith.value,
+                        drinking: this.form_step_three.form_step_three.drinking.value,
+                        eyes: this.form_step_three.form_step_three.eyes.value,
+                        favoriteBooks: this.form_step_three.form_step_three.favoriteBooks.value,
+                        favoriteDish: this.form_step_three.form_step_three.favoriteDish.value,
+                        favoriteRestaurant: this.form_step_three.form_step_three.favoriteRestaurant.value,
+                        green: this.form_step_three.form_step_three.green.value,
+                        hair: this.form_step_three.form_step_three.hair.value,
+                        height: this.form_step_three.form_step_three.height.value,
+                        interests: this.form_step_three.form_step_three.interests.value,
+                        looking: this.form_step_three.form_step_three.looking.value,
+                        music: this.form_step_three.form_step_three.music.value,
+                        nutrition: this.form_step_three.form_step_three.nutrition.value,
+                        perfectDate: this.form_step_three.form_step_three.perfectDate.value,
+                        politicalAffiliation: this.form_step_three.form_step_three.politicalAffiliation.value,
+                        smoking: this.form_step_three.form_step_three.smoking.value,
+                        sport: this.form_step_three.form_step_three.sport.value,
+                        type: this.form_step_three.form_step_three.type.value,
+                        veggieReasons: this.form_step_three.form_step_three.veggieReasons.value,
+                        _token: this.form_step_three.form_step_three._token.value
 
-                }
-            });
+                    }
+                });
 
             }
 
         }
-        if(this.allfields == ''){
+
+
+        if (this.allfields == '') {
             this.http.post(this.api.url + '/api/v1/edits/profiles', params, this.api.setHeaders(true)).subscribe(data => this.validate(data.json()));
         }
     }
 
-    /*
-        form-1
-        region: this.form.form.region.value,
-        area: this.form.form.area.value,
-        zipCode: this.form.form.zipCode.value,
+    getItems(ev) {
+        // Reset items back to all of the items
+        this.items = [];
+        this.initializeItems();
 
-        form-3
-        about: this.form_step_three.form_step_three.about.value,
-        hobbies: this.form_step_three.form_step_three.hobbies.value,
-        looking: this.form_step_three.form_step_three.looking.value,
-        _token: this.form_step_three.form_step_three._token.value
+        // set val to the value of the ev target
+        var val = ev.target.value;
 
-        form-2
-        languages: this.form_step_two.form_step_two.languages.value,
-        children: this.form_step_two.form_step_two.children.value,
-        height: this.form_step_two.form_step_two.height.value,
-        body: this.form_step_two.form_step_two.body.value,
-        eyes: this.form_step_two.form_step_two.eyes.value,
-        hair: this.form_step_two.form_step_two.hair.value,
-        features: this.form_step_two.form_step_two.features.value,
-        status: status,
-        netWorth: netWorth,
-        income: income,
-        smoking: this.form_step_two.form_step_two.smoking.value,
-        drinking: this.form_step_two.form_step_two.drinking.value,
-        ethnicity: this.form_step_two.form_step_two.ethnicity.value,
+        // if the value is an empty string don't filter the items
+        if (val && val.trim() != '') {
+            this.items = this.items.filter((item) => {
+                return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+            })
+        }
+    }
+
+    initializeItems() {
 
 
-    */
-    
+        var i = 0;
+
+        for (let city of this.form_step_two.form_step_two.city.choices) {
+            this.items.push(city.label);
+            i++;
+        }
 
 
-          
+
+    }
 
     show_hint(msg) {
         let toast = this.toastCtrl.create({
@@ -859,7 +638,7 @@ export class EditProfilePage {
 
         if (this.step == 1) {
             this.err = response.errors.form.children;
-            console.log('ERRORS',this.err.email.children.first.errors);
+            console.log('ERRORS', this.err.email.children.first.errors);
             this.errKeys = Object.keys(this.err);
         } else if (this.step == 2) {
             this.err_step_two = response.errors.form.children;

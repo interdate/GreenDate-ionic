@@ -44,7 +44,7 @@
             </ion-option>
         </select-alertless>
     </ion-item>
-<ion-item>
+<ion-item class="border-top">
   <ion-label>{{ form.form.region.label }}</ion-label>
   <select-alertless item-content name="area" [(ngModel)]="form.form.region.value">
         <ion-option value="{{area.value}}" *ngFor="let area of form.form.region.choices" >{{area.label}}</ion-option>

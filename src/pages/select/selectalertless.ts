@@ -10,6 +10,8 @@ export const SELECT_VALUE_ACCESSOR: any = {
     multi: true
 };
 
+declare var $: any;
+
 @Component({
     selector: 'select-alertless',
     styles: ['.select-alertless .alert-button-group{display:none}'],
@@ -117,6 +119,8 @@ export class SelectAlertless implements AfterContentInit, ControlValueAccessor, 
     }
 
     open() {
+        $('ion-list.search').hide();
+
         if (this._disabled) {
             return;
         }

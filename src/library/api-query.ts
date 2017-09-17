@@ -19,6 +19,7 @@ export class ApiQuery {
     public status: any = '';
     public back: any = false;
     public storageRes: any;
+    public footer: any = true;
     loading: any;
 
     public signupData: {  username: any, password: any };
@@ -29,8 +30,8 @@ export class ApiQuery {
                 public loadingCtrl: LoadingController,
                 private sanitizer: DomSanitizer) {
 
-        //this.url = 'http://localhost:8100';
-        this.url = 'https://www.greendate.co.il';
+      // this.url = 'http://localhost:8100';
+       this.url = 'https://www.greendate.co.il';
 
         this.storage.get('user_id').then((val) => {
             this.storage.get('username').then((username) => {
@@ -135,14 +136,6 @@ export class ApiQuery {
         });
         return this.header;
     }
-
-//     b64EncodeUnicode(str) {
-//     return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match,p1)  {
-//         return String.fromCharCode(0 + p1);
-//     }));
-// }
-
-    //btoa(this.username + ':' + this.password)
 
     ngAfterViewInit() {
 

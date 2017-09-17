@@ -21,6 +21,18 @@ page-dialog {
     float: left;
   }
 
+ .toolbar-ios {
+   // margin-bottom: 7px;
+    background-color: lightgrey;
+}
+
+.footer .toolbar-content-ios{
+    margin-top: 7px;
+    margin-bottom: 12px;
+    height: auto;
+}
+
+
   ion-textarea {
     width: 74%;
     height: 55px;
@@ -36,7 +48,12 @@ page-dialog {
 
   ion-footer .toolbar-background-md,
   ion-footer .toolbar-background-ios {
-    background-color: #ecedf3
+    background-color: #ecedf3;
+  }
+
+    ion-footer .toolbar-background-ios {
+    height: 0px;
+    margin-top: auto;
   }
 
   ion-avatar div {
@@ -63,4 +80,15 @@ page-dialog {
   .item-ios ion-avatar[item-left], .item-ios ion-thumbnail[item-left] {
     margin: 8px 13px;
   }
+
+  /*.ion-ios-done-all{
+    font-size: 2.2em;
+  }*/
+
+  /*
+     position: absolute;
+    top: 9px;
+    left: 5px;
+  */
+
 }

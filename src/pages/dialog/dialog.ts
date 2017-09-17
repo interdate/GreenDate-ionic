@@ -36,7 +36,8 @@ export class DialogPage {
                 public toastCtrl: ToastController,
                 public api: ApiQuery) {
 
-        this.api.back = false;
+        
+        api.back = false;
         this.user = navParams.get('user');
 
         this.http.get(api.url + '/api/v1/dialogs/' + this.user.id, api.setHeaders(true)).subscribe(data => {
@@ -61,12 +62,18 @@ export class DialogPage {
     }
 
     back() {
-        this.api.back = true;
-        this.navCtrl.pop();
-
+        //this.api.footer = true;
+        $('.footerMenu').show();
+        //$('.scroll-content, .fixed-content').css({'margin-bottom': '57px'});
         setTimeout(function () {
             $('.scroll-content, .fixed-content').css({'margin-bottom': '57px'});
         }, 500);
+
+        /*setTimeout(function () {
+            $('.footer').removeAttr('style');
+        },1000);*/
+        this.api.back = true;
+        this.navCtrl.pop();
     }
 
     sendPush() {
@@ -75,27 +82,29 @@ export class DialogPage {
 
     sendMessage() {
 
-        var params = JSON.stringify({
-            message: this.message
-        });
+            var params = JSON.stringify({
+                message: this.message
+            });
 
-        this.http.post(this.api.url + '/api/v1/sends/' + this.user.id + '/messages', params, this.api.setHeaders(true)).subscribe(data => {
-            let mess = data.json().message;
-            if (mess) {
-                mess.text = this.message;
-                this.messages.push(mess);
-                this.notReadMessage.push(mess.id);
-                this.sendPush();
-            } else {
-                let toast = this.toastCtrl.create({
-                    message: data.json().errorMessage,
-                    duration: 5000
-                });
-                toast.present();
-            }
 
-            this.scrollToBottom();
-        });
+            this.http.post(this.api.url + '/api/v1/sends/' + this.user.id + '/messages', params, this.api.setHeaders(true)).subscribe(data => {
+                let mess = data.json().message;
+                if (mess) {
+                    mess.text = this.message;
+                    this.messages.push(mess);
+                    this.notReadMessage.push(mess.id);
+                    this.sendPush();
+                } else {
+                    let toast = this.toastCtrl.create({
+                        message: data.json().errorMessage,
+                        duration: 5000
+                    });
+                    toast.present();
+                }
+
+                this.scrollToBottom();
+            });
+        
     }
 
     getNewMessages() {
@@ -181,11 +190,11 @@ export class DialogPage {
     }
 
     ionViewWillLeave() {
-
+        this.api.footer = true;
         // enable the root left menu when leaving the tutorial page
         //this.app.getComponent('leftMenu').enable(true);
         clearInterval(this.checkChat);
-        console.log('Leave');
+        console.log('DIALOG Leave');
     }
 
     toProfilePage() {
@@ -194,7 +203,15 @@ export class DialogPage {
         });
     }
 
+    ionViewWillEnter() {
+        this.api.footer = false;
+        $('.footerMenu').hide();
+        console.log('DIALOG Enter' + this.api.footer);
+    }
+
     ionViewDidLoad() {
+        console.log('DIALOG Load');
+        //$('.footerMenu').hide();
         this.scrollToBottom();
         var that = this;
         this.checkChat = setInterval(function () {

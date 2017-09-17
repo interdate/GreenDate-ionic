@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {NavController, NavParams, Slides, ToastController, Events} from 'ionic-angular';
+import {NavController, NavParams, Slides, ToastController, LoadingController, Events} from 'ionic-angular';
 import {DialogPage} from '../dialog/dialog';
 import {ApiQuery} from '../../library/api-query';
 import {Http} from '@angular/http';
@@ -32,21 +32,17 @@ export class ArenaPage {
                 public toastCtrl: ToastController,
                 public navParams: NavParams,
                 public http: Http,
+                public loadingCtrl: LoadingController,
                 public events: Events,
                 public api: ApiQuery) {
 
-        /* var that = this;
-
-         this.checkNotifications = setInterval(function () {
-         that.api.storage.get('notifications').then((notifications) => {
-         that.notifications = notifications;
-         console.log('UPDATE NOTIFICATIONS');
-         });
-         }, 10000);
-         */
-        //this.getStatistics();
-
         let user_id = false;
+
+        let loading = this.loadingCtrl.create({
+            content: 'אנא המתן...'
+        });
+
+        loading.present();
 
         if (navParams.get('user')) {
             user_id = navParams.get('user');
@@ -58,11 +54,11 @@ export class ArenaPage {
         });
 
         this.http.post(api.url + '/api/v1/users/results', params, api.setHeaders(true)).subscribe(data => {
+            loading.dismiss();
             this.users = data.json().users;
             this.texts = data.json().texts;
 
-            this.api.storage.get('status').then((status) => {
-                if (status == 'login') {
+
                     // If there's message, than user can't be on this page
                     if (data.json().arenaStatus) {
                         let toast = this.toastCtrl.create({
@@ -74,9 +70,6 @@ export class ArenaPage {
                         toast.present();
                         this.navCtrl.push(ChangePhotosPage);
                     }
-                }
-            });
-
         });
     }
 
@@ -148,27 +141,13 @@ export class ArenaPage {
         this.navCtrl.push(NotificationsPage);
     }
 
-    /*
-     getStatistics() {
-     this.http.get(this.api.url + '/api/v1/statistics', this.api.setHeaders(true)).subscribe(data => {
-
-     let statistics = data.json().statistics;
-
-     this.notifications = statistics.newNotificationsNumber;
-
-     });
-     }*/
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad ArenaPage');
     }
 
-
-    ionViewWillLeave() {
-
-        // enable the root left menu when leaving the tutorial page
-        //this.app.getComponent('leftMenu').enable(true);
-        // clearInterval(this.checkNotifications);
-    }
+    ionViewDidEnter() {
+     this.slides.update();
+}
 
 }

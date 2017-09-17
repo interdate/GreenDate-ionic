@@ -53,19 +53,18 @@ export class FullScreenProfilePage {
 
     addFavorites(user) {
         user.isAddFavorite = true;
-        let toast = this.toastCtrl.create({
-            message: user.nickName + ' ' + 'הוסף לרשימת המועדפים שלך',
-            duration: 2000
-        });
-
-        toast.present();
 
         let params = JSON.stringify({
             list: 'Favorite'
         });
 
         this.http.post(this.api.url + '/api/v1/lists/' + user.id, params, this.api.setHeaders(true)).subscribe(data => {
-            console.log(data);
+            let toast = this.toastCtrl.create({
+                message: data.json().success,
+                duration: 3000
+            });
+
+            toast.present();
         }, err => {
             console.log("Oops!");
         });
@@ -74,7 +73,7 @@ export class FullScreenProfilePage {
     addLike(user) {
         user.isAddLike = true;
         let toast = this.toastCtrl.create({
-            message: user.nickName + ' ' + 'עשית/ה לייק ל',
+            message: ' עשית לייק ל' + user.username,
             duration: 2000
         });
 

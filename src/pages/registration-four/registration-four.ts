@@ -273,7 +273,7 @@ export class RegistrationFourPage {
             targetHeight: 600,
             saveToPhotoAlbum: true,
             chunkedMode: true,
-            correctOrientation: true
+            //correctOrientation: true
         };
 
         Camera.getPicture(cameraOptions).then((imageData) => {

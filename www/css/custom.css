@@ -1,26 +1,9 @@
-
-
-
-/*
-.list-md {
-  margin-left: 15px;
-  margin-right: 15px;
-}
-
-#menu2 .list-md {
-  margin-top: 20px
-}
-
-.side-menu ion-icon {
-  margin-right: 20px;
-}
-*/
 .alert-tappable {
     text-align: right;
     direction: rtl;
 }
 
-.alert-radio-icon, .alert-checkbox-icon{
+.alert-radio-icon, .alert-checkbox-icon {
     left: auto;
     right: 13px;
 }
@@ -39,53 +22,69 @@
 }
 
 #the_area {
-  background: url(../img/icons/the-arena.png) center no-repeat;
-  width: 20px;
-  height: 20px;
-  background-size: contain;
+    background: url(../img/icons/the-arena.png) center no-repeat;
+    width: 28px;
+    height: 21px;
+    margin-right: 16px;
+    background-size: contain;
 }
 
 #inbox {
-  background: url(../img/icons/inbox.png) center no-repeat;
-  width: 20px;
-  height: 20px;
-  background-size: contain;
+    background: url(../img/icons/inbox.png) center no-repeat;
+    width: 30px;
+    height: 20px;
+    margin-left: 3px;
+    margin-right: 16px;
+    background-size: contain;
 }
 
 #notifications {
-  background: url(../img/icons/notifications_ft.png) center no-repeat;
-  width: 20px;
-  height: 20px;
-  background-size: contain;
+    background: url(../img/icons/notifications_ft.png) center no-repeat;
+    width: 28px;
+    height: 22px;
+    margin-right: 16px;
+    background-size: contain;
 }
 
-
 #edit_photos {
-  background: url(../img/icons/edit_photos.png) center no-repeat;
-  width: 20px;
-  height: 20px;
-  background-size: contain;
+    background: url(../img/icons/edit_photos.png) center no-repeat;
+    width: 24px;
+    height: 22px;
+    margin-left: 2px;
+    background-size: contain;
 }
 
 #change_password {
-  background: url(../img/icons/change_password.png) center no-repeat;
-  width: 20px;
-  height: 20px;
-  background-size: contain;
+    background: url(../img/icons/change_password.png) center no-repeat;
+    width: 24px;
+    height: 22px;
+    margin-left: 2px;
+    background-size: contain;
 }
 
 #freeze_account {
-  background: url(../img/icons/freeze_account.png) center no-repeat;
-  width: 20px;
-  height: 20px;
-  background-size: contain;
+    background: url(../img/icons/freeze_account.png) center no-repeat;
+    width: 24px;
+    height: 22px;
+    margin-left: 2px;
+    background-size: contain;
 }
 
 .right {
-  float: right;
+    float: right;
 }
 
-.alert-head{
-  text-align: right !important;
+.alert-head {
+    text-align: right !important;
 
+}
+
+.toolbar-content-ios{
+    height: 76%;
+    margin-top: 6.7%;
+}
+
+.bar-buttons-ios{
+    height: 73%;
+    margin-top: 5.7%;
 }
