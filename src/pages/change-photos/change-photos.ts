@@ -119,14 +119,14 @@ export class ChangePhotosPage {
         }
 
 
-        let myHeaders: Headers = new Headers;
+        /*let myHeaders: Headers = new Headers;
         myHeaders.append('Content-type', 'application/json');
-        myHeaders.append('Accept', '*/*');
-        myHeaders.append('Access-Control-Allow-Origin', '*');
+        myHeaders.append('Accept', '*//*');
+        /*myHeaders.append('Access-Control-Allow-Origin', '*');
         myHeaders.append("Authorization", "Basic " + btoa(encodeURIComponent(this.username) + ':' + this.password));/*@encodeURIComponent(this.username)*/
-        let header = new RequestOptions({
-            headers: myHeaders
-        });
+        /*let header = new RequestOptions({*/
+           /* headers: myHeaders*/
+        /*});*/
 
         this.http.post(this.api.url + '/api/v1/photos.json', data, this.api.setHeaders(true, this.username, this.password)).subscribe(data => {
 

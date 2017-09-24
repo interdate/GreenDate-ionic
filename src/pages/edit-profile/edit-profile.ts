@@ -25,6 +25,9 @@ export class EditProfilePage {
     public mydate: string = "";
     public allfields = '';
     public items = [];
+    public cityname = "";
+    public citys = [];
+    public iscity : boolean = false;
 
     public searchQuery: string = '';
 
@@ -228,7 +231,16 @@ export class EditProfilePage {
         return number;
     }
 
-    selectCity(city) {
+    openlist(){
+        $('.citylist').show();
+        console.log("open!");
+    }
+
+    itemSelected(city){
+        this.form_step_two.form_step_two.city.value = this.form_step_two.form_step_two.city.choices[city].value;
+    }
+
+    /*selectCity(city) {
         this.searchQuery = city;
         $('ion-list.search').hide();
     }
@@ -240,7 +252,7 @@ export class EditProfilePage {
         if ($('ion-list.search:hidden')) {
             $('ion-list.search').show();
         }
-    }
+    }*/
 
     open() {
         if ((<any>this)._disabled) {
@@ -389,6 +401,60 @@ export class EditProfilePage {
     }
 
 
+        citysearch(){
+
+            console.log("1)city enter " + this.cityname.length);
+
+          if (this.cityname.length == 0) {
+            this.iscity = false;
+        }else{
+            //var hint = "";
+            this.citys = [];
+            this.iscity = false;
+
+            for(var v in this.form_step_two.form_step_two.city.choices){
+
+                for(var y = 0; y < this.form_step_two.form_step_two.city.choices[v].label.length ; y++){
+
+                    if(this.cityname.length <= y){break;}
+
+                    if(this.form_step_two.form_step_two.city.choices[v].label[y] == this.cityname[y]){
+
+                        if(y + 1 == this.cityname.length){
+                            //hint += '<li (click)="'+this.form_step_two.form_step_two.city.choices[v].label+'" class="suggestion">'+ this.form_step_two.form_step_two.city.choices[v].label +'</li>';
+                            this.citys.push(this.form_step_two.form_step_two.city.choices[v].label);
+                        }
+
+                    }else{
+                        break;
+                    }
+                }
+
+
+            }
+
+            if(this.citys.length != 0){
+                this.iscity = true;
+            }
+
+        }
+
+        console.log("2)city enter " + this.cityname.length);
+        
+    }  
+
+    suggestionsel(city){
+        console.log("suggestion enter " + city);
+        this.iscity = false;
+        this.cityname = city;
+    }
+
+    closesuggestions(){
+        console.log("closesuggestions enter ");
+        this.iscity = false;
+    }
+
+
     festSelected(str) {
         var data = JSON.stringify({
             sign_up_one: {
@@ -520,7 +586,7 @@ export class EditProfilePage {
                 this.allfields = '';
 
 
-                let city = this.form_step_two.form_step_two.city.choices.findIndex(i => i.label === this.searchQuery);
+                let city = this.form_step_two.form_step_two.city.choices.findIndex(i => i.label === this.cityname);
 
 
                 if (city != -1) {
@@ -592,7 +658,7 @@ export class EditProfilePage {
         }
     }
 
-    getItems(ev) {
+   getItems(ev) {
         // Reset items back to all of the items
         this.items = [];
         this.initializeItems();

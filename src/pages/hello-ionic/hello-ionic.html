@@ -25,7 +25,7 @@
 </div>
 
 
-<ion-content class="has-header page-hello-ionic">
+<ion-content (ionScroll)="onScroll($event)" (ionScrollEnd)="endscroll($event)" class="has-header page-hello-ionic">
     <div class="no_results" *ngIf="user_counter == 0">{{ texts?.no_results }}</div>
     <ion-list>
         <ion-card class="usr_profile" ion-item *ngFor="let user of users">
@@ -84,10 +84,12 @@
         </ion-card>
     </ion-list>
     <div *ngIf="loader == true" class="loader"><img src="img/loader.gif"></div>
-    <ion-infinite-scroll threshold="90%" (ionInfinite)="moreUsers($event)">
+    <ion-infinite-scroll #scroll  threshold="90%" (ionInfinite)="moreUsers($event)">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>
+
+<!--<div class="my-invisible-overlay"></div>-->
 <ion-footer>
 
     <ion-navbar>
@@ -95,4 +97,7 @@
     </ion-navbar>
 
 </ion-footer>
+
+
+
 

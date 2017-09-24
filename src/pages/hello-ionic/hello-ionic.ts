@@ -1,11 +1,12 @@
-import {Component} from '@angular/core';
+import {Component,ViewChild} from '@angular/core';
 import {Http} from '@angular/http';
 import {Storage} from '@ionic/storage';
-import {NavController, NavParams, LoadingController, ToastController, Events} from 'ionic-angular';
+import {NavController, NavParams, LoadingController, ToastController, Events,InfiniteScroll} from 'ionic-angular';
 import {ApiQuery} from '../../library/api-query';
 import {ProfilePage} from '../profile/profile';
 import {DialogPage} from '../dialog/dialog';
-import {Geolocation} from 'ionic-native';
+
+
 
 
 import 'rxjs/add/operator/map';
@@ -18,6 +19,7 @@ declare var $: any;
     providers: [Storage]
 })
 export class HelloIonicPage {
+    @ViewChild(InfiniteScroll) scroll: InfiniteScroll;
 
     //selectedItem: any;
     public options: {filter: any} = {filter: 1};
@@ -38,6 +40,7 @@ export class HelloIonicPage {
     texts: { like: string, add: string, message: string, remove: string, unblock: string, no_results: string };
     params: { action: any, filter: any, page: any, list: any } = {action: 'search', filter: 'new', page: 1, list: ''};
     params_str: any;
+    scrolling = false;
 
     constructor(public toastCtrl: ToastController,
                 public loadingCtrl: LoadingController,
@@ -86,9 +89,11 @@ export class HelloIonicPage {
 
     itemTapped(user) {
 
-        this.navCtrl.push(ProfilePage, {
-            user: user
-        });
+        if(this.scrolling == false){
+            this.navCtrl.push(ProfilePage, {
+                user: user
+            });
+        }
     }
 
     filterStatus() {
@@ -282,14 +287,37 @@ export class HelloIonicPage {
         }
     }
 
+  
+    /*scrolling(){
+        var i = 0;
+        i++;
+        console.log('scrolling ' + i);
+    }*/
+
     ionViewDidLoad() {
         console.log('ionViewDidLoad LoginPage');
     }
 
-    /*ngAfterViewInit() {
-
-     if (this.navParams.get('page')) {
-     //console.log('tertertert',this.navParams.get('page'));
-     }
+    /*ngAfterViewInit(event) {
+  
      }*/
+
+    onScroll(event) {
+        //this.scrolling = true;
+        this.scrolling = true;
+        //$('.my-invisible-overlay').show();
+        console.log('scroll');
+  
+    }
+
+    endscroll(event) {
+            var that = this;
+            setTimeout(function () {
+              //$('.my-invisible-overlay').hide();
+              that.scrolling = false; 
+              console.log('scrollend'); 
+            }, 4000);
+              
+    }
+    
 }

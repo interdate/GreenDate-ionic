@@ -667,7 +667,7 @@ export class MyApp {
             window.addEventListener('native.keyboardshow', function () {
                 let page = el.nav.getActive();
                 //this.keyboard.disabledScroll(true);
-
+                //this.Keyboard.disableScroll(true);
                 //$('.footerMenu, .back-btn').hide();
                 $('.back-btn').hide();
                 
@@ -677,7 +677,7 @@ export class MyApp {
                     
                     setTimeout(function () {
                         //$('.scroll-content, .fixed-content').css({'margin-bottom': '57px'});
-                        $('.scroll-content, .fixed-content').css({'margin-bottom': '0px'});
+                        $('.scroll-content, .fixed-content').css({'margin-bottom': '57px'});
                         //$('.form-dialog').css({'margin-bottom': '-20px'});
                     }, 200);
                 } else {
