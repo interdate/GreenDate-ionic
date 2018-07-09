@@ -631,7 +631,6 @@ export class MyApp {
                     }
                 })
             }
-
         });
     }
 
