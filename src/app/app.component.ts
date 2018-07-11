@@ -643,12 +643,27 @@ export class MyApp {
         alert.present();
     }
 
+    getAppVersion() {
+        this.http.get(this.api.url + '/open_api/version', this.api.header).subscribe(data => {
+            console.log(data.json());
+            if (this.platform.is('cordova')) {
+                AppVersion.getVersionNumber().then((s) => {
+                    if (data.json() != s) {
+                        window.open('market://details?id=com.nyrd', '_system');
+                    } else {
+                        //alert('test2');
+                    }
+                })
+            }
+        });
+    }
 
     ngAfterViewInit() {
 
         this.nav.viewDidEnter.subscribe((view) => {
 
             this.getBanner();
+            this.getAppVersion();
 
             this.events.subscribe('statistics:updated', () => {
                 // user and time are the same arguments passed in `events.publish(user, time)`

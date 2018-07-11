@@ -241,18 +241,18 @@ export class EditProfilePage {
     }
 
     /*selectCity(city) {
-     this.searchQuery = city;
-     $('ion-list.search').hide();
-     }
+        this.searchQuery = city;
+        $('ion-list.search').hide();
+    }
 
-     closeDropDown() {
-     $('ion-list.search').hide();
-     }
-     onKeydown() {
-     if ($('ion-list.search:hidden')) {
-     $('ion-list.search').show();
-     }
-     }*/
+    closeDropDown() {
+        $('ion-list.search').hide();
+    }
+    onKeydown() {
+        if ($('ion-list.search:hidden')) {
+            $('ion-list.search').show();
+        }
+    }*/
 
     open() {
         if ((<any>this)._disabled) {

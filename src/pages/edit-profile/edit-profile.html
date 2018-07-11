@@ -103,13 +103,13 @@
 
 
     <ion-list *ngIf="step == 2">
-        <div class="input" (tap)="closesuggestions()">
+        <div class="input" (click)="closeDropDown()" >
             <div [ngClass]="{'yellow-bg':  err_step_two.region.errors  && err_step_two.region.errors != 0 }"
                  class="placeholder">{{ form_step_two.form_step_two.region.label }}
             </div>
             <ion-item>
                 <select-alertless item-content [(ngModel)]="form_step_two.form_step_two.region.value">
-                    <ion-option value="{{ reg.value }}"
+                    <ion-option  value="{{ reg.value }}"
                                 *ngFor="let reg of form_step_two.form_step_two.region.choices">{{reg.label}}
                     </ion-option>
                 </select-alertless>
@@ -238,8 +238,7 @@
 
         <div class="input">
             <div [ngClass]="{'yellow-bg':  err_step_three.about.errors && err_step_three.about.errors?.length != 0 }"
-                 [innerHTML]="form_step_three.form_step_three.about.label+ ' (מינימום 10 תווים) '"
-                 class="placeholder"></div>
+                 [innerHTML]="form_step_three.form_step_three.about.label+ ' (מינימום 10 תווים) '" class="placeholder"></div>
             <ion-item>
                 <ion-textarea id="about" [(ngModel)]="form_step_three.form_step_three.about.value" rows="4">{{
                     form_step_three.form_step_three.about.value }}
@@ -250,8 +249,7 @@
 
         <div class="input">
             <div [ngClass]="{'yellow-bg':  err_step_three.looking.errors && err_step_three.looking.errors?.length != 0 }"
-                 [innerHTML]="form_step_three.form_step_three.looking.label+ ' (מינימום 10 תווים) '"
-                 class="placeholder"></div>
+                 [innerHTML]="form_step_three.form_step_three.looking.label+ ' (מינימום 10 תווים) '" class="placeholder"></div>
             <ion-item>
                 <ion-textarea id="looking" [(ngModel)]="form_step_three.form_step_three.looking.value" rows="4">{{
                     form_step_three.form_step_three.looking.value }}

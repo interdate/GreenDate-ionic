@@ -93,3 +93,7 @@ page-search .scroll-content{
     height: 73%;
     margin-top: 5.7%;
 }
+
+page-search .scroll-content{
+    margin-top: 59px !important;
+}
