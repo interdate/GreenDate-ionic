@@ -64,4 +64,8 @@ export class NotificationsPage {
     console.log('ionViewDidLoad NotificationsPage');
   }
 
+    ionViewWillEnter() {
+        this.api.pageName = 'NotificationsPage';
+    }
+
 }

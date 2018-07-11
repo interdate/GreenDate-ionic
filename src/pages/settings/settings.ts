@@ -48,4 +48,8 @@ export class SettingsPage {
     console.log('ionViewDidLoad SettingsPage');
   }
 
+    ionViewWillEnter() {
+        this.api.pageName = 'SettingsPage';
+    }
+
 }

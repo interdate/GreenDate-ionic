@@ -146,6 +146,10 @@ export class ArenaPage {
         console.log('ionViewDidLoad ArenaPage');
     }
 
+    ionViewWillEnter() {
+        this.api.pageName = 'ArenaPage';
+    }
+
     ionViewDidEnter() {
      this.slides.update();
 }

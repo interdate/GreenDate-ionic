@@ -6,8 +6,7 @@
 
 </ion-header>
 
-<div *ngIf="filter" class="member cf sorting">
-    <div *ngIf="options.filter == 1">
+<div class="member cf sorting">
         <div class="mem-left">מיין לפי:</div>
         <div class="mem-right">
             <div class="sortby">
@@ -20,12 +19,11 @@
         </div>
         <ion-icon (click)="filterStatus()" class="close" name="close"></ion-icon>
     </div>
-    <ion-icon class="open" md="ios-arrow-down-outline" *ngIf="options.filter == 0" (click)="filterStatus()"
+    <ion-icon class="open" md="ios-arrow-down-outline" (click)="filterStatus()"
               name="arrow-down"></ion-icon>
-</div>
 
 
-<ion-content class="has-header page-hello-ionic">
+<ion-content (ionScroll)="onScroll($event)" (ionScrollEnd)="endscroll($event)" class="has-header page-hello-ionic">
     <div class="no_results" *ngIf="user_counter == 0">{{ texts?.no_results }}</div>
     <ion-list>
         <ion-card class="usr_profile" ion-item *ngFor="let user of users">
@@ -84,7 +82,7 @@
         </ion-card>
     </ion-list>
     <div *ngIf="loader == true" class="loader"><img src="img/loader.gif"></div>
-    <ion-infinite-scroll threshold="90%" (ionInfinite)="moreUsers($event)">
+        <ion-infinite-scroll #scroll  threshold="90%" (ionInfinite)="moreUsers($event)">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>

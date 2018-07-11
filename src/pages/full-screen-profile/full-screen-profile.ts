@@ -89,4 +89,8 @@ export class FullScreenProfilePage {
             console.log("Oops!");
         });
     }
+
+    ionViewWillEnter() {
+        this.api.pageName = 'FullScreenProfilePage';
+    }
 }

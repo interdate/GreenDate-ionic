@@ -232,5 +232,9 @@ export class RegistrationTwoPage {
         console.log('ionViewDidLoad EditProfilePage');
     }
 
+    ionViewWillEnter() {
+        this.api.pageName = 'RegistrationTwoPage';
+    }
+
 }
 

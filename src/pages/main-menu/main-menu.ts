@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import {ApiQuery} from "../../library/api-query";
 
 /*
   Generated class for the MainMenu page.
@@ -13,10 +14,15 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class MainMenuPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams,public api: ApiQuery) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MainMenuPage');
+  }
+
+  ionViewWillEnter() {
+    this.api.pageName = 'MainMenuPage';
+    console.log('MainMenuPage '+ this.api.pageName);
   }
 
 }

@@ -21,22 +21,27 @@ page-dialog {
     float: left;
   }
 
- .toolbar-ios {
-   // margin-bottom: 7px;
+  .toolbar-ios {
+    // margin-bottom: 7px;
     background-color: lightgrey;
-}
+  }
 
-.footer .toolbar-content-ios{
+  .footer .toolbar-content-ios {
     margin-top: 7px;
     margin-bottom: 12px;
     height: auto;
-}
+  }
 
+  .v-ios-icon {
+    font-size: 2.9rem;
+    position: absolute;
+    top: 6px;
+  }
 
   ion-textarea {
     width: 74%;
     height: 55px;
-    float:left;
+    float: left;
   }
   .send-msg {
     float: right;
@@ -51,7 +56,7 @@ page-dialog {
     background-color: #ecedf3;
   }
 
-    ion-footer .toolbar-background-ios {
+  ion-footer .toolbar-background-ios {
     height: 0px;
     margin-top: auto;
   }

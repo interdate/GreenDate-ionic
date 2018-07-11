@@ -35,6 +35,8 @@ import {Storage} from '@ionic/storage';
 import {RegistrationFourPage} from "../pages/registration-four/registration-four";
 import {FaqPage} from "../pages/faq/faq";
 import {RegistrationThreePage} from "../pages/registration-three/registration-three";
+import {AdvancedSearchPage} from "../pages/advanced-search/advanced-search";
+import {RegistrationTwoPage} from "../pages/registration-two/registration-two";
 
 declare var $: any;
 
@@ -50,6 +52,7 @@ export class MyApp {
 
     // make HelloIonicPage the root (or first) page
     rootPage: any;
+    banner: {src: string; link: string};
     menu_items_logout: Array<{_id: string, icon: string, title: string, count: any, component: any}>;
     menu_items_login: Array<{_id: string, icon: string, title: string, count: any, component: any}>;
     menu_items: Array<{_id: string, icon: string, title: string, count: any, component: any}>;
@@ -139,9 +142,6 @@ export class MyApp {
             });
 
             this.http.post(this.api.url + '/api/v1/locations', params, this.api.setHeaders(true)).subscribe(data => {
-                console.log(data);
-                console.log(params);
-
             });
         });
     }
@@ -169,10 +169,37 @@ export class MyApp {
             this.menu_items_footer2[0].count = statistics.favorited;
             this.menu_items_footer2[1].count = statistics.favoritedMe;
 
+            this.bannerStatus();
+
         }, err => {
             this.clearLocalStorage();
         });
     }
+
+
+    bannerStatus() {
+        let page = this.nav.getActive();
+
+
+        if (this.api.pageName == 'DialogPage' || this.api.pageName == 'EditProfilePage'
+            || this.api.pageName == 'SearchPage' || this.api.pageName == AdvancedSearchPage
+            || this.api.pageName == 'RegistrationTwoPage' || this.api.pageName == 'RegistrationThreePage'
+            || this.api.pageName == 'RegistrationFourPage' || this.api.pageName == 'ArenaPage'
+            || this.api.pageName == 'ChangePhotosPage' || this.api.pageName == 'ProfilePage' || this.is_login == false) {
+            $('.link-banner').hide();
+        }
+        else if (this.api.pageName == 'LoginPage') {
+            $('.link-banner').hide();
+        } else if (this.api.pageName == 'HelloIonicPage') {
+            $('.link-banner').show();
+        }
+        else {
+            $('.link-banner').show();
+        }
+
+        console.log('Test '+ this.api.pageName);
+    }
+
 
     clearLocalStorage() {
         this.api.setHeaders(false, null, null);
@@ -438,10 +465,6 @@ export class MyApp {
 
             }
         });
-
-        push.on('error', (e) => {
-            alert("PUSH PLUGIN ERROR: " + JSON.stringify(e));
-        });
     }
 
 
@@ -469,6 +492,16 @@ export class MyApp {
         $('#menu3, #menu2').find('ion-backdrop').remove();
     }
 
+    getBanner() {
+        this.http.get(this.api.url + '/open_api/banner', this.api.header).subscribe(data => {
+            this.banner = data.json().banner;
+        });
+    }
+
+    goTo() {
+        window.open(this.banner.link, '_blank');
+        return false;
+    }
 
     openPage(page) {
         if (page._id == 'logout') {
@@ -541,12 +574,7 @@ export class MyApp {
                 });
             }
         });
-        //this.nav.push(BingoPage);
     }
-
-    /*loginPage() {
-     this.nav.push(LoginPage);
-     }*/
 
     dialogPage() {
         let user = {id: this.new_message.userId};
@@ -558,7 +586,7 @@ export class MyApp {
         let page = this.nav.getActive();
         this.http.get(this.api.url + '/api/v1/new/messages', this.api.setHeaders(true)).subscribe(data => {
 
-            if ((this.new_message == '' || typeof this.new_message == 'undefined') && !(page.instance instanceof DialogPage)) {
+            if ((this.new_message == '' || typeof this.new_message == 'undefined') && !(this.api.pageName == 'DialogPage')) {
                 this.new_message = data.json().messages[0];
                 if (typeof this.new_message == 'object') {
                     this.http.get(this.api.url + '/api/v1/messages/notify?message_id=' + this.new_message.id, this.api.setHeaders(true)).subscribe(data => {
@@ -567,10 +595,7 @@ export class MyApp {
             }
 
             this.message = data.json();
-            //var param;
-            //this.events.publish('statistics:updated', param = data.json().newNotificationsNumber);
 
-            //this.api.setStorageData({label: 'notifications', value: data.json().newNotificationsNumber});
             this.menu_items[2].count = data.json().newNotificationsNumber;
             this.menu_items[0].count = data.json().newMessagesNumber;
             this.menu_items_footer2[2].count = data.json().newNotificationsNumber;
@@ -580,10 +605,9 @@ export class MyApp {
 
     checkStatus() {
         let page = this.nav.getActive();
-        //noinspection TypeScriptValidateTypes
-        //alert(this.nav.getActive() == HelloIonicPage);
 
-        if (!(page.instance instanceof ActivationPage) && !(page.instance instanceof ContactUsPage) && !(page.instance instanceof ChangePhotosPage) && !(page.instance instanceof RegistrationThreePage) && !(page.instance instanceof RegistrationFourPage) && !(page.instance instanceof PagePage)) {
+        if (!(this.api.pageName == 'ActivationPage') && !(this.api.pageName == 'ContactUsPage') && !(this.api.pageName == 'ChangePhotosPage') && !(this.api.pageName == 'RegistrationThreePage')
+            && !(this.api.pageName == 'RegistrationFourPage') && !(this.api.pageName == 'PagePage')) {
             if (this.status == 'no_photo') {
 
                 let toast = this.toastCtrl.create({
@@ -600,7 +624,7 @@ export class MyApp {
                 this.nav.push(ActivationPage);
             }
         }
-        if (((page.instance instanceof ActivationPage) && this.status == 'login')) {
+        if (((this.api.pageName == 'ActivationPage') && this.status == 'login')) {
             this.nav.push(HelloIonicPage);
         }
     }
@@ -619,28 +643,12 @@ export class MyApp {
         alert.present();
     }
 
-    getAppVersion() {
-        this.http.get(this.api.url + '/open_api/version', this.api.header).subscribe(data => {
-            console.log(data.json());
-            if (this.platform.is('cordova')) {
-                AppVersion.getVersionNumber().then((s) => {
-                    if (data.json() != s) {
-                        window.open('market://details?id=com.nyrd', '_system');
-                    } else {
-                        //alert('test2');
-                    }
-                })
-            }
-
-        });
-    }
 
     ngAfterViewInit() {
 
         this.nav.viewDidEnter.subscribe((view) => {
 
-            //this.alert('title','test');
-            this.getAppVersion();
+            this.getBanner();
 
             this.events.subscribe('statistics:updated', () => {
                 // user and time are the same arguments passed in `events.publish(user, time)`
@@ -649,35 +657,36 @@ export class MyApp {
 
             let page = this.nav.getActive();
 
-            if (page.instance instanceof HelloIonicPage) {
+            if (this.api.pageName == 'HelloIonicPage') {
                 if (this.api.status != '') {
                     this.status = this.api.status;
                 }
                 this.setLocation();
             }
 
-            if (page.instance instanceof DialogPage) {
-            }else{
-                if(this.api.footer == true){
+            if (this.api.pageName == 'DialogPage') {
+                $('.footerMenu').hide();
+            } else {
+                if (this.api.footer == true) {
                     $('.footerMenu').show();
                 }
             }
 
             let el = this;
             window.addEventListener('native.keyboardshow', function () {
-                let page = el.nav.getActive();
+                //let page = el.nav.getActive();
                 //this.keyboard.disabledScroll(true);
 
-                //$('.footerMenu, .back-btn').hide();
+                $('.link-banner').hide();
+                $('.footerMenu, .back-btn').hide();
                 $('.back-btn').hide();
-                
 
-                if (page.instance instanceof DialogPage) {
+
+                if (this.api.pageName == 'DialogPage') {
                     $('.banner').hide();
-                    
+
                     setTimeout(function () {
                         //$('.scroll-content, .fixed-content').css({'margin-bottom': '57px'});
-                        $('.scroll-content, .fixed-content').css({'margin-bottom': '0px'});
                         //$('.form-dialog').css({'margin-bottom': '-20px'});
                     }, 200);
                 } else {
@@ -685,41 +694,40 @@ export class MyApp {
                     setTimeout(function () {
                         $('.scroll-content, .fixed-content').css({'margin-bottom': '0px'});
                     }, 200);
-                    
+
                 }
 
             });
             window.addEventListener('native.keyboardhide', function () {
-                let page = el.nav.getActive();
+                //let page = el.nav.getActive();
                 //$('.footerMenu, .back-btn').show();
-                $('.back-btn').show();
-                if (page.instance instanceof DialogPage && el.api.back == false) {
+
+                this.bannerStatus();
+
+                if (el.api.pageName == 'DialogPage') {
+                    $('.back-btn').show();
+                    $('.footerMenu').hide();
                     setTimeout(function () {
                         //$('.scroll-content, .fixed-content').css({'margin-bottom': '115px'});
                         $('.scroll-content, .fixed-content').css({'margin-bottom': '57px'});
                         el.content.scrollTo(0, 999999, 300);
                     }, 600);
                 } else {
-                    el.storage.get('user_id').then((user_id) => {
-                        if (user_id) {
-                            setTimeout(function () {
-                                $('.scroll-content, .fixed-content').css({'margin-bottom': '57px'});
-                            }, 500);
-                        } else {
-                            setTimeout(function () {
-                                $('.scroll-content, .fixed-content').css({'margin-bottom': '0px'});
-                            }, 500);
-                        }
-                    });
+                    $('.footerMenu, .back-btn').show();
+                    setTimeout(function () {
+                        $('.scroll-content, .fixed-content').css({'margin-bottom': '0px'});
+                    }, 500);
                 }
+
             });
 
-            if (page.instance instanceof LoginPage) {
+            if (el.api.pageName == 'LoginPage') {
                 //clearInterval(this.interval);
                 this.interval = false;
                 //this.avatar = '';
             }
-            if (page.instance instanceof HelloIonicPage && this.interval == false) {
+            if (el.api.pageName == 'HelloIonicPage' && this.interval == false) {
+                $('.link-banner').show();
                 this.interval = true;
                 this.getBingo();
             }
@@ -735,10 +743,20 @@ export class MyApp {
                     this.menu_items = this.menu_items_logout;
                     this.is_login = false
                 } else {
-                    this.getStatistics();
                     this.is_login = true;
                     this.menu_items = this.menu_items_login;
+                    this.getStatistics();
                 }
+
+                if (el.api.pageName == 'HelloIonicPage') {
+                    $('.link-banner').show();
+                }
+
+                if (el.api.pageName == 'LoginPage') {
+                    $('.link-banner').hide();
+                }
+                this.bannerStatus();
+
             });
             this.username = this.api.username;
         });

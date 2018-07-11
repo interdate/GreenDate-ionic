@@ -42,4 +42,8 @@ export class FaqPage {
         console.log('ionViewDidLoad FaqPage');
     }
 
+    ionViewWillEnter() {
+        this.api.pageName = 'FaqPage';
+    }
+
 }

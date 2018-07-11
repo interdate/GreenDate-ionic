@@ -1,11 +1,10 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {Http} from '@angular/http';
 import {Storage} from '@ionic/storage';
-import {NavController, NavParams, LoadingController, ToastController, Events} from 'ionic-angular';
+import {NavController, NavParams, LoadingController, ToastController, Events, InfiniteScroll} from 'ionic-angular';
 import {ApiQuery} from '../../library/api-query';
 import {ProfilePage} from '../profile/profile';
 import {DialogPage} from '../dialog/dialog';
-import {Geolocation} from 'ionic-native';
 
 
 import 'rxjs/add/operator/map';
@@ -18,9 +17,9 @@ declare var $: any;
     providers: [Storage]
 })
 export class HelloIonicPage {
-
+    @ViewChild(InfiniteScroll) scroll: InfiniteScroll;
     //selectedItem: any;
-    public options: {filter: any} = {filter: 1};
+    public options: { filter: any } = {filter: 1};
     list: any;
     action: any;
     //posts: any;
@@ -34,10 +33,11 @@ export class HelloIonicPage {
     form_filter: any;
     filter: any = {filter: '', visible: ''};
     //url: any;
-    users: Array<{ id: string, isOnline: string, isAddBlackListed: string, username: string, photo: string, age: string, region_name: string, image: string, about: {}, component: any}>;
+    users: Array<{ id: string, isOnline: string, isAddBlackListed: string, username: string, photo: string, age: string, region_name: string, image: string, about: {}, component: any }>;
     texts: { like: string, add: string, message: string, remove: string, unblock: string, no_results: string };
     params: { action: any, filter: any, page: any, list: any } = {action: 'search', filter: 'new', page: 1, list: ''};
     params_str: any;
+    scrolling = false;
 
     constructor(public toastCtrl: ToastController,
                 public loadingCtrl: LoadingController,
@@ -86,9 +86,11 @@ export class HelloIonicPage {
 
     itemTapped(user) {
 
-        this.navCtrl.push(ProfilePage, {
-            user: user
-        });
+        if (this.scrolling == false) {
+            this.navCtrl.push(ProfilePage, {
+                user: user
+            });
+        }
     }
 
     filterStatus() {
@@ -196,6 +198,8 @@ export class HelloIonicPage {
 
     sortBy() {
 
+        console.log('PARAMS:' + JSON.stringify(this.params));
+
         let params = JSON.stringify({
             action: 'search',
             filter: this.filter
@@ -215,6 +219,8 @@ export class HelloIonicPage {
     }
 
     getUsers() {
+
+        //console.log('FILTER OPTIONS: ' + JSON.stringify(this.options.filter) + ', FILTER: ' + JSON.stringify(this.filter));
 
         let loading = this.loadingCtrl.create({
             content: 'אנא המתן...'
@@ -269,7 +275,7 @@ export class HelloIonicPage {
             this.params.page = this.page_counter;
             this.params_str = JSON.stringify(this.params);
 
-            this.http.post(this.api.url + '/app_dev.php/api/v1/users/results', this.params_str, this.api.setHeaders(true)).subscribe(data => {
+            this.http.post(this.api.url + '/api/v1/users/results', this.params_str, this.api.setHeaders(true)).subscribe(data => {
                 if (data.json().users.length < 10) {
                     this.loader = false;
                 }
@@ -282,14 +288,24 @@ export class HelloIonicPage {
         }
     }
 
-    ionViewDidLoad() {
-        console.log('ionViewDidLoad LoginPage');
+
+    onScroll(event) {
+        //this.scrolling = true;
+        this.scrolling = true;
+        //$('.my-invisible-overlay').show();
+
     }
 
-    /*ngAfterViewInit() {
+    endscroll(event) {
+        var that = this;
+        setTimeout(function () {
+            //$('.my-invisible-overlay').hide();
+            that.scrolling = false;
+        }, 4000);
 
-     if (this.navParams.get('page')) {
-     //console.log('tertertert',this.navParams.get('page'));
-     }
-     }*/
+    }
+
+    ionViewWillEnter() {
+        this.api.pageName = 'HelloIonicPage';
+    }
 }

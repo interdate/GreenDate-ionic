@@ -36,8 +36,8 @@
     <ion-col  width-33> <ion-card-content class="date" item-right>
       {{msg.dateTime}}
       <!--<ion-icon *ngIf="user?.id == msg.from" name="checkmark"></ion-icon>-->
-      <ion-icon *ngIf="user?.id != msg.from && !msg.isRead" name="done-all"></ion-icon>
-      <ion-icon color="danger" *ngIf="user?.id != msg.from && msg.isRead" name="done-all"></ion-icon>
+      <ion-icon *ngIf="user?.id != msg.from && !msg.isRead" name="done-all" class="v-ios-icon"></ion-icon>
+      <ion-icon color="danger" *ngIf="user?.id != msg.from && msg.isRead" name="done-all" class="v-ios-icon"></ion-icon>
     </ion-card-content></ion-col>
     </ion-row>
   </ion-grid>

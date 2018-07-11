@@ -75,6 +75,9 @@
     </ion-content>
 </ion-menu>
 <!--<img style="display: none;" class="banner" src="/images/spedate1.gif">-->
+<a class="link-banner"  *ngIf="banner?.img && is_login" href="{{banner?.link}}" (click)="goTo();">
+        <img class="banner" src="{{banner?.img}}">"#"
+</a>
 <ion-footer *ngIf="is_login" (swipe)="swipeFooterMenu()">
     <div *ngIf="new_message && new_message.is_not_sent_today == true" class="messageNotify">
         <ion-icon (click)="closeMsg()" name="close"></ion-icon>

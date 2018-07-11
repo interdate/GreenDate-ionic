@@ -14,12 +14,15 @@
 
 
 <ion-content padding>
-    <div *ngFor="let q of page">
-        <h2 class="headline">{{q?.name}}</h2>
-        <div *ngFor="let qa of q?.faq, let i = index" padding-top padding-bottom>
-            <div class="question" (click)="hightlightStatus[i]=!hightlightStatus[i]"
-                 [class.highlight]="hightlightStatus[i]" [attr.data-selected]="false">{{qa.q }}</div>
-            <div class="answer" [class.highlight]="hightlightStatus[i]" [innerHTML]="qa.a">
+    <div class="faq">
+        <div *ngFor="let q of page">
+            <h2 class="headline">{{q?.name}}</h2>
+            <div *ngFor="let qa of q?.faq, let i = index" padding-top padding-bottom>
+                <div class="question" (click)="hightlightStatus[i]=!hightlightStatus[i]"
+                     [class.highlight]="hightlightStatus[i]" [attr.data-selected]="false">{{qa.q }}
+                </div>
+                <div class="answer" [class.highlight]="hightlightStatus[i]" [innerHTML]="qa.a">
+                </div>
             </div>
         </div>
     </div>

@@ -14,7 +14,7 @@
 
 
 <ion-content>
-    <div class="inner_form_top steps">
+    <div class="inner_form_top steps" (tap)="closesuggestions()">
         <ul>
 
             <li (click)="step_edit(1)" [ngClass]="{'active': step == 1 }">
@@ -103,13 +103,13 @@
 
 
     <ion-list *ngIf="step == 2">
-        <div class="input" (click)="closeDropDown()" >
+        <div class="input" (tap)="closesuggestions()">
             <div [ngClass]="{'yellow-bg':  err_step_two.region.errors  && err_step_two.region.errors != 0 }"
                  class="placeholder">{{ form_step_two.form_step_two.region.label }}
             </div>
             <ion-item>
                 <select-alertless item-content [(ngModel)]="form_step_two.form_step_two.region.value">
-                    <ion-option  value="{{ reg.value }}"
+                    <ion-option value="{{ reg.value }}"
                                 *ngFor="let reg of form_step_two.form_step_two.region.choices">{{reg.label}}
                     </ion-option>
                 </select-alertless>
@@ -119,19 +119,17 @@
 
 
         <div class="input">
-            <div [ngClass]="{'yellow-bg':  err_step_two.city.errors  && err_step_two.city.errors != 0 }"
-                 class="placeholder">{{ form_step_two.form_step_two.city.label }}
-            </div>
-            <ion-item>
-                <ion-searchbar placeholder=" " (keydown)="onKeydown($event)" [(ngModel)]="searchQuery"
-                               (ionInput)="getItems($event)"></ion-searchbar>
-                <ion-list class="search">
-                    <ion-item (click)="selectCity(item)" *ngFor="let item of items">
-                        {{ item }}
-                    </ion-item>
-                </ion-list>
-            </ion-item>
-            <div class="err">{{ err_step_two.city?.errors }}</div>
+        <div [ngClass]="{'yellow-bg':  err_step_two.city.errors  && err_step_two.city.errors != 0 }"
+             class="placeholder">{{ form_step_two.form_step_two.city.label }}
+        </div>
+        <ion-item>
+            <ion-input (keyup)="citysearch()" type="text" [(ngModel)]="cityname"
+                       placeholder="{{ form_step_two.form_step_two.city.textValue }}"></ion-input>
+        </ion-item>
+        <ion-list id="livesearch" *ngIf="iscity">
+            <button ion-item class="suggestion" (tap)="suggestionsel(cit)"  *ngFor="let cit of citys">{{ cit }}</button>
+        </ion-list>
+        <div class="err">{{ err_step_two.city?.errors }}</div>
         </div>
 
 
@@ -150,7 +148,7 @@
         </div>
 
 
-        <div class="input">
+        <div class="input" (tap)="closesuggestions()">
             <div [ngClass]="{'yellow-bg':  err_step_two.occupation.errors  && err_step_two.occupation.errors != 0 }"
                  class="placeholder">{{ form_step_two.form_step_two.occupation.label }}
             </div>
@@ -240,7 +238,8 @@
 
         <div class="input">
             <div [ngClass]="{'yellow-bg':  err_step_three.about.errors && err_step_three.about.errors?.length != 0 }"
-                 [innerHTML]="form_step_three.form_step_three.about.label+ ' (מינימום 10 תווים) '" class="placeholder"></div>
+                 [innerHTML]="form_step_three.form_step_three.about.label+ ' (מינימום 10 תווים) '"
+                 class="placeholder"></div>
             <ion-item>
                 <ion-textarea id="about" [(ngModel)]="form_step_three.form_step_three.about.value" rows="4">{{
                     form_step_three.form_step_three.about.value }}
@@ -251,7 +250,8 @@
 
         <div class="input">
             <div [ngClass]="{'yellow-bg':  err_step_three.looking.errors && err_step_three.looking.errors?.length != 0 }"
-                 [innerHTML]="form_step_three.form_step_three.looking.label+ ' (מינימום 10 תווים) '" class="placeholder"></div>
+                 [innerHTML]="form_step_three.form_step_three.looking.label+ ' (מינימום 10 תווים) '"
+                 class="placeholder"></div>
             <ion-item>
                 <ion-textarea id="looking" [(ngModel)]="form_step_three.form_step_three.looking.value" rows="4">{{
                     form_step_three.form_step_three.looking.value }}

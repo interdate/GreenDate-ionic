@@ -25,6 +25,7 @@
   </div>-->
   <ion-slides ng-if="true" freeMode="true" loop="true" #slider (ionSlideReachStart)="slideChanged($event)" >
     <ion-slide  *ngFor="let user of users">
+
       <ion-card *ngIf="user?.image">
         <div class="clr"></div>
         <div class="pop_title"><span (click)="toProfile()">{{user?.username}},</span> {{user?.age}} {{user?.area}}</div>

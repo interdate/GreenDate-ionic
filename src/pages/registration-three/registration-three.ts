@@ -120,25 +120,6 @@ export class RegistrationThreePage {
                 public api:ApiQuery,
                 public alertCtrl:AlertController) {
 
-        /*
-         window.addEventListener('native.keyboardshow', function(){
-         $('.footerMenu').hide();
-         $('.scroll-content, .fixed-content').css({'margin-bottom': '58px'});
-
-         let toast = this.toastCtrl.create({
-         message: 'User was added successfully',
-         duration: 3000
-         });
-         toast.present();
-
-         });
-         window.addEventListener('cdhide', function(){
-         $('.footerMenu').show();
-         $('.scroll-content, .fixed-concctent').css({'margin-bottom':'122px'});
-         this.toast.dismiss();
-         });
-         */
-
         let params = navParams.get('form');
 
         this.form.form = params;
@@ -257,6 +238,10 @@ export class RegistrationThreePage {
         }
 
         this.api.hideLoad();
+    }
+
+    ionViewWillEnter() {
+        this.api.pageName = 'RegistrationThreePage';
     }
 
 }

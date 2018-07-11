@@ -313,34 +313,6 @@ export class RegistrationFourPage {
                 loading.dismiss();
             });
         });
-
-
-        /*
-         let loader = this.loadingCtrl.create({
-         content: "Please wait..."
-         });
-         loader.present();
-
-         let filename = this.imagePath.split('/').pop();
-         let options = {
-         fileKey: "file",
-         fileName: filename,
-         chunkedMode: false,
-         mimeType: "image/jpg",
-         params: { 'title': this.postTitle, 'description': this.desc }
-         };
-
-
-         const fileTransfer = new Transfer();
-
-         fileTransfer.upload(this.imageNewPath, AppSettings.API_UPLOAD_ENDPOINT,
-         options).then((entry) => {
-         this.imagePath = '';
-         this.imageChosen = 0;
-
-         }, (err) => {
-         alert(JSON.stringify(err));
-         });*/
     }
 
 
@@ -354,7 +326,10 @@ export class RegistrationFourPage {
 
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad ChangePhotosPage');
+        console.log('ionViewDidLoad RegistrationFourPage');
     }
 
+    ionViewWillEnter() {
+        this.api.pageName = 'RegistrationFourPage';
+    }
 }

@@ -205,6 +205,8 @@ export class DialogPage {
 
     ionViewWillEnter() {
         this.api.footer = false;
+        this.api.pageName = 'DialogPage';
+
         $('.footerMenu').hide();
         console.log('DIALOG Enter' + this.api.footer);
     }

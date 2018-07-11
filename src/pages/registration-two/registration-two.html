@@ -14,7 +14,7 @@
 
 
 <ion-content>
-    <div class="inner_form_top">
+    <div class="inner_form_top" (tap)="closesuggestions()">
         <ul>
             <li><span class="fnumber profileSpan">1</span><span class="ftext"></span></li>
             <li class="active"><span class="fnumber profileSpan">2</span></li>
@@ -25,7 +25,7 @@
     </div>
     <ion-list>
 
-        <div class="input">
+        <div class="input" (tap)="closesuggestions()">
             <div [ngClass]="{'yellow-bg':  err.region.errors && err.region.errors?.length != 0 }"
                  class="placeholder">{{ form.form.region.label }}
             </div>
@@ -44,22 +44,12 @@
             <div [ngClass]="{'yellow-bg':  err.city.errors && err.city.errors?.length != 0 }"
                  class="placeholder">{{ form.form.city.label }}
             </div>
-           <!-- <ion-item>
-                <select-alertless item-content [(ngModel)]="form.form.city.value">
-                    <ion-option value="{{cit.value}}" *ngFor="let cit of form.form.city.choices">
-                        {{cit.label}}
-                    </ion-option>
-                </select-alertless>
-            </ion-item>-->
             <ion-item>
-                <ion-searchbar placeholder=" " (keydown)="onKeydown($event)" [(ngModel)]="searchQuery"
-                               (ionInput)="getItems($event)"></ion-searchbar>
-                <ion-list class="search">
-                    <ion-item (click)="selectCity(item)" *ngFor="let item of items">
-                        {{ item }}
-                    </ion-item>
-                </ion-list>
+                <ion-input (keyup)="citysearch()" type="text" [(ngModel)]="cityname"></ion-input>
             </ion-item>
+            <ion-list id="livesearch" *ngIf="iscity">
+                <button ion-item class="suggestion" (tap)="suggestionsel(cit)"  *ngFor="let cit of citys">{{ cit }}</button>
+            </ion-list>
             <div class="err">{{ err.city.errors }}</div>
         </div>
 
@@ -78,7 +68,7 @@
         </div>
 
 
-        <div class="input">
+        <div class="input" (tap)="closesuggestions()">
             <div [ngClass]="{'yellow-bg':  err.occupation.errors && err.occupation.errors?.length != 0 }"
                  class="placeholder">{{ form.form.occupation.label }}
             </div>
@@ -156,10 +146,9 @@
             </div>
         </div>
         <div *ngIf="allfields  && allfields?.length != 0" class="err">{{ allfields }}</div>
-            <button right color="danger" (click)="formSubmit(form)" full ion-button>{{form.form.next_step}}
-            </button>
+        <button right color="danger" (click)="formSubmit(form)" full ion-button>{{form.form.next_step}}
+        </button>
 
     </ion-list>
 
 </ion-content>
-

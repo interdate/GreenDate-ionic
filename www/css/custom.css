@@ -38,6 +38,11 @@
     background-size: contain;
 }
 
+page-search .scroll-content{
+    margin-top: 59px !important;
+}
+
+
 #notifications {
     background: url(../img/icons/notifications_ft.png) center no-repeat;
     width: 28px;

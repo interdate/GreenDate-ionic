@@ -20,7 +20,8 @@ export class ApiQuery {
     public back: any = false;
     public storageRes: any;
     public footer: any = true;
-    loading: any;
+    public pageName: any =false;
+    public loading: any;
 
     public signupData: {  username: any, password: any };
 
@@ -30,7 +31,7 @@ export class ApiQuery {
                 public loadingCtrl: LoadingController,
                 private sanitizer: DomSanitizer) {
 
-      // this.url = 'http://localhost:8100';
+       //this.url = 'http://localhost:8100';
        this.url = 'https://www.greendate.co.il';
 
         this.storage.get('user_id').then((val) => {

@@ -177,5 +177,9 @@ export class LoginPage {
         this.navCtrl.push(PasswordRecoveryPage);
     }
 
+    ionViewWillEnter() {
+        this.api.pageName = 'LoginPage';
+    }
+
 }
 

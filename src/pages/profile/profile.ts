@@ -58,7 +58,7 @@ export class ProfilePage {
             content: 'אנא המתן...'
         });
 
-        loading.present();
+        //loading.present();
 
         var user = navParams.get('user');
 
@@ -66,7 +66,7 @@ export class ProfilePage {
 
             this.user = user;
 
-            this.http.get(api.url + '/app_dev.php/api/v1/users/' + this.user.id, api.setHeaders(true)).subscribe(data => {
+            this.http.get(api.url + '/api/v1/users/' + this.user.id, api.setHeaders(true)).subscribe(data => {
                 this.user = data.json();
                 this.formReportAbuse = data.json().formReportAbuse;
                 this.texts = data.json().texts;
@@ -78,7 +78,7 @@ export class ProfilePage {
                 if (val) {
                     this.myId = val;
                     this.user.id = val;
-                    this.http.get(api.url + '/app_dev.php/api/v1/users/' + this.user.id, api.setHeaders(true)).subscribe(data => {
+                    this.http.get(api.url + '/api/v1/users/' + this.user.id, api.setHeaders(true)).subscribe(data => {
 
                         this.user = data.json();
                         this.formReportAbuse = data.json().formReportAbuse;
@@ -207,5 +207,9 @@ export class ProfilePage {
 
     ionViewDidLoad() {
         console.log(this.user);
+    }
+
+    ionViewWillEnter() {
+        this.api.pageName = 'ProfilePage';
     }
 }

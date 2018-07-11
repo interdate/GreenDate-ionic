@@ -39,6 +39,10 @@ export class BingoPage {
     this.navCtrl.pop();
   }
 
+  ionViewWillEnter() {
+    this.api.pageName = 'BingoPage';
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad BingoPage');
   }

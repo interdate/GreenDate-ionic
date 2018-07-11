@@ -181,7 +181,8 @@ export class RegistrationOnePage {
         this.api.hideLoad();
     }
 
-    ionViewDidLoad() {
+    ionViewWillEnter() {
+        this.api.pageName = 'RegistrationOnePage';
     }
 
 }

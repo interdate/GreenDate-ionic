@@ -40,6 +40,10 @@ export class InboxPage {
         console.log('ionViewDidLoad InboxPage');
     }
 
+    ionViewWillEnter() {
+        this.api.pageName = 'InboxPage';
+    }
+
     toDialogPage(user) {
         this.navCtrl.push(DialogPage, {user: user});
     }

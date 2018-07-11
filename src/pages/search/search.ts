@@ -126,4 +126,8 @@ export class SearchPage {
   toAdvancedPage() {
     this.navCtrl.push(AdvancedSearchPage);
   }
+
+  ionViewWillEnter() {
+    this.api.pageName = 'SearchPage';
+  }
 }

@@ -66,4 +66,8 @@ export class PasswordRecoveryPage {
     console.log('ionViewDidLoad PasswordRecoveryPage');
   }
 
+    ionViewWillEnter() {
+        this.api.pageName = 'PasswordRecoveryPage';
+    }
+
 }

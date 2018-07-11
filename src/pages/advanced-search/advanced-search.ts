@@ -132,34 +132,9 @@ export class AdvancedSearchPage {
   }
 
 
-  /*
-        region: this.form.form.region.value,
-        area: this.form.form.area.value,
-        ageFrom: this.form.form.ageFrom.value,
-        ageTo: this.form.form.ageTo.value,
-        zodiac: this.form.form.zodiac.value,
-        purposes: this.form.form.purposes.value,
-        status: this.form.form.status.value,
-        languages: this.form.form.languages.value,
-        children: this.form.form.children.value,
-        relationshipStatus: this.form.form.relationshipStatus.value,
-        netWorth: this.form.form.netWorth.value,
-        income: this.form.form.income.value,
-        heightFrom: this.form.form.heightFrom.value,
-        heightTo: this.form.form.heightTo.value,
-        body: this.form.form.body.value,
-        eyes: this.form.form.eyes.value,
-        hair: this.form.form.hair.value,
-        features: this.form.form.features.value,
-        smoking: this.form.form.smoking.value,
-        drinking: this.form.form.drinking.value,
-        ethnicity: this.form.form.ethnicity.value,
-        religion: this.form.form.religion.value,
-        education: this.form.form.education.value,
-        withPhoto: this.form.form.withPhoto.value,
-        distance: this.form.form.distance.value
-
-  */
+  ionViewWillEnter() {
+    this.api.pageName = 'AdvancedSearchPage';
+  }
 
   selectedRegion()
   {
