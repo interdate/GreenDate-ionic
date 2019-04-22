@@ -460,7 +460,12 @@ ion-header button {
    border: 1px solid #A5ACB2;
  }*/
 
- #livesearch{
+ .menuToggle {
+   position: absolute;
+   left: 14px
+ }
+
+ #livesearch {
      position: absolute;
      top: 76px;
      z-index: 1000;

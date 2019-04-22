@@ -25779,6 +25779,11 @@ ion-header button {
    height: 106%;
    border: 1px solid #A5ACB2;
  }*/
+.menuToggle {
+  position: absolute;
+  left: 14px;
+}
+
 #livesearch {
   position: absolute;
   top: 76px;

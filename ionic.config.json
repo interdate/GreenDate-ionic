@@ -1,14 +1,13 @@
 {
   "name": "Greendate",
-  "app_id": "",
+  "integrations": {
+    "cordova": {}
+  },
   "proxies": [
     {
       "path": "/",
       "proxyUrl": "https://www.greendate.co.il"
     }
   ],
-  "type": "ionic-angular",
-  "integrations": {
-    "cordova": {}
-  }
+  "type": "ionic-angular"
 }
